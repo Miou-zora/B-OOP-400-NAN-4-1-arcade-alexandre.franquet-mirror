@@ -1,0 +1,10 @@
+.vscode
+.build
+cmake_install.cmake
+CMakeCache.txt
+Makefile
+CMakeFiles
+CTestTestfile.cmake
+CTestTestfile.cmake
+Testing
+tests_run
