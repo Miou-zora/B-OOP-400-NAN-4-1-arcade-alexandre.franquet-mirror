@@ -60,7 +60,8 @@ jobs:
       - run: make
         timeout-minutes: 2
 
-      - run: make clean
+      # Make clean from CMake remove binary files
+      # - run: make clean
 
       - name: Verifies that files are present and executable
         run: |
