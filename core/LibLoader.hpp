@@ -18,10 +18,10 @@
 #include "ErrorManagement.hpp"
 
 namespace Arcade {
-        /**
-         * @brief The class LoaderException is the exception thrown when the library cannot be loaded
-         * @param message The message to display
-         */
+    /**
+     * @brief The class LoaderException is the exception thrown when the library cannot be loaded
+     * @param message The message to display
+     */
     template <typename LibInterface>
         class LibLoader {
             /**
@@ -31,8 +31,8 @@ namespace Arcade {
              *  @details The template must be a IDisplay or a IGame or a ISounds or a IEvent
             **/
             public:
-                LibLoader(void);
-                ~LibLoader();
+                LibLoader(void) {};
+                ~LibLoader() {};
 
                 /**
                  * @brief Loads a library

@@ -9,6 +9,7 @@
 #include <string>
 #include <memory>
 #include <map>
+#include <vector>
 
 #include "IGame.hpp"
 #include "IEvent.hpp"
@@ -30,14 +31,14 @@ namespace Arcade {
             ~Core();
 
             void runScene(Arcade::Scenes scene = Arcade::MAIN_MENU);
-            bool loadGame(const std::string &GameName);
-            bool loadLib(const std::string &LibName);
+            bool loadGame(const std::string &GameName) { (void)GameName; return true; };
+            bool loadLib(const std::string &LibName) { (void)LibName; return true; };
             void loop();
 
         protected:
         private:
             void displayMainMenu();
-            void handleEvents();
+            void handleEvents() {};
 
             Arcade::LibLoader<Arcade::IDisplay> _displayLoader;
             Arcade::LibLoader<Arcade::IEvent> _eventLoader;

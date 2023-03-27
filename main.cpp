@@ -23,5 +23,7 @@ int main(int ac, char **argv)
     if (ac != 2) {
         return (84);
     }
+    Arcade::Core core(argv[1]);
+    core.loop();
     return (0);
 }

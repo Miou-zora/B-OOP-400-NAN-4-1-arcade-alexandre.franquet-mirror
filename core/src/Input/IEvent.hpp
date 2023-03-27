@@ -7,6 +7,7 @@
 
 #pragma once
 
+#include "Types.hpp"
 namespace Arcade {
 
     class IEvent {

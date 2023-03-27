@@ -19,7 +19,10 @@ set(INCLUDE_SRC core/src/Display
 include_directories(${INCLUDE_SRC})
 
 project(arcade)
-set(CORE_SRC main.cpp)
+set(CORE_SRC main.cpp
+             core/Arcade.cpp
+)
+
 add_executable(arcade ${CORE_SRC})
 
 
