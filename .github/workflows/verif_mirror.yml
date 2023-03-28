@@ -54,10 +54,14 @@ jobs:
         with:
           fetch-depth: 0
 
+      - run: cmake .
+        timeout-minutes: 2
+
       - run: make
         timeout-minutes: 2
 
-      - run: make clean
+      # Make clean from CMake remove binary files
+      # - run: make clean
 
       - name: Verifies that files are present and executable
         run: |
@@ -86,7 +90,7 @@ jobs:
   push_to_mirror:
     name: Pushes the current repository files to a given mirror repository
     runs-on: ubuntu-latest
-    if: ${{ github.event_name == 'push' }}
+    if: ${{ github.event_name != 'push' }}
     needs: [check_program_compilation]
     steps:
       - name: Checkout repository

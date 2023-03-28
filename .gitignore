@@ -1,0 +1,10 @@
+.vscode
+.build
+*.cmake
+CMakeCache.txt
+Makefile
+CMakeFiles
+Testing
+tests_run
+arcade
+*.so
