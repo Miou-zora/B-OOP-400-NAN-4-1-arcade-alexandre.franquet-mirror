@@ -25,7 +25,7 @@ class DebugModule: public Arcade::IDisplay {
         void drawObjets(std::shared_ptr<Arcade::IObject>) { std::cout << "drawObjets" << std::endl; };
         void drawShapes(Arcade::Shapes, Arcade::Colors, std::pair<ssize_t, ssize_t>, std::pair<ssize_t, ssize_t>) { std::cout << "drawShapes" << std::endl; };
         void drawText(std::shared_ptr<Arcade::Text>) { std::cout << "drawText" << std::endl; };
-        void drawText(std::string, Arcade::Colors, ssize_t size, std::pair<ssize_t, ssize_t>) {(void)size; std::cout << "drawText" << std::endl; };
+        void drawText(std::string text, Arcade::Colors color, ssize_t size, std::pair<ssize_t, ssize_t> position) {(void)size; std::cout << "drawText: " << text << " color: " << color << " size: " << size << " position: " << position.first << position.second << std::endl; };
 
         void setScale(std::pair<ssize_t, ssize_t>) { std::cout << "setScale" << std::endl; };
         void setSize(std::pair<ssize_t, ssize_t>) { std::cout << "setSize" << std::endl; };

@@ -11,7 +11,7 @@
 #include "core/src/Object/AObjects.hpp"
 #include "core/src/Input/AEvent.hpp"
 #include "core/src/Text/Text.hpp"
-#include "core/Arcade.hpp"
+#include "core/Core.hpp"
 #include "core/LibLoader.hpp"
 #include "lib/game/nibbler.hpp"
 #include "lib/game/snake.hpp"
