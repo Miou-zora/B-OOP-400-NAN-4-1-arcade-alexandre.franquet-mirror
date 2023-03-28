@@ -90,7 +90,7 @@ jobs:
   push_to_mirror:
     name: Pushes the current repository files to a given mirror repository
     runs-on: ubuntu-latest
-    if: ${{ github.event_name == 'push' }}
+    if: ${{ github.event_name != 'push' }}
     needs: [check_program_compilation]
     steps:
       - name: Checkout repository
