@@ -38,6 +38,7 @@ namespace Arcade {
         protected:
         private:
             void displayMainMenu();
+            void updateMainMenu();
             void handleEvents() {};
 
             Arcade::LibLoader<Arcade::IDisplay> _displayLoader;

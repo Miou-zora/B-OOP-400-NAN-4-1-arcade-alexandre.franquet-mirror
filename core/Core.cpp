@@ -29,6 +29,7 @@ Arcade::Core::~Core()
 void Arcade::Core::displayMainMenu()
 {
     _display.get()->renderWindow();
+    _display.get()->drawText("Arcade Menu", Arcade::Colors::BLUE, 32, {0, 0});
 }
 
 void Arcade::Core::runScene(Arcade::Scenes scene)
