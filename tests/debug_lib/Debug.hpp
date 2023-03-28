@@ -32,10 +32,6 @@ class DebugModule: public Arcade::IDisplay {
 
         std::pair<ssize_t, ssize_t> getScale(void) const { std::cout << "getScale" << std::endl; return std::pair<ssize_t, ssize_t>(0, 0);};
         std::pair<ssize_t, ssize_t> getSize(void) const { std::cout << "getSize" << std::endl; return std::pair<ssize_t, ssize_t>(0, 0);};
-
-    protected:
-    private:
-        std::string _name;
 };
 
 #endif /* !DISPLAYMODULE_HPP_ */
