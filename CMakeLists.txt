@@ -21,11 +21,13 @@ add_subdirectory(lib)
 add_subdirectory(tests/debug_lib)
 
 project(arcade)
-set(CORE_SRC main.cpp
-             core/Core.cpp
-)
 
-add_executable(arcade ${CORE_SRC})
+set(CORE_MAIN main.cpp)
+
+set(CORE_SRC core/Core.cpp)
+
+
+add_executable(arcade ${CORE_MAIN} ${CORE_SRC})
 
 
 ####################TESTS####################
@@ -37,5 +39,5 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/build)
 enable_testing()
 set(TEST_SRC tests/tests.cpp)
 
-add_executable(tests_run ${TEST_SRC})
+add_executable(tests_run ${TEST_SRC} ${CORE_SRC})
 add_test(NAME tests_run COMMAND ./tests_run)
