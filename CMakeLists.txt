@@ -22,7 +22,7 @@ add_subdirectory(tests/debug_lib)
 
 project(arcade)
 set(CORE_SRC main.cpp
-             core/Arcade.cpp
+             core/Core.cpp
 )
 
 add_executable(arcade ${CORE_SRC})

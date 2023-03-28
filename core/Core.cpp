@@ -5,7 +5,7 @@
 ** Arcade
 */
 
-#include "Arcade.hpp"
+#include "Core.hpp"
 
 Arcade::Core::Core(std::string libFilePath)
 {
