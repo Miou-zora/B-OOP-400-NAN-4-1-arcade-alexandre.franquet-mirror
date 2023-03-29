@@ -11,25 +11,36 @@ Arcade::Core::Core(std::string libFilePath)
 {
     _currentScene = Arcade::Scenes::MAIN_MENU;
     try {
-        _display = _displayLoader.loadLib(libFilePath);
+        _lib.second = _lib.first.loadLib(libFilePath);
     } catch (const LoaderException &e) {
         std::cerr << e.what() << std::endl;
         exit(84);
     }
-    _libs.push_back(libFilePath);
     _currentLib = 0;
     _currentGame = 0;
-    _display.get()->createWindow();
+    _lib.second.get()->createWindow();
+    try {
+        loadLibsFromDirectory();
+    } catch (const LoaderException &e) {
+        std::cerr << e.what() << std::endl;
+        exit(84);
+    }
 }
 
 Arcade::Core::~Core()
 {
+    _lib.first.closeLib();
+}
+
+void Arcade::Core::loadLibsFromDirectory()
+{
+
 }
 
 void Arcade::Core::displayMainMenu()
 {
-    _display.get()->renderWindow();
-    _display.get()->drawText("Arcade Menu", Arcade::Colors::BLUE, 32, {0, 0});
+    _lib.second.get()->renderWindow();
+    _lib.second.get()->drawText("Arcade Menu", Arcade::Colors::BLUE, 32, {0, 0});
 }
 
 void Arcade::Core::runScene(Arcade::Scenes scene)
@@ -47,8 +58,8 @@ void Arcade::Core::runScene(Arcade::Scenes scene)
 
 void Arcade::Core::loop()
 {
-    while (_currentScene != Arcade::Scenes::LEAVE) {
+    // while (_currentScene != Arcade::Scenes::LEAVE) {
         runScene(_currentScene);
         handleEvents();
-    }
+    // }
 }

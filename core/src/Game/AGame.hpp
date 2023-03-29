@@ -7,7 +7,6 @@
 
 #pragma once
 #include "IGame.hpp"
-#include "Types.hpp"
 
 namespace Arcade
 {
@@ -26,15 +25,11 @@ namespace Arcade
             ssize_t getScore(void) const final override {return _score;};
             ssize_t getHighScore(void) const final override {return _highScore;};
             std::string getGameName(void) const final override {return _name;};
-            void setIEvents(std::shared_ptr<Arcade::IEvent> event) final override {_event = event;};
-            void setIDisplay(std::shared_ptr<Arcade::IDisplay> display) final override {_display = display;};
 
         protected:
             std::string _name;
             Arcade::gameState _state;
             ssize_t _score;
             ssize_t _highScore;
-            std::shared_ptr<Arcade::IEvent> _event;
-            std::shared_ptr<Arcade::IDisplay> _display;
     };
 }

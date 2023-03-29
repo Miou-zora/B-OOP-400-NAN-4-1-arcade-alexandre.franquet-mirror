@@ -14,7 +14,6 @@
 #include <string>
 #include <memory.h>
 #include <dlfcn.h>
-#include "IDisplay.hpp"
 #include "ErrorManagement.hpp"
 
 namespace Arcade {
@@ -46,7 +45,9 @@ namespace Arcade {
                     LibInterface *(*builder)() = nullptr;
                     if (!_handle)
                         throw LoaderException(dlerror());
-                    builder = reinterpret_cast<LibInterface *(*)()>(dlsym(_handle, "entryPoint"));
+                    builder = reinterpret_cast<LibInterface *(*)()>(dlsym(_handle, "GameEntryPoint"));
+                    if (!builder)
+                        builder = reinterpret_cast<LibInterface *(*)()>(dlsym(_handle, "DisplayEntryPoint"));
                     if (!builder)
                         throw LoaderException(dlerror());
                     return std::shared_ptr<LibInterface>(builder());

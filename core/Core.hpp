@@ -10,10 +10,10 @@
 #include <memory>
 #include <map>
 #include <vector>
+#include <dirent.h>
 
 #include "IGame.hpp"
-#include "IEvent.hpp"
-#include "IDisplay.hpp"
+#include "Lib/ILib.hpp"
 #include "LibLoader.hpp"
 
 namespace Arcade {
@@ -40,18 +40,16 @@ namespace Arcade {
             void displayMainMenu();
             void updateMainMenu();
             void handleEvents() {};
+            void loadLibsFromDirectory();
 
-            Arcade::LibLoader<Arcade::IDisplay> _displayLoader;
-            Arcade::LibLoader<Arcade::IEvent> _eventLoader;
-            Arcade::LibLoader<Arcade::IGame> _gameLoader;
+            std::pair<Arcade::LibLoader<Arcade::ILib>, std::shared_ptr<Arcade::ILib>> _lib;
+            std::pair<Arcade::LibLoader<Arcade::IGame>, std::shared_ptr<Arcade::IGame>> _game;
 
             std::vector<std::string> _games;
             std::vector<std::string> _libs;
+
             std::size_t _currentGame;
             std::size_t _currentLib;
-            std::shared_ptr<Arcade::IDisplay> _display;
-            std::shared_ptr<Arcade::IGame> _game;
-            std::shared_ptr<Arcade::IEvent> _events;
             Arcade::Scenes _currentScene;
     };
 };
