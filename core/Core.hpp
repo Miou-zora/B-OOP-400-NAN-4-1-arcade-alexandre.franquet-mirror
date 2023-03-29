@@ -40,7 +40,7 @@ namespace Arcade {
             void displayMainMenu();
             void updateMainMenu();
             void handleEvents() {};
-            void loadLibsFromDirectory();
+            std::vector<std::string> loadLibsFromDirectory();
 
             std::pair<Arcade::LibLoader<Arcade::ILib>, std::shared_ptr<Arcade::ILib>> _lib;
             std::pair<Arcade::LibLoader<Arcade::IGame>, std::shared_ptr<Arcade::IGame>> _game;

@@ -6,14 +6,14 @@
 */
 
 #include <iostream>
-// #include "core/src/Lib/ILib.hpp"
-// #include "core/src/Game/AGame.hpp"
-// #include "core/src/Object/AObjects.hpp"
-// #include "core/src/Text/Text.hpp"
+#include "core/src/Lib/ILib.hpp"
+#include "core/src/Game/AGame.hpp"
+#include "core/src/Object/AObjects.hpp"
+#include "core/src/Text/Text.hpp"
 #include "core/Core.hpp"
-// #include "core/LibLoader.hpp"
-// #include "lib/game/nibbler.hpp"
-// #include "lib/game/snake.hpp"
+#include "core/LibLoader.hpp"
+#include "lib/game/nibbler.hpp"
+#include "lib/game/snake.hpp"
 
 int main(int ac, char **argv)
 {
