@@ -6,11 +6,12 @@
 */
 
 #pragma once
-#include <string>
+#include <iostream>
 #include <memory>
 #include <map>
 #include <vector>
 #include <dirent.h>
+#include <algorithm>
 
 #include "IGame.hpp"
 #include "Lib/ILib.hpp"
@@ -30,23 +31,21 @@ namespace Arcade {
             Core(std::string libFilePath);
             ~Core();
 
-            void runScene(Arcade::Scenes scene = Arcade::MAIN_MENU);
-            bool loadGame(const std::string &GameName) { (void)GameName; return true; };
-            bool loadLib(const std::string &LibName) { (void)LibName; return true; };
             void loop();
 
-        protected:
         private:
-            void displayMainMenu();
-            void updateMainMenu();
-            void handleEvents() {};
-            std::vector<std::string> loadLibsFromDirectory();
+            void runScene(Arcade::Scenes scene = Arcade::MAIN_MENU);
+            bool loadGame(const std::string &GameName);
+            bool loadLib(const std::string &LibName);
+
+            std::vector<std::string> getLibsFromDirectory();
+            void storeLibsPath();
 
             std::pair<Arcade::LibLoader<Arcade::ILib>, std::shared_ptr<Arcade::ILib>> _lib;
             std::pair<Arcade::LibLoader<Arcade::IGame>, std::shared_ptr<Arcade::IGame>> _game;
 
-            std::vector<std::string> _games;
-            std::vector<std::string> _libs;
+            std::vector<std::string> _gamesPath;
+            std::vector<std::string> _libsPath;
 
             std::size_t _currentGame;
             std::size_t _currentLib;

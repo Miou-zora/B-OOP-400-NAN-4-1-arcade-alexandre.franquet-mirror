@@ -9,15 +9,15 @@
 
 Arcade::Core::Core(std::string libFilePath)
 {
+    storeLibsPath();
     try {
-        _lib.second = _lib.first.loadLib(libFilePath);
-        loadLibsFromDirectory();
+        _lib.second = _lib.first.loadGraphicalLib(libFilePath);
     } catch (const LoaderException &e) {
         std::cerr << e.what() << std::endl;
         exit(84);
     }
     _currentScene = Arcade::Scenes::MAIN_MENU;
-    _currentLib = 0;
+    _currentLib = std::find(_libsPath.begin(), _libsPath.end(), libFilePath) - _libsPath.begin();
     _currentGame = 0;
     _lib.second.get()->createWindow();
 }
@@ -27,7 +27,28 @@ Arcade::Core::~Core()
     _lib.first.closeLib();
 }
 
-std::vector<std::string> Arcade::Core::loadLibsFromDirectory()
+void Arcade::Core::storeLibsPath()
+{
+    for (auto &lib : getLibsFromDirectory()) {
+        try {
+            if (_lib.first.loadGameLib(lib)) {
+                _gamesPath.push_back(lib);
+                _lib.first.closeLib();
+            }
+        } catch (const LoaderException &e) {
+            try {
+                if (_lib.first.loadGraphicalLib(lib)) {
+                    _libsPath.push_back(lib);
+                    _lib.first.closeLib();
+                }
+            } catch (const LoaderException &err) {
+                std::cout << lib << " bad library" << std::endl;
+            }
+        }
+    }
+}
+
+std::vector<std::string> Arcade::Core::getLibsFromDirectory()
 {
     DIR *dir;
     struct dirent *ent;
@@ -47,17 +68,10 @@ std::vector<std::string> Arcade::Core::loadLibsFromDirectory()
     return libs;
 }
 
-void Arcade::Core::displayMainMenu()
-{
-    _lib.second.get()->renderWindow();
-    _lib.second.get()->drawText("Arcade Menu", Arcade::Colors::BLUE, 32, {0, 0});
-}
-
 void Arcade::Core::runScene(Arcade::Scenes scene)
 {
     switch (scene) {
         case Arcade::Scenes::MAIN_MENU:
-            displayMainMenu();
             break;
         case Arcade::Scenes::IN_GAME:
             break;
@@ -68,8 +82,29 @@ void Arcade::Core::runScene(Arcade::Scenes scene)
 
 void Arcade::Core::loop()
 {
-    // while (_currentScene != Arcade::Scenes::LEAVE) {
+    while (_currentScene != Arcade::Scenes::LEAVE) {
         runScene(_currentScene);
-        handleEvents();
-    // }
+    }
+}
+
+bool Arcade::Core::loadGame(const std::string &GameName)
+{
+    try {
+        _game.second = _game.first.loadGameLib(GameName);
+    } catch (const LoaderException &e) {
+        std::cerr << e.what() << std::endl;
+        return false;
+    }
+    return true;
+}
+
+bool Arcade::Core::loadLib(const std::string &LibName)
+{
+    try {
+        _lib.second = _lib.first.loadGraphicalLib(LibName);
+    } catch (const LoaderException &e) {
+        std::cerr << e.what() << std::endl;
+        return false;
+    }
+    return true;
 }
