@@ -13,6 +13,8 @@
 #include <vector>
 #include <filesystem>
 #include <algorithm>
+#include <time.h>
+#include <chrono>
 
 #include "IGame.hpp"
 #include "Lib/ILib.hpp"
@@ -35,7 +37,7 @@ namespace Arcade {
             void loop();
 
             float getDeltaTime() const { return _deltaTime; };
-            void setDeltaTime(float deltaTime) { _deltaTime = deltaTime; };
+            void updateDeltaTime(void);
 
         private:
             void runScene(Arcade::Scenes scene = Arcade::MAIN_MENU);
@@ -55,6 +57,7 @@ namespace Arcade {
             std::size_t _currentLib;
             Arcade::Scenes _currentScene;
 
-            float _deltaTime;
+            double _deltaTime;
+            std::chrono::_V2::system_clock::time_point _startTime;
     };
 };

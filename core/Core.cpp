@@ -16,6 +16,7 @@ Arcade::Core::Core(std::string libFilePath)
         std::cerr << e.what() << std::endl;
         exit(84);
     }
+    _startTime = std::chrono::high_resolution_clock::now();
     _currentScene = Arcade::Scenes::MAIN_MENU;
     _currentLib = std::find(_libsPath.begin(), _libsPath.end(), libFilePath) - _libsPath.begin();
     _currentGame = 0;
@@ -80,9 +81,20 @@ void Arcade::Core::runScene(Arcade::Scenes scene)
     }
 }
 
+void Arcade::Core::updateDeltaTime(void)
+{
+    std::chrono::_V2::system_clock::time_point endTime = std::chrono::high_resolution_clock::now();
+    _deltaTime += std::chrono::duration<double, std::milli>(endTime-_startTime).count();
+    _startTime = endTime;
+    if (_deltaTime > 1000.0) {
+        _deltaTime -= 1000.0;
+    }
+}
+
 void Arcade::Core::loop()
 {
     while (_currentScene != Arcade::Scenes::LEAVE) {
+        updateDeltaTime();
         runScene(_currentScene);
     }
 }
