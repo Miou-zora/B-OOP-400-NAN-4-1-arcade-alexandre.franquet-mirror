@@ -7,7 +7,7 @@
 
 #pragma once
 #include "IObject.hpp"
-#include "Types.hpp"
+#include "Lib/Types.hpp"
 
 namespace Arcade {
     class AObject : virtual public Arcade::IObject {

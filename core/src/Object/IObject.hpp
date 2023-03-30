@@ -7,7 +7,7 @@
 
 #pragma once
 #include <utility>
-#include "Types.hpp"
+#include "Lib/Types.hpp"
 
 namespace Arcade {
 

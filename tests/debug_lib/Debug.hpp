@@ -9,13 +9,18 @@
 #define DISPLAYMODULE_HPP_
 
 #include <iostream>
-#include "../core/src/Display/IDisplay.hpp"
+#include "../core/src/Lib/ILib.hpp"
 #include <unistd.h>
 
-class DebugModule: public Arcade::IDisplay {
+class DebugModule: public Arcade::ILib {
     public:
         DebugModule() {};
         ~DebugModule() {};
+
+        bool isKeyPressed(Arcade::Inputs input) { (void)input; std::cout << "KeyPressed" << std::endl; return (true); };
+        bool isKeyReleased(Arcade::Inputs input) { (void)input; std::cout << "KeyReleased" << std::endl; return (true); };
+        void updateEvent(void) { std::cout << "updateEvent" << std::endl; };
+        bool isWindowClosed(void) { std::cout << "isWindowClosed" << std::endl; return (true); };
 
         void createWindow(void) { std::cout << "createWindow" << std::endl; };
         void closeWindow(void) { std::cout << "closeWindow" << std::endl; };
@@ -29,7 +34,7 @@ class DebugModule: public Arcade::IDisplay {
 
         void setScale(std::pair<ssize_t, ssize_t>) { std::cout << "setScale" << std::endl; };
         void setSize(std::pair<ssize_t, ssize_t>) { std::cout << "setSize" << std::endl; };
-
+        void setScale(ssize_t scale) { std::cout << "setScale: " << scale << std::endl; };
         std::pair<ssize_t, ssize_t> getScale(void) const { std::cout << "getScale" << std::endl; return std::pair<ssize_t, ssize_t>(0, 0);};
         std::pair<ssize_t, ssize_t> getSize(void) const { std::cout << "getSize" << std::endl; return std::pair<ssize_t, ssize_t>(0, 0);};
 };

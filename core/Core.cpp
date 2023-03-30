@@ -9,34 +9,70 @@
 
 Arcade::Core::Core(std::string libFilePath)
 {
-    _currentScene = Arcade::Scenes::MAIN_MENU;
     try {
-        _display = _displayLoader.loadLib(libFilePath);
+        storeLibsPath();
+        _lib.second = _lib.first.loadGraphicalLib(libFilePath);
     } catch (const LoaderException &e) {
         std::cerr << e.what() << std::endl;
         exit(84);
     }
-    _libs.push_back(libFilePath);
-    _currentLib = 0;
+    _startTime = std::chrono::high_resolution_clock::now();
+    _currentScene = Arcade::Scenes::MAIN_MENU;
+    _currentLib = std::find(_libsPath.begin(), _libsPath.end(), libFilePath) - _libsPath.begin();
     _currentGame = 0;
-    _display.get()->createWindow();
+    _lib.second.get()->createWindow();
 }
 
 Arcade::Core::~Core()
 {
+    _lib.first.closeLib();
 }
 
-void Arcade::Core::displayMainMenu()
+void Arcade::Core::storeLibsPath()
 {
-    _display.get()->renderWindow();
-    _display.get()->drawText("Arcade Menu", Arcade::Colors::BLUE, 32, {0, 0});
+    for (auto &lib : getLibsFromDirectory()) {
+        try {
+            if (_lib.first.loadGameLib(lib)) {
+                _gamesPath.push_back(lib);
+                _lib.first.closeLib();
+            }
+        }
+        catch (const LoaderException &e) {
+            try {
+                if (_lib.first.loadGraphicalLib(lib)) {
+                    _libsPath.push_back(lib);
+                    _lib.first.closeLib();
+                }
+            }
+            catch (const LoaderException &err) {
+                std::cout << lib << " bad library" << std::endl;
+            }
+        }
+    }
+}
+
+std::vector<std::string> Arcade::Core::getLibsFromDirectory()
+{
+    std::string path = "./lib/";
+    std::vector<std::string> libs;
+
+    if (!std::filesystem::exists(path))
+        throw LoaderException("Error while loading libs");
+    try {
+        for (const auto &entry : std::filesystem::directory_iterator(path))
+            if (entry.path().extension() == ".so")
+                libs.push_back(path + entry.path().filename().string());
+    } catch (const std::filesystem::filesystem_error &e) {
+        std::cerr << e.what() << std::endl;
+        throw LoaderException("Error while loading libs");
+    }
+    return libs;
 }
 
 void Arcade::Core::runScene(Arcade::Scenes scene)
 {
     switch (scene) {
         case Arcade::Scenes::MAIN_MENU:
-            displayMainMenu();
             break;
         case Arcade::Scenes::IN_GAME:
             break;
@@ -45,10 +81,42 @@ void Arcade::Core::runScene(Arcade::Scenes scene)
     }
 }
 
+void Arcade::Core::updateDeltaTime(void)
+{
+    std::chrono::_V2::system_clock::time_point endTime = std::chrono::high_resolution_clock::now();
+    _deltaTime += std::chrono::duration<double, std::milli>(endTime-_startTime).count();
+    _startTime = endTime;
+    if (_deltaTime > 1000.0) {
+        _deltaTime -= 1000.0;
+    }
+}
+
 void Arcade::Core::loop()
 {
     while (_currentScene != Arcade::Scenes::LEAVE) {
+        updateDeltaTime();
         runScene(_currentScene);
-        handleEvents();
     }
+}
+
+bool Arcade::Core::loadGame(const std::string &GameName)
+{
+    try {
+        _game.second = _game.first.loadGameLib(GameName);
+    } catch (const LoaderException &e) {
+        std::cerr << e.what() << std::endl;
+        return false;
+    }
+    return true;
+}
+
+bool Arcade::Core::loadLib(const std::string &LibName)
+{
+    try {
+        _lib.second = _lib.first.loadGraphicalLib(LibName);
+    } catch (const LoaderException &e) {
+        std::cerr << e.what() << std::endl;
+        return false;
+    }
+    return true;
 }

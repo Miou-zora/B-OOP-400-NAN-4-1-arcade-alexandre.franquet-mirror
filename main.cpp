@@ -6,10 +6,9 @@
 */
 
 #include <iostream>
-#include "core/src/Display/ADisplay.hpp"
+#include "core/src/Lib/ILib.hpp"
 #include "core/src/Game/AGame.hpp"
 #include "core/src/Object/AObjects.hpp"
-#include "core/src/Input/AEvent.hpp"
 #include "core/src/Text/Text.hpp"
 #include "core/Core.hpp"
 #include "core/LibLoader.hpp"

@@ -25,8 +25,8 @@ namespace Arcade {
             ~SnakeGame();
 
             void load(void) final override;
-            void update(std::shared_ptr<IEvent> events, float seconds) final override;
-            void render(Arcade::IDisplay module) final override;
+            void update(Arcade::ILib &lib, float seconds) final override;
+            void render(Arcade::ILib &lib) final override;
             void reset(void) final override;
             void unload(void) final override;
 

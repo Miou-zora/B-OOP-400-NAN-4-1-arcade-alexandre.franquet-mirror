@@ -14,7 +14,6 @@
 #include <string>
 #include <memory.h>
 #include <dlfcn.h>
-#include "IDisplay.hpp"
 #include "ErrorManagement.hpp"
 
 namespace Arcade {
@@ -40,13 +39,25 @@ namespace Arcade {
                  * @return A shared pointer to the library
                  * @details The library must be in the ./lib folder
                  **/
-                std::shared_ptr<LibInterface> loadLib(const std::string &libPath)
+                std::shared_ptr<LibInterface> loadGraphicalLib(const std::string &libPath)
                 {
                     _handle = dlopen(libPath.c_str(), RTLD_LAZY);
                     LibInterface *(*builder)() = nullptr;
                     if (!_handle)
                         throw LoaderException(dlerror());
-                    builder = reinterpret_cast<LibInterface *(*)()>(dlsym(_handle, "entryPoint"));
+                    builder = reinterpret_cast<LibInterface *(*)()>(dlsym(_handle, "DisplayEntryPoint"));
+                    if (!builder)
+                        throw LoaderException(dlerror());
+                    return std::shared_ptr<LibInterface>(builder());
+                }
+
+                std::shared_ptr<LibInterface> loadGameLib(const std::string &libPath)
+                {
+                    _handle = dlopen(libPath.c_str(), RTLD_LAZY);
+                    LibInterface *(*builder)() = nullptr;
+                    if (!_handle)
+                        throw LoaderException(dlerror());
+                    builder = reinterpret_cast<LibInterface *(*)()>(dlsym(_handle, "GameEntryPoint"));
                     if (!builder)
                         throw LoaderException(dlerror());
                     return std::shared_ptr<LibInterface>(builder());

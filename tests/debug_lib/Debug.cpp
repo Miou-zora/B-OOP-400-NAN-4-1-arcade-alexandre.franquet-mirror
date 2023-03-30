@@ -2,7 +2,7 @@
 
 extern "C"
 {
-    Arcade::IDisplay *entryPoint()
+    Arcade::ILib *DisplayEntryPoint()
     {
         return new DebugModule();
     }

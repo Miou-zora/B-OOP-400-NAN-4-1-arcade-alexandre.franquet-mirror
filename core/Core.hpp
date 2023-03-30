@@ -6,14 +6,18 @@
 */
 
 #pragma once
+#include <iostream>
 #include <string>
 #include <memory>
 #include <map>
 #include <vector>
+#include <filesystem>
+#include <algorithm>
+#include <time.h>
+#include <chrono>
 
 #include "IGame.hpp"
-#include "IEvent.hpp"
-#include "IDisplay.hpp"
+#include "Lib/ILib.hpp"
 #include "LibLoader.hpp"
 
 namespace Arcade {
@@ -30,28 +34,30 @@ namespace Arcade {
             Core(std::string libFilePath);
             ~Core();
 
-            void runScene(Arcade::Scenes scene = Arcade::MAIN_MENU);
-            bool loadGame(const std::string &GameName) { (void)GameName; return true; };
-            bool loadLib(const std::string &LibName) { (void)LibName; return true; };
             void loop();
 
-        protected:
+            float getDeltaTime() const { return _deltaTime; };
+            void updateDeltaTime(void);
+
         private:
-            void displayMainMenu();
-            void updateMainMenu();
-            void handleEvents() {};
+            void runScene(Arcade::Scenes scene = Arcade::MAIN_MENU);
+            bool loadGame(const std::string &GameName);
+            bool loadLib(const std::string &LibName);
 
-            Arcade::LibLoader<Arcade::IDisplay> _displayLoader;
-            Arcade::LibLoader<Arcade::IEvent> _eventLoader;
-            Arcade::LibLoader<Arcade::IGame> _gameLoader;
+            std::vector<std::string> getLibsFromDirectory();
+            void storeLibsPath();
 
-            std::vector<std::string> _games;
-            std::vector<std::string> _libs;
+            std::pair<Arcade::LibLoader<Arcade::ILib>, std::shared_ptr<Arcade::ILib>> _lib;
+            std::pair<Arcade::LibLoader<Arcade::IGame>, std::shared_ptr<Arcade::IGame>> _game;
+
+            std::vector<std::string> _gamesPath;
+            std::vector<std::string> _libsPath;
+
             std::size_t _currentGame;
             std::size_t _currentLib;
-            std::shared_ptr<Arcade::IDisplay> _display;
-            std::shared_ptr<Arcade::IGame> _game;
-            std::shared_ptr<Arcade::IEvent> _events;
             Arcade::Scenes _currentScene;
+
+            double _deltaTime;
+            std::chrono::_V2::system_clock::time_point _startTime;
     };
 };
