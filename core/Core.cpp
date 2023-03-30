@@ -9,8 +9,8 @@
 
 Arcade::Core::Core(std::string libFilePath)
 {
-    storeLibsPath();
     try {
+        storeLibsPath();
         _lib.second = _lib.first.loadGraphicalLib(libFilePath);
     } catch (const LoaderException &e) {
         std::cerr << e.what() << std::endl;
@@ -35,13 +35,15 @@ void Arcade::Core::storeLibsPath()
                 _gamesPath.push_back(lib);
                 _lib.first.closeLib();
             }
-        } catch (const LoaderException &e) {
+        }
+        catch (const LoaderException &e) {
             try {
                 if (_lib.first.loadGraphicalLib(lib)) {
                     _libsPath.push_back(lib);
                     _lib.first.closeLib();
                 }
-            } catch (const LoaderException &err) {
+            }
+            catch (const LoaderException &err) {
                 std::cout << lib << " bad library" << std::endl;
             }
         }
@@ -50,20 +52,18 @@ void Arcade::Core::storeLibsPath()
 
 std::vector<std::string> Arcade::Core::getLibsFromDirectory()
 {
-    DIR *dir;
-    struct dirent *ent;
     std::string path = "./lib/";
     std::vector<std::string> libs;
 
-    if ((dir = opendir("./lib")) != NULL) {
-        while ((ent = readdir(dir)) != NULL) {
-            if (ent->d_name[0] != '.' && strlen(ent->d_name) > 3 && !strcmp(ent->d_name + strlen(ent->d_name) - 3, ".so")) {
-                libs.push_back(path + ent->d_name);
-            }
-        }
-        closedir(dir);
-    } else {
-        throw LoaderException("Couldn't open directory");
+    if (!std::filesystem::exists(path))
+        throw LoaderException("Error while loading libs");
+    try {
+        for (const auto &entry : std::filesystem::directory_iterator(path))
+            if (entry.path().extension() == ".so")
+                libs.push_back(path + entry.path().filename().string());
+    } catch (const std::filesystem::filesystem_error &e) {
+        std::cerr << e.what() << std::endl;
+        throw LoaderException("Error while loading libs");
     }
     return libs;
 }

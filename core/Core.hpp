@@ -7,10 +7,11 @@
 
 #pragma once
 #include <iostream>
+#include <string>
 #include <memory>
 #include <map>
 #include <vector>
-#include <dirent.h>
+#include <filesystem>
 #include <algorithm>
 
 #include "IGame.hpp"
@@ -33,6 +34,9 @@ namespace Arcade {
 
             void loop();
 
+            float getDeltaTime() const { return _deltaTime; };
+            void setDeltaTime(float deltaTime) { _deltaTime = deltaTime; };
+
         private:
             void runScene(Arcade::Scenes scene = Arcade::MAIN_MENU);
             bool loadGame(const std::string &GameName);
@@ -50,5 +54,7 @@ namespace Arcade {
             std::size_t _currentGame;
             std::size_t _currentLib;
             Arcade::Scenes _currentScene;
+
+            float _deltaTime;
     };
 };
