@@ -21,18 +21,54 @@ namespace Arcade {
             SfmlLib(void);
             ~SfmlLib();
 
-            bool isWindowClosed(void);
-            void updateEvent(void);
-            void createWindow(void);
-            void closeWindow(void);
-            void clearWindow(void);
-            void renderWindow(void);
-            void drawObjets(std::shared_ptr<Arcade::IObject> object);
+            bool isWindowClosed(void) { return _window.isOpen(); };
+            void updateEvent(void) { /* TODO: this */ };
+            void createWindow(void) { _window.create(sf::VideoMode(1920, 1080), "Arcade"); };
+            void closeWindow(void) { _window.close(); };
+            void clearWindow(void) { _window.clear(); };
+            void renderWindow(void) { _window.display(); };
+            void drawObjets(std::shared_ptr<Arcade::IObject> object) {
+                std::string fp = object->getFilePath();
+                bool isTextured = _textures[fp].loadFromFile(object->getFilePath());
+                _sprites[fp].setTexture(_textures[fp]);
+                if (!isTextured) {
+                    _sprites[fp].setColor(arcadeColorToSfColor(object->getColor()));
+                }
+                _sprites[fp].setPosition(object->getPosition().first, object->getPosition().second);
+                _sprites[fp].setScale(object->getSize().first, object->getSize().second);
+                _window.draw(_sprites[fp]);
+            };
             void drawShapes(Arcade::Shapes shape, Arcade::Colors color, std::pair<ssize_t, ssize_t> pos, std::pair<ssize_t, ssize_t> size);
             void drawText(std::shared_ptr<Arcade::Text> text);
             void drawText(std::string str, Arcade::Colors color, ssize_t size, std::pair<ssize_t, ssize_t> pos);
 
         private:
+
+            sf::Color arcadeColorToSfColor(Arcade::Colors color) {
+                switch (color) {
+                    case Arcade::Colors::BLACK:
+                        return sf::Color::Black;
+                    case Arcade::Colors::WHITE:
+                        return sf::Color::White;
+                    case Arcade::Colors::RED:
+                        return sf::Color::Red;
+                    case Arcade::Colors::GREEN:
+                        return sf::Color::Green;
+                    case Arcade::Colors::BLUE:
+                        return sf::Color::Blue;
+                    case Arcade::Colors::YELLOW:
+                        return sf::Color::Yellow;
+                    case Arcade::Colors::MAGENTA:
+                        return sf::Color::Magenta;
+                    case Arcade::Colors::CYAN:
+                        return sf::Color::Cyan;
+                    case Arcade::Colors::TRANSPARENT:
+                        return sf::Color::Transparent;
+                    default:
+                        return sf::Color::Black;
+                };
+            }
+
             sf::RenderWindow _window;
             std::map<std::string, sf::Texture> _textures;
             std::map<std::string, sf::Sprite> _sprites;
