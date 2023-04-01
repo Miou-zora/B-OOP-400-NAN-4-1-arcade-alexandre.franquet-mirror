@@ -21,7 +21,16 @@ namespace Arcade {
             SfmlLib(void);
             ~SfmlLib();
 
-            
+            bool isWindowClosed(void);
+            void updateEvent(void);
+            void createWindow(void);
+            void closeWindow(void);
+            void clearWindow(void);
+            void renderWindow(void);
+            void drawObjets(std::shared_ptr<Arcade::IObject> object);
+            void drawShapes(Arcade::Shapes shape, Arcade::Colors color, std::pair<ssize_t, ssize_t> pos, std::pair<ssize_t, ssize_t> size);
+            void drawText(std::shared_ptr<Arcade::Text> text);
+            void drawText(std::string str, Arcade::Colors color, ssize_t size, std::pair<ssize_t, ssize_t> pos);
 
         private:
             sf::RenderWindow _window;
