@@ -18,8 +18,11 @@ namespace Arcade {
          */
 
         public:
-            SfmlLib(void);
-            ~SfmlLib();
+            SfmlLib(void) = default;
+            ~SfmlLib() {
+                if (_window.isOpen())
+                    _window.close();
+            };
 
             bool isWindowClosed(void) { return _window.isOpen(); };
             void updateEvent(void) { /* TODO: this */ };
@@ -38,7 +41,13 @@ namespace Arcade {
                 _sprites[fp].setScale(object->getSize().first, object->getSize().second);
                 _window.draw(_sprites[fp]);
             };
-            void drawShapes(Arcade::Shapes shape, Arcade::Colors color, std::pair<ssize_t, ssize_t> pos, std::pair<ssize_t, ssize_t> size);
+            void drawShapes(Arcade::Shapes shape, Arcade::Colors color, std::pair<ssize_t, ssize_t> pos, std::pair<ssize_t, ssize_t> size) {
+                std::unique_ptr<sf::Shape> sfShape = arcadeShapeToSfShape(shape);
+                sfShape->setFillColor(arcadeColorToSfColor(color));
+                sfShape->setPosition(pos.first, pos.second);
+                sfShape->setScale(size.first, size.second);
+                _window.draw(*sfShape);
+            };
             void drawText(std::shared_ptr<Arcade::Text> text);
             void drawText(std::string str, Arcade::Colors color, ssize_t size, std::pair<ssize_t, ssize_t> pos);
 
@@ -66,6 +75,19 @@ namespace Arcade {
                         return sf::Color::Transparent;
                     default:
                         return sf::Color::Black;
+                };
+            }
+
+            std::unique_ptr<sf::Shape> arcadeShapeToSfShape(Arcade::Shapes shape) {
+                switch (shape) {
+                    case Arcade::Shapes::CIRCLE:
+                        return std::make_unique<sf::CircleShape>();
+                    case Arcade::Shapes::SQUARE:
+                        return std::make_unique<sf::RectangleShape>();
+                    case Arcade::Shapes::TRIANGLE:
+                        return std::make_unique<sf::ConvexShape>();
+                    default:
+                        return std::make_unique<sf::CircleShape>();
                 };
             }
 
