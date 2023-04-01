@@ -48,8 +48,8 @@ namespace Arcade {
                 sfShape->setScale(size.first, size.second);
                 _window.draw(*sfShape);
             };
-            void drawText(std::shared_ptr<Arcade::Text> text);
-            void drawText(std::string str, Arcade::Colors color, ssize_t size, std::pair<ssize_t, ssize_t> pos);
+            void drawText(std::shared_ptr<Arcade::Text> text) { (void)text; /* TODO */ };
+            void drawText(std::string str, Arcade::Colors color, ssize_t size, std::pair<ssize_t, ssize_t> pos) { (void)pos; (void)color; (void)size; (void)str;/* TODO */ };
 
         private:
 
