@@ -20,6 +20,7 @@ set(INCLUDE_SRC core/src/Display
 include_directories(${INCLUDE_SRC})
 add_subdirectory(tests/debug_lib)
 add_subdirectory(lib/graphics)
+add_subdirectory(lib)
 
 project(arcade)
 

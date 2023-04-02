@@ -34,7 +34,7 @@ namespace Arcade {
         private:
 
             sf::Color arcadeColorToSfColor(Arcade::Colors color);
-            std::unique_ptr<sf::Shape> arcadeShapeToSfShape(Arcade::Shapes shape);
+            std::unique_ptr<sf::Shape> arcadeShapeToSfShape(Arcade::Shapes shape, std::pair<ssize_t, ssize_t> size);
 
             sf::RenderWindow _window;
             std::map<std::string, sf::Texture> _textures;

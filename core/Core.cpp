@@ -12,15 +12,17 @@ Arcade::Core::Core(std::string libFilePath)
     try {
         storeLibsPath();
         _lib.second = _lib.first.loadGraphicalLib(libFilePath);
+        _game.second = _game.first.loadGameLib("./lib/lib_snake.so");
     } catch (const LoaderException &e) {
         std::cerr << e.what() << std::endl;
         exit(84);
     }
     _startTime = std::chrono::high_resolution_clock::now();
-    _currentScene = Arcade::Scenes::MAIN_MENU;
+    _currentScene = Arcade::Scenes::IN_GAME;
     _currentLib = std::find(_libsPath.begin(), _libsPath.end(), libFilePath) - _libsPath.begin();
     _currentGame = 0;
     _lib.second.get()->createWindow();
+    _game.second.get()->load();
 }
 
 Arcade::Core::~Core()
@@ -109,7 +111,10 @@ void Arcade::Core::loop()
     while (_currentScene != Arcade::Scenes::LEAVE) {
         updateDeltaTime();
         _lib.second.get()->updateEvent();
-        runScene(_currentScene);
+        // runScene(_currentScene);
+        _lib.second.get()->clearWindow();
+        _game.second.get()->render(*_lib.second.get());
+        _lib.second.get()->renderWindow();
     }
 }
 
