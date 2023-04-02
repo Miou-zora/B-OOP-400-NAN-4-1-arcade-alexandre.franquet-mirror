@@ -73,28 +73,42 @@ void Arcade::Core::runScene(Arcade::Scenes scene)
 {
     switch (scene) {
         case Arcade::Scenes::MAIN_MENU:
+            updateMainMenu(*_lib.second.get());
+            renderMainMenu(*_lib.second.get());
             break;
         case Arcade::Scenes::IN_GAME:
+            _game.second.get()->update(*_lib.second.get(), _deltaTime);
+            _game.second.get()->render(*_lib.second.get());
             break;
         case Arcade::Scenes::LEAVE:
             break;
     }
 }
 
+void Arcade::Core::updateMainMenu(Arcade::ILib &lib)
+{
+    (void)lib;
+}
+
+void Arcade::Core::renderMainMenu(Arcade::ILib &lib)
+{
+    lib.clearWindow();
+
+    lib.renderWindow();
+}
+
 void Arcade::Core::updateDeltaTime(void)
 {
     std::chrono::_V2::system_clock::time_point endTime = std::chrono::high_resolution_clock::now();
-    _deltaTime += std::chrono::duration<double, std::milli>(endTime-_startTime).count();
+    _deltaTime = std::chrono::duration<double, std::milli>(endTime-_startTime).count();
     _startTime = endTime;
-    if (_deltaTime > 1000.0) {
-        _deltaTime -= 1000.0;
-    }
 }
 
 void Arcade::Core::loop()
 {
     while (_currentScene != Arcade::Scenes::LEAVE) {
         updateDeltaTime();
+        _lib.second.get()->updateEvent();
         runScene(_currentScene);
     }
 }
