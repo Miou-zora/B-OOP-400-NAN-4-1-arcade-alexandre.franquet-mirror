@@ -59,8 +59,26 @@ namespace Arcade {
                 sfShape->setScale(size.first, size.second);
                 _window.draw(*sfShape);
             };
-            void drawText(std::shared_ptr<Arcade::Text> text) { (void)text; /* TODO */ };
-            void drawText(std::string str, Arcade::Colors color, ssize_t size, std::pair<ssize_t, ssize_t> pos) { (void)pos; (void)color; (void)size; (void)str;/* TODO */ };
+            void drawText(std::shared_ptr<Arcade::Text> text) {
+                if (_fonts.find("arial.ttf") == _fonts.end())
+                    _fonts["arial.ttf"].loadFromFile("./lib/graphics/arial.ttf");
+                _texts[text->getText()].setFont(_fonts["arial.ttf"]);
+                _texts[text->getText()].setString(text->getText());
+                _texts[text->getText()].setCharacterSize(20);
+                _texts[text->getText()].setFillColor(arcadeColorToSfColor(text->getColor()));
+                _texts[text->getText()].setPosition(text->getPosition().first, text->getPosition().second);
+                _window.draw(_texts[text->getText()]);
+            };
+            void drawText(std::string str, Arcade::Colors color, ssize_t size, std::pair<ssize_t, ssize_t> pos) {
+                if (_fonts.find("arial.ttf") == _fonts.end())
+                    _fonts["arial.ttf"].loadFromFile("./lib/graphics/arial.ttf");
+                _texts[str].setFont(_fonts["arial.ttf"]);
+                _texts[str].setString(str);
+                _texts[str].setCharacterSize(size);
+                _texts[str].setFillColor(arcadeColorToSfColor(color));
+                _texts[str].setPosition(pos.first, pos.second);
+                _window.draw(_texts[str]);
+            };
 
         private:
 
@@ -106,6 +124,8 @@ namespace Arcade {
             std::map<std::string, sf::Texture> _textures;
             std::map<std::string, sf::Sprite> _sprites;
             sf::Event _event;
+            std::map<std::string, sf::Font> _fonts;
+            std::map<std::string, sf::Text> _texts;
             std::map<sf::Keyboard::Key, Arcade::Inputs> _keyMap = {
                 {sf::Keyboard::Key::Left, Arcade::Inputs::KEY_LEFT},
                 {sf::Keyboard::Key::Right, Arcade::Inputs::KEY_RIGHT},
