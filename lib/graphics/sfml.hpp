@@ -25,7 +25,18 @@ namespace Arcade {
             };
 
             bool isWindowClosed(void) { return _window.isOpen(); };
-            void updateEvent(void) { /* TODO: this */ };
+            void updateEvent(void) {
+                while (_window.pollEvent(_event)) {
+                    if (_event.type == sf::Event::Closed)
+                        _keys[Arcade::Inputs::KEY_Q] = true;
+                    if (_event.type == sf::Event::KeyPressed) {
+                        _keys[_keyMap[_event.key.code]] = true;
+                    }
+                    if (_event.type == sf::Event::KeyReleased) {
+                        _keys[_keyMap[_event.key.code]] = false;
+                    }
+                }
+            };
             void createWindow(void) { _window.create(sf::VideoMode(1920, 1080), "Arcade"); };
             void closeWindow(void) { _window.close(); };
             void clearWindow(void) { _window.clear(); };
@@ -94,5 +105,17 @@ namespace Arcade {
             sf::RenderWindow _window;
             std::map<std::string, sf::Texture> _textures;
             std::map<std::string, sf::Sprite> _sprites;
+            sf::Event _event;
+            std::map<sf::Keyboard::Key, Arcade::Inputs> _keyMap = {
+                {sf::Keyboard::Key::Left, Arcade::Inputs::KEY_LEFT},
+                {sf::Keyboard::Key::Right, Arcade::Inputs::KEY_RIGHT},
+                {sf::Keyboard::Key::Up, Arcade::Inputs::KEY_UP},
+                {sf::Keyboard::Key::Down, Arcade::Inputs::KEY_DOWN},
+                {sf::Keyboard::Key::Space, Arcade::Inputs::KEY_SPACE},
+                {sf::Keyboard::Key::Q, Arcade::Inputs::KEY_Q},
+                {sf::Keyboard::Key::Escape, Arcade::Inputs::KEY_ESC},
+                {sf::Keyboard::Key::G, Arcade::Inputs::KEY_G},
+                {sf::Keyboard::Key::H, Arcade::Inputs::KEY_H},
+            };
     };
 }
