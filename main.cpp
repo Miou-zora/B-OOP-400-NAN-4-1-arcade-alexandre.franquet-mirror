@@ -13,7 +13,6 @@
 #include "core/Core.hpp"
 #include "core/LibLoader.hpp"
 #include "lib/game/nibbler.hpp"
-#include "lib/game/snake.hpp"
 
 int main(int ac, char **argv)
 {
