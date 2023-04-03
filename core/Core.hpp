@@ -37,12 +37,15 @@ namespace Arcade {
             void loop();
 
             float getDeltaTime() const { return _deltaTime; };
-            void updateDeltaTime(void);
 
         private:
             void runScene(Arcade::Scenes scene = Arcade::MAIN_MENU);
             bool loadGame(const std::string &GameName);
             bool loadLib(const std::string &LibName);
+            void updateDeltaTime(void);
+
+            void updateMainMenu(Arcade::ILib &lib);
+            void renderMainMenu(Arcade::ILib &lib);
 
             std::vector<std::string> getLibsFromDirectory();
             void storeLibsPath();

@@ -29,6 +29,7 @@ namespace Arcade {
             std::pair<ssize_t, ssize_t> _scale;
             std::pair<ssize_t, ssize_t> _size;
 
+        protected:
             std::unordered_map<Arcade::Inputs, bool> _keys;
             std::string _name;
     };
