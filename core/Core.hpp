@@ -19,6 +19,7 @@
 #include "IGame.hpp"
 #include "Lib/ILib.hpp"
 #include "LibLoader.hpp"
+#include "AObjects.hpp"
 
 namespace Arcade {
     /*Those are just example */
@@ -46,6 +47,7 @@ namespace Arcade {
 
             void updateMainMenu(Arcade::ILib &lib);
             void renderMainMenu(Arcade::ILib &lib);
+            void initMenu();
 
             void globalInputs(Arcade::ILib &lib);
 
@@ -64,5 +66,7 @@ namespace Arcade {
 
             double _deltaTime;
             std::chrono::_V2::system_clock::time_point _startTime;
+
+            std::vector<std::shared_ptr<Arcade::IObject>> _menuObjects;
     };
 };

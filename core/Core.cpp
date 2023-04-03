@@ -25,11 +25,22 @@ Arcade::Core::Core(std::string libFilePath)
         exit(84);
     }
     _lib.second.get()->createWindow();
+    initMenu();
 }
 
 Arcade::Core::~Core()
 {
     _lib.first.closeLib();
+}
+
+void Arcade::Core::initMenu()
+{
+    std::shared_ptr<Arcade::AObject> game = std::make_shared<Arcade::AObject>();
+    game->setPosition({100, 100});
+    game->setShape(Arcade::Shapes::SQUARE);
+    game->setSize({100, 100});
+    game->setColor(Arcade::Colors::WHITE);
+    _menuObjects.push_back(game);
 }
 
 void Arcade::Core::storeLibsPath()
@@ -91,13 +102,35 @@ void Arcade::Core::runScene(Arcade::Scenes scene)
 
 void Arcade::Core::updateMainMenu(Arcade::ILib &lib)
 {
-    (void)lib;
+    if (lib.isKeyPressed(Arcade::Inputs::IKEY_LEFT))
+        _menuObjects[0]->setPosition({_menuObjects[0]->getPosition().first - 10, _menuObjects[0]->getPosition().second});
+    if (lib.isKeyPressed(Arcade::Inputs::IKEY_RIGHT))
+        _menuObjects[0]->setPosition({_menuObjects[0]->getPosition().first + 10, _menuObjects[0]->getPosition().second});
+    if (lib.isKeyPressed(Arcade::Inputs::IKEY_UP))
+        _menuObjects[0]->setPosition({_menuObjects[0]->getPosition().first, _menuObjects[0]->getPosition().second - 10});
+    if (lib.isKeyPressed(Arcade::Inputs::IKEY_DOWN))
+        _menuObjects[0]->setPosition({_menuObjects[0]->getPosition().first, _menuObjects[0]->getPosition().second + 10});
 }
 
 void Arcade::Core::renderMainMenu(Arcade::ILib &lib)
 {
     lib.clearWindow();
-    lib.drawText("arcade", Arcade::Colors::BLUE, 100, {100,100});
+    lib.drawText("ARCADE", Arcade::Colors::BLUE, 100, {800,0});
+    lib.drawText("Games", Arcade::Colors::BLUE, 100, {10,150});
+    lib.drawText("Libraries", Arcade::Colors::BLUE, 100, {490,150});
+    lib.drawText("HighScores", Arcade::Colors::BLUE, 75, {970,175});
+    lib.drawText("UserName", Arcade::Colors::BLUE, 100, {1440,150});
+    for (size_t i = 0; i < _menuObjects.size(); i++)
+        lib.drawObjets(_menuObjects[i]);
+    for (size_t i = 0; i < _gamesPath.size(); i++)
+        lib.drawText(_gamesPath[i], Arcade::Colors::BLUE, 40, {10,300 + (i * 150)});
+    for (size_t i = 0; i < _libsPath.size(); i++)
+        lib.drawText(_libsPath[i], Arcade::Colors::BLUE, 40, {490,300 + (i * 150)});
+    lib.drawShapes(Arcade::Shapes::SQUARE, Arcade::Colors::BLUE, {480, 150}, {2, 1080});
+    lib.drawShapes(Arcade::Shapes::SQUARE, Arcade::Colors::BLUE, {960, 150}, {2, 1080});
+    lib.drawShapes(Arcade::Shapes::SQUARE, Arcade::Colors::BLUE, {1440, 150}, {2, 1080});
+    lib.drawShapes(Arcade::Shapes::SQUARE, Arcade::Colors::BLUE, {0, 150}, {2000, 2});
+    lib.drawShapes(Arcade::Shapes::SQUARE, Arcade::Colors::BLUE, {0, 300}, {2000, 2});
     lib.renderWindow();
 }
 
