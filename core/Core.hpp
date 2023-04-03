@@ -47,6 +47,8 @@ namespace Arcade {
             void updateMainMenu(Arcade::ILib &lib);
             void renderMainMenu(Arcade::ILib &lib);
 
+            void globalInputs(Arcade::ILib &lib);
+
             std::vector<std::string> getLibsFromDirectory();
             void storeLibsPath();
 

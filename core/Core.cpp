@@ -18,8 +18,12 @@ Arcade::Core::Core(std::string libFilePath)
     }
     _startTime = std::chrono::high_resolution_clock::now();
     _currentScene = Arcade::Scenes::MAIN_MENU;
-    _currentLib = std::find(_libsPath.begin(), _libsPath.end(), libFilePath) - _libsPath.begin();
+    _currentLib = 0;
     _currentGame = 0;
+    if (_libsPath.size() == 0 || _gamesPath.size() == 0) {
+        std::cerr << "No library found" << std::endl;
+        exit(84);
+    }
     _lib.second.get()->createWindow();
 }
 
@@ -87,18 +91,40 @@ void Arcade::Core::runScene(Arcade::Scenes scene)
 
 void Arcade::Core::updateMainMenu(Arcade::ILib &lib)
 {
-    if (lib.isKeyPressed(Arcade::Inputs::IKEY_Q)) {
-        std::cout << "q" << std::endl;
-        _currentScene = Arcade::Scenes::LEAVE;
-        lib.closeWindow();
-    }
+    (void)lib;
 }
 
 void Arcade::Core::renderMainMenu(Arcade::ILib &lib)
 {
     lib.clearWindow();
-
+    lib.drawText("arcade", Arcade::Colors::BLUE, 100, {100,100});
     lib.renderWindow();
+}
+
+void Arcade::Core::globalInputs(Arcade::ILib &lib)
+{
+    if (lib.isKeyPressed(Arcade::Inputs::IKEY_Q) && !lib.isWindowClosed()) {
+        _currentScene = Arcade::Scenes::LEAVE;
+        lib.closeWindow();
+        return;
+    }
+    if (lib.isKeyPressed(Arcade::Inputs::IKEY_H) && !lib.isWindowClosed()) {
+        if (_currentGame == _gamesPath.size() - 1) {
+            _currentGame = 0;
+        } else {
+            _currentGame++;
+        }
+        loadGame(_gamesPath[_currentGame]);
+        return;
+    }
+    if (lib.isKeyPressed(Arcade::Inputs::IKEY_G) && !lib.isWindowClosed()) {
+        if (_currentLib == _libsPath.size() - 1) {
+            _currentLib = 0;
+        } else {
+            _currentLib++;
+        }
+        loadLib(_libsPath[_currentLib]);
+    }
 }
 
 void Arcade::Core::updateDeltaTime(void)
@@ -113,6 +139,7 @@ void Arcade::Core::loop()
     while (_currentScene != Arcade::Scenes::LEAVE) {
         updateDeltaTime();
         _lib.second.get()->updateEvent();
+        globalInputs(*_lib.second.get());
         runScene(_currentScene);
     }
 }
@@ -120,7 +147,13 @@ void Arcade::Core::loop()
 bool Arcade::Core::loadGame(const std::string &GameName)
 {
     try {
+        if (_game.second)
+            _game.second.get()->unload();
+        if (_game.first.isLibOpen())
+            _game.first.closeLib();
         _game.second = _game.first.loadGameLib(GameName);
+        _game.second.get()->load();
+        _currentScene = Arcade::Scenes::IN_GAME;
     } catch (const LoaderException &e) {
         std::cerr << e.what() << std::endl;
         return false;
@@ -131,7 +164,12 @@ bool Arcade::Core::loadGame(const std::string &GameName)
 bool Arcade::Core::loadLib(const std::string &LibName)
 {
     try {
+        if (_lib.second)
+            _lib.second.get()->closeWindow();
+        if (_lib.first.isLibOpen())
+            _lib.first.closeLib();
         _lib.second = _lib.first.loadGraphicalLib(LibName);
+        _lib.second.get()->createWindow();
     } catch (const LoaderException &e) {
         std::cerr << e.what() << std::endl;
         return false;
