@@ -71,7 +71,7 @@ void Arcade::SnakeGame::generateMap(void)
                 empty->setShape(Arcade::Shapes::SQUARE);
                 empty->setPosition({x, y});
                 empty->setSize({1, 1});
-                empty->setColor(Arcade::Colors::BLACK);
+                empty->setColor(Arcade::Colors::GREEN);
                 empty->setFilePath("");
                 _allObjects.push_back(empty);
             }
