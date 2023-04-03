@@ -6,6 +6,7 @@
 */
 
 #include "snake.hpp"
+#include <iostream>
 
 extern "C"
 {

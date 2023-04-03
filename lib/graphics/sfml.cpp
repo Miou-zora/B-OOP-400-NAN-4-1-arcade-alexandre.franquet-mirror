@@ -6,6 +6,7 @@
 */
 
 #include "sfml.hpp"
+#include <iostream>
 
 extern "C"
 {
@@ -60,6 +61,10 @@ void Arcade::SfmlLib::renderWindow(void)
 
 void Arcade::SfmlLib::drawObjets(std::shared_ptr<Arcade::IObject> object) {
     std::string fp = object->getFilePath();
+    if (object->getFilePath().compare("") == 0) {
+        drawShapes(object->getShape(), object->getColor(), object->getPosition(), object->getSize());
+        return;
+    }
     bool isTextured = _textures[fp].loadFromFile(object->getFilePath());
     _sprites[fp].setTexture(_textures[fp]);
     if (!isTextured) {
@@ -71,10 +76,9 @@ void Arcade::SfmlLib::drawObjets(std::shared_ptr<Arcade::IObject> object) {
 }
 
 void Arcade::SfmlLib::drawShapes(Arcade::Shapes shape, Arcade::Colors color, std::pair<ssize_t, ssize_t> pos, std::pair<ssize_t, ssize_t> size) {
-    std::unique_ptr<sf::Shape> sfShape = arcadeShapeToSfShape(shape);
+    std::unique_ptr<sf::Shape> sfShape = arcadeShapeToSfShape(shape, size);
     sfShape->setFillColor(arcadeColorToSfColor(color));
     sfShape->setPosition(pos.first, pos.second);
-    sfShape->setScale(size.first, size.second);
     _window.draw(*sfShape);
 }
 
@@ -125,15 +129,15 @@ sf::Color Arcade::SfmlLib::arcadeColorToSfColor(Arcade::Colors color) {
     };
 }
 
-std::unique_ptr<sf::Shape> Arcade::SfmlLib::arcadeShapeToSfShape(Arcade::Shapes shape) {
+std::unique_ptr<sf::Shape> Arcade::SfmlLib::arcadeShapeToSfShape(Arcade::Shapes shape, std::pair<ssize_t, ssize_t> size) {
     switch (shape) {
         case Arcade::Shapes::CIRCLE:
-            return std::make_unique<sf::CircleShape>();
+            return std::make_unique<sf::CircleShape>(sf::CircleShape(size.first));
         case Arcade::Shapes::SQUARE:
-            return std::make_unique<sf::RectangleShape>();
+            return std::make_unique<sf::RectangleShape>(sf::RectangleShape(sf::Vector2f(size.first, size.second)));
         case Arcade::Shapes::TRIANGLE:
-            return std::make_unique<sf::ConvexShape>();
+            return std::make_unique<sf::CircleShape>(sf::CircleShape(size.first, 3));
         default:
-            return std::make_unique<sf::CircleShape>();
+            return std::make_unique<sf::RectangleShape>(sf::RectangleShape(sf::Vector2f(size.first, size.second)));
     };
 }
