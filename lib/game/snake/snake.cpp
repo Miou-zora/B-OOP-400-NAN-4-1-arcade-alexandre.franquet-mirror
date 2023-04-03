@@ -29,6 +29,15 @@ Arcade::SnakeGame::SnakeGame(void)
         "#                  #",
         "#                  #",
         "#                  #",
+        "#                  #",
+        "#                  #",
+        "#                  #",
+        "#                  #",
+        "#                  #",
+        "#                  #",
+        "#                  #",
+        "#                  #",
+        "#                  #",
         "####################"
     };
     _snake = {"sssS"};
@@ -60,8 +69,8 @@ void Arcade::SnakeGame::generateMap(void)
             if (_map[y][x] == '#') {
                 std::shared_ptr<Arcade::AObject> wall = std::make_shared<Arcade::AObject>();
                 wall->setShape(Arcade::Shapes::SQUARE);
-                wall->setPosition({x, y});
-                wall->setSize({1, 1});
+                wall->setPosition({50*x + 450, 50*y});
+                wall->setSize({50, 50});
                 wall->setColor(Arcade::Colors::RED);
                 wall->setFilePath("");
                 _allObjects.push_back(wall);
@@ -69,8 +78,8 @@ void Arcade::SnakeGame::generateMap(void)
             if (_map[y][x] == ' ') {
                 std::shared_ptr<Arcade::AObject> empty = std::make_shared<Arcade::AObject>();
                 empty->setShape(Arcade::Shapes::SQUARE);
-                empty->setPosition({x, y});
-                empty->setSize({1, 1});
+                empty->setPosition({50*x+450, 50*y});
+                empty->setSize({50, 50});
                 empty->setColor(Arcade::Colors::GREEN);
                 empty->setFilePath("");
                 _allObjects.push_back(empty);
