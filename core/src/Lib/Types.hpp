@@ -18,17 +18,17 @@ namespace Arcade {
 
     enum Inputs {
         /*Those are for in game inputs for player movement */
-        KEY_UP,
-        KEY_DOWN,
-        KEY_LEFT,
-        KEY_RIGHT,
-        KEY_SPACE,
+        IKEY_UP,
+        IKEY_DOWN,
+        IKEY_LEFT,
+        IKEY_RIGHT,
+        IKEY_SPACE,
 
         /*Those key are for arcade control Exit/Menu/... */
-        KEY_Q,
-        KEY_ESC,
-        KEY_G,
-        KEY_H,
+        IKEY_Q,
+        IKEY_ESC,
+        IKEY_G,
+        IKEY_H,
 
         NO_KEY
     };
