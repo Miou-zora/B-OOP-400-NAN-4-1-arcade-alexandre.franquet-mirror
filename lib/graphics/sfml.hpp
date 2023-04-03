@@ -31,6 +31,9 @@ namespace Arcade {
             void drawText(std::shared_ptr<Arcade::Text> text);
             void drawText(std::string str, Arcade::Colors color, ssize_t size, std::pair<ssize_t, ssize_t> pos);
 
+            bool isKeyPressed(Arcade::Inputs) override;
+            bool isKeyReleased(Arcade::Inputs) override;
+
         private:
 
             sf::Color arcadeColorToSfColor(Arcade::Colors color);

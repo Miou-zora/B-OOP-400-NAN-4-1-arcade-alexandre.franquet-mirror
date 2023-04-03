@@ -39,6 +39,17 @@ void Arcade::SfmlLib::updateEvent(void) {
     }
 }
 
+bool Arcade::SfmlLib::isKeyPressed(Arcade::Inputs input)
+{
+    return _keys[input];
+}
+
+bool Arcade::SfmlLib::isKeyReleased(Arcade::Inputs input)
+{
+    return !_keys[input];
+}
+
+
 void Arcade::SfmlLib::createWindow(void)
 {
     _window.create(sf::VideoMode(1920, 1080), "Arcade");
