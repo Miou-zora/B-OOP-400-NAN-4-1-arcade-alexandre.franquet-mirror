@@ -87,7 +87,11 @@ void Arcade::Core::runScene(Arcade::Scenes scene)
 
 void Arcade::Core::updateMainMenu(Arcade::ILib &lib)
 {
-    (void)lib;
+    if (lib.isKeyPressed(Arcade::Inputs::IKEY_Q)) {
+        std::cout << "q" << std::endl;
+        _currentScene = Arcade::Scenes::LEAVE;
+        lib.closeWindow();
+    }
 }
 
 void Arcade::Core::renderMainMenu(Arcade::ILib &lib)
