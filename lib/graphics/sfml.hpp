@@ -43,15 +43,15 @@ namespace Arcade {
             std::map<std::string, sf::Font> _fonts;
             std::map<std::string, sf::Text> _texts;
             std::map<sf::Keyboard::Key, Arcade::Inputs> _keyMap = {
-                {sf::Keyboard::Key::Left, Arcade::Inputs::KEY_LEFT},
-                {sf::Keyboard::Key::Right, Arcade::Inputs::KEY_RIGHT},
-                {sf::Keyboard::Key::Up, Arcade::Inputs::KEY_UP},
-                {sf::Keyboard::Key::Down, Arcade::Inputs::KEY_DOWN},
-                {sf::Keyboard::Key::Space, Arcade::Inputs::KEY_SPACE},
-                {sf::Keyboard::Key::Q, Arcade::Inputs::KEY_Q},
-                {sf::Keyboard::Key::Escape, Arcade::Inputs::KEY_ESC},
-                {sf::Keyboard::Key::G, Arcade::Inputs::KEY_G},
-                {sf::Keyboard::Key::H, Arcade::Inputs::KEY_H},
+                {sf::Keyboard::Key::Left, Arcade::Inputs::IKEY_LEFT},
+                {sf::Keyboard::Key::Right, Arcade::Inputs::IKEY_RIGHT},
+                {sf::Keyboard::Key::Up, Arcade::Inputs::IKEY_UP},
+                {sf::Keyboard::Key::Down, Arcade::Inputs::IKEY_DOWN},
+                {sf::Keyboard::Key::Space, Arcade::Inputs::IKEY_SPACE},
+                {sf::Keyboard::Key::Q, Arcade::Inputs::IKEY_Q},
+                {sf::Keyboard::Key::Escape, Arcade::Inputs::IKEY_ESC},
+                {sf::Keyboard::Key::G, Arcade::Inputs::IKEY_G},
+                {sf::Keyboard::Key::H, Arcade::Inputs::IKEY_H},
             };
     };
 }

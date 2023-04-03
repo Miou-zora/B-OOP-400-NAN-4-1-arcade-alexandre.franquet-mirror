@@ -29,7 +29,7 @@ bool Arcade::SfmlLib::isWindowClosed(void)
 void Arcade::SfmlLib::updateEvent(void) {
     while (_window.pollEvent(_event)) {
         if (_event.type == sf::Event::Closed)
-            _keys[Arcade::Inputs::KEY_Q] = true;
+            _keys[Arcade::Inputs::IKEY_Q] = true;
         if (_event.type == sf::Event::KeyPressed) {
             _keys[_keyMap[_event.key.code]] = true;
         }
