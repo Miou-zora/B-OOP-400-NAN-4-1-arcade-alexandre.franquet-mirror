@@ -7,12 +7,40 @@
 
 #include "snake.hpp"
 #include <iostream>
+#include <unistd.h>
 
 extern "C"
 {
     Arcade::IGame *GameEntryPoint()
     {
         return new Arcade::SnakeGame();
+    }
+}
+
+void Arcade::SnakeGame::fill_tab_int()
+{
+    for (size_t y = 0; y < _map.size(); y++) {
+        for (size_t x = 0; x < _map[y].size(); x++) {
+            if (_map[y][x] == 's' || _map[y][x] == 'S' || _map[y][x] == '-') {
+                _int_map[y][x] = 1;
+            }
+            else if (_map[y][x] == ' ') {
+                _int_map[y][x] = 0;
+            }
+            else if (_map[y][x] == '#') {
+                _int_map[y][x] = -1;
+            }
+        }
+    }
+}
+
+void print_tab(std::vector<std::vector<int>> map)
+{
+    for (size_t y = 0; y < map.size(); y++) {
+        for (size_t x = 0; x < map[y].size(); x++) {
+            std::cout << map[y][x] << " ";
+        }
+        std::cout << std::endl;
     }
 }
 
@@ -25,7 +53,7 @@ Arcade::SnakeGame::SnakeGame(void)
         "#                  #",
         "#                  #",
         "#                  #",
-        "#                  #",
+        "#  -ssS            #",
         "#                  #",
         "#                  #",
         "#                  #",
@@ -40,17 +68,202 @@ Arcade::SnakeGame::SnakeGame(void)
         "#                  #",
         "####################"
     };
-    _snake = {"sssS"};
+    _snake = {"-ssS"};
     _food = "f";
+    _int_map = {
+        {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+        {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+        {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+        {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+        {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+        {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+        {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+        {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+        {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+        {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+        {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+        {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+        {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+        {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+        {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+        {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+        {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+        {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+        {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+        {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+    };
+
+    fill_tab_int();
 }
 
 Arcade::SnakeGame::~SnakeGame()
 {
 }
 
-void Arcade::SnakeGame::update(Arcade::ILib &lib, float seconds)
+void Arcade::SnakeGame::moveSnake()
 {
-    (void) seconds;
+
+    switch (_direction) {
+        case UP:
+            moveSnakeUp();
+            break;
+        case DOWN:
+            moveSnakeDown();
+            break;
+        case LEFT:
+            moveSnakeLeft();
+            break;
+        case RIGHT:
+            moveSnakeRight();
+            break;
+        default:
+            break;
+    }
+}
+
+void Arcade::SnakeGame::moveSnakeUp()
+{
+    for (size_t y = 0; y < _map.size(); y++) {
+        for (size_t x = 0; x < _map[y].size(); x++) {
+            if (_map[y][x] == 'S') {
+                if (_int_map[y-1][x] != -1) {
+                    _map[y][x] = 's';
+                    _map[y-1][x] = 'S';
+                    _int_map[y-1][x] = UP;
+                    _int_map[y][x] = UP;
+                    break;
+                }
+            }
+        }
+    }
+    change_tail();
+}
+
+int  Arcade::SnakeGame::moveSnakeDown()
+{
+    for (size_t y = 0; y < _map.size(); y++) {
+        for (size_t x = 0; x < _map[y].size(); x++) {
+            if (_map[y][x] == 'S') {
+                if (_int_map[y+1][x] != -1) {
+                    _map[y][x] = 's';
+                    _map[y+1][x] = 'S';
+                    _int_map[y+1][x] = DOWN;
+                    _int_map[y][x] = DOWN;
+                }
+                change_tail();
+                return(0);
+            }
+        }
+    }
+    return (0);
+}
+
+void Arcade::SnakeGame::moveSnakeLeft()
+{
+    for (size_t y = 0; y < _map.size(); y++) {
+        for (size_t x = 0; x < _map[y].size(); x++) {
+            if (_map[y][x] == 'S') {
+                if (_int_map[y][x-1] != -1) {
+                    _map[y][x] = 's';
+                    _map[y][x-1] = 'S';
+                    _int_map[y][x-1] = LEFT;
+                    _int_map[y][x] = LEFT;
+                    break;
+                }
+            }
+        }
+    }
+    change_tail();
+}
+
+int Arcade::SnakeGame::change_tail(void)
+{
+    for (size_t y = 0; y < _map.size(); y++) {
+        for (size_t x = 0; x < _map[y].size(); x++) {
+            if (_map[y][x] == '-') {
+                switch (_int_map[y][x])
+                {
+                case UP :
+                    _map[y][x] = ' ';
+                    _int_map[y][x] = 0;
+                    _map[y-1][x] = '-';
+                    break;
+                case DOWN :
+                    _map[y][x] = ' ';
+                    _int_map[y][x] = 0;
+                    _map[y+1][x] = '-';
+                    return(0);
+                    break;
+                case LEFT :
+                    _map[y][x] = ' ';
+                    _int_map[y][x] = 0;
+                    _map[y][x-1] = '-';
+                    break;
+                case RIGHT :
+                    _map[y][x] = ' ';
+                    _int_map[y][x] = 0;
+                    _map[y][x+1] = '-';
+                    break;
+                default:
+                    break;
+                }
+                break;
+            }
+        }
+    }
+    return (0);
+}
+
+void Arcade::SnakeGame::moveSnakeRight()
+{
+    for (size_t y = 0; y < _map.size(); y++) {
+        for (size_t x = 0; x < _map[y].size()-1; x++) {
+            if (_map[y][x] == 'S') {
+                if (_int_map[y][x+1] != -1) {
+                    _map[y][x] = 's';
+                    _int_map[y][x] = RIGHT;
+                    _map[y][x+1] = 'S';
+                    _int_map[y][x+1] = RIGHT;
+                    break;
+                }
+            }
+        }
+    }
+    change_tail();
+}
+
+void Arcade::SnakeGame::changeKeyDirection(Arcade::ILib &lib)
+{
+    if (lib.isKeyPressed( Arcade::IKEY_UP) && _direction != DOWN)
+        _direction = UP;
+    if (lib.isKeyPressed( Arcade::IKEY_DOWN) && _direction != UP)
+        _direction = DOWN;
+    if (lib.isKeyPressed( Arcade::IKEY_LEFT) && _direction != RIGHT)
+        _direction = LEFT;
+    if (lib.isKeyPressed( Arcade::IKEY_RIGHT) && _direction != LEFT)
+        _direction = RIGHT;
+}
+
+void Arcade::SnakeGame::move()
+{
+    moveSnake();
+
+}
+
+void Arcade::SnakeGame::update(Arcade::ILib &lib, float milliseconds)
+{
+    generateMap();
+    generateSnake();
+
+    _second += milliseconds/1000;
+    changeKeyDirection(lib);
+    if (_second >= 0.1) {
+        move();
+        _second = 0;
+        _allObjects.clear();
+        print_tab(_int_map);
+    }
+
     (void) lib;
 }
 
@@ -88,9 +301,27 @@ void Arcade::SnakeGame::generateMap(void)
     }
 }
 
+void Arcade::SnakeGame::generateSnake(void)
+{
+    for (size_t y = 0; y < _map.size(); y++) {
+        for (size_t x = 0; x < _map[y].size(); x++) {
+            if (_map[y][x] == 'S' || _map[y][x] == 's' || _map[y][x] == '-') {
+                std::shared_ptr<Arcade::AObject> snake = std::make_shared<Arcade::AObject>();
+                snake->setShape(Arcade::Shapes::SQUARE);
+                snake->setPosition({50*x+450, 50*y});
+                snake->setSize({50, 50});
+                snake->setColor(Arcade::Colors::BLUE);
+                snake->setFilePath("");
+                _allObjects.push_back(snake);
+            }
+        }
+    }
+}
+
 void Arcade::SnakeGame::load(void)
 {
     generateMap();
+    generateSnake();
 }
 
 void Arcade::SnakeGame::render(Arcade::ILib &lib)
