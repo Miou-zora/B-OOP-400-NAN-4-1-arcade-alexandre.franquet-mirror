@@ -26,17 +26,12 @@ Arcade::SdlDisplayModule::~SdlDisplayModule()
 
 void Arcade::SdlDisplayModule::createWindow(void)
 {
-    if (SDL_Init(SDL_INIT_VIDEO) != 0 )
-    {
-        std::cerr << "Arcade::SdlDisplayModule::SdlDisplayModule: " << SDL_GetError() << ".\n" << std::endl;
-    }
     _window = SDL_CreateWindow("Arcade SDL",SDL_WINDOWPOS_UNDEFINED,
-                                                              SDL_WINDOWPOS_UNDEFINED,
-                                                              600,
-                                                              600,
-                                                              SDL_WINDOW_SHOWN);
-    if (_window == nullptr)
-    {
+                                            SDL_WINDOWPOS_UNDEFINED,
+                                            1920,
+                                            1080,
+                                            SDL_WINDOW_SHOWN);
+    if (_window == nullptr) {
         std::cerr << "Arcade::SdlDisplayModule::createWindow: " << SDL_GetError() << ".\n" << std::endl;
     }
 }
@@ -49,7 +44,6 @@ void Arcade::SdlDisplayModule::closeWindow(void)
 
 void Arcade::SdlDisplayModule::clearWindow(void)
 {
-
 }
 
 void Arcade::SdlDisplayModule::renderWindow(void)
@@ -59,20 +53,23 @@ void Arcade::SdlDisplayModule::renderWindow(void)
 
 bool Arcade::SdlDisplayModule::isWindowClosed(void)
 {
-    return (true);
+    if (_window == nullptr)
+        return (true);
+    return (false);
 }
 
 void Arcade::SdlDisplayModule::updateEvent(void)
 {
-    while (SDL_PollEvent(&_event)) {
-        if (_event.type == SDL_QUIT)
+    SDL_Event event;
+    while (SDL_PollEvent(&event)) {
+        if (event.type == SDL_QUIT)
             _keys[Arcade::Inputs::IKEY_Q] = true;
-        if (_keyMap.count(_event.key.keysym.sym)) {
-            if (_event.type == SDL_KEYUP) {
-                    _keys[_keyMap[_event.key.keysym.sym]] = true;
+        if (_keyMap.count(event.key.keysym.sym)) {
+            if (event.type == SDL_KEYUP) {
+                _keys[_keyMap[event.key.keysym.sym]] = true;
             }
-            if (_event.type == SDL_KEYDOWN) {
-                    _keys[_keyMap[_event.key.keysym.sym]] = false;
+            if (event.type == SDL_KEYDOWN) {
+                _keys[_keyMap[event.key.keysym.sym]] = false;
             }
         }
     }
@@ -109,16 +106,15 @@ void Arcade::SdlDisplayModule::drawText(std::string str, Arcade::Colors color, s
 }
 
 
-bool Arcade::SdlDisplayModule::isKeyPressed(Arcade::Inputs key)
+bool Arcade::SdlDisplayModule::isKeyPressed(Arcade::Inputs input)
 {
-    (void)key;
-    return (false);
+    return _keys[input];
 }
 
 
-bool Arcade::SdlDisplayModule::isKeyReleased(Arcade::Inputs key)
+bool Arcade::SdlDisplayModule::isKeyReleased(Arcade::Inputs input)
 {
-    (void)key;
-    return (false);
+    return !_keys[input];
+
 }
 
