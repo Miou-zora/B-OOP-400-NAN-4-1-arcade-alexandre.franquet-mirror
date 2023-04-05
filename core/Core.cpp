@@ -169,7 +169,7 @@ void Arcade::Core::loop()
 {
     while (_currentScene != Arcade::Scenes::LEAVE) {
         _lib.second->clearWindow();
-        _lib.second.get()->updateEvent();
+        _lib.second->updateEvent();
         globalInputs(*_lib.second.get());
         updateDeltaTime();
         runScene(_currentScene);
