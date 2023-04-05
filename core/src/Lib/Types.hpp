@@ -52,7 +52,6 @@ namespace Arcade {
         IKEY_N,
         IKEY_O,
         IKEY_P,
-        IKEY_Q,
         IKEY_R,
         IKEY_T,
         IKEY_U,
