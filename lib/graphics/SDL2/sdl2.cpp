@@ -18,19 +18,18 @@ extern "C"
 
 Arcade::SdlDisplayModule::SdlDisplayModule(void)
 {
-    if (SDL_Init(SDL_INIT_VIDEO) != 0 )
-    {
-        std::cerr << "Arcade::SdlDisplayModule::SdlDisplayModule: " << SDL_GetError() << ".\n" << std::endl;
-    }
 }
 
 Arcade::SdlDisplayModule::~SdlDisplayModule()
 {
-    SDL_Quit();
 }
 
 void Arcade::SdlDisplayModule::createWindow(void)
 {
+    if (SDL_Init(SDL_INIT_VIDEO) != 0 )
+    {
+        std::cerr << "Arcade::SdlDisplayModule::SdlDisplayModule: " << SDL_GetError() << ".\n" << std::endl;
+    }
     _window = SDL_CreateWindow("Arcade SDL",SDL_WINDOWPOS_UNDEFINED,
                                                               SDL_WINDOWPOS_UNDEFINED,
                                                               600,
@@ -44,7 +43,8 @@ void Arcade::SdlDisplayModule::createWindow(void)
 
 void Arcade::SdlDisplayModule::closeWindow(void)
 {
-
+    SDL_DestroyWindow(_window);
+    SDL_Quit();
 }
 
 void Arcade::SdlDisplayModule::clearWindow(void)
@@ -64,7 +64,18 @@ bool Arcade::SdlDisplayModule::isWindowClosed(void)
 
 void Arcade::SdlDisplayModule::updateEvent(void)
 {
-
+    while (SDL_PollEvent(&_event)) {
+        if (_event.type == SDL_QUIT)
+            _keys[Arcade::Inputs::IKEY_Q] = true;
+        if (_keyMap.count(_event.key.keysym.sym)) {
+            if (_event.type == SDL_KEYUP) {
+                    _keys[_keyMap[_event.key.keysym.sym]] = true;
+            }
+            if (_event.type == SDL_KEYDOWN) {
+                    _keys[_keyMap[_event.key.keysym.sym]] = false;
+            }
+        }
+    }
 }
 
 

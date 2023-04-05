@@ -37,7 +37,6 @@ namespace Arcade {
 
         private:
             SDL_Window *_window;
-            SDL_Renderer *_renderer;
             SDL_Event _event;
             // std::map<std::string, SDL_Surface> _textures;
             // std::map<std::string, SDL_Texture> _sprites;
@@ -45,17 +44,45 @@ namespace Arcade {
             // SDL_Color arcadeColorToSfColor(Arcade::Colors color);
             // std::unique_ptr<SDL_S> arcadeShapeToSfShape(Arcade::Shapes shape, std::pair<ssize_t, ssize_t> size);
 
-            // SDL_Event _event;
-            // std::map<SDL_KeyCode, Arcade::Inputs> _keyMap = {
-            //     {SDLK_LEFT, Arcade::Inputs::IKEY_LEFT},
-            //     {SDLK_RIGHT, Arcade::Inputs::IKEY_RIGHT},
-            //     {SDLK_UP, Arcade::Inputs::IKEY_UP},
-            //     {SDLK_DOWN, Arcade::Inputs::IKEY_DOWN},
-            //     {SDLK_SPACE, Arcade::Inputs::IKEY_SPACE},
-            //     {SDLK_q, Arcade::Inputs::IKEY_Q},
-            //     {SDLK_ESCAPE, Arcade::Inputs::IKEY_ESC},
-            //     {SDLK_g, Arcade::Inputs::IKEY_G},
-            //     {SDLK_h, Arcade::Inputs::IKEY_H},
-            // };
+            std::map<SDL_Keycode, Arcade::Inputs> _keyMap = {
+                {SDLK_LEFT, Arcade::Inputs::IKEY_LEFT},
+                {SDLK_RIGHT, Arcade::Inputs::IKEY_RIGHT},
+                {SDLK_UP, Arcade::Inputs::IKEY_UP},
+                {SDLK_DOWN, Arcade::Inputs::IKEY_DOWN},
+                {SDLK_SPACE, Arcade::Inputs::IKEY_SPACE},
+                {SDLK_ESCAPE, Arcade::Inputs::IKEY_ESC},
+                {SDLK_RETURN, Arcade::Inputs::IKEY_ENTER},
+                {SDLK_BACKSPACE, Arcade::Inputs::IKEY_BACKSPACE},
+                {SDLK_TAB, Arcade::Inputs::IKEY_TAB},
+                {SDLK_LSHIFT, Arcade::Inputs::IKEY_SHIFT},
+                {SDLK_LCTRL, Arcade::Inputs::IKEY_CTRL},
+                {SDLK_LALT, Arcade::Inputs::IKEY_ALT},
+                {SDLK_a, Arcade::Inputs::IKEY_A},
+                {SDLK_b, Arcade::Inputs::IKEY_B},
+                {SDLK_c, Arcade::Inputs::IKEY_C},
+                {SDLK_d, Arcade::Inputs::IKEY_D},
+                {SDLK_e, Arcade::Inputs::IKEY_E},
+                {SDLK_f, Arcade::Inputs::IKEY_F},
+                {SDLK_g, Arcade::Inputs::IKEY_G},
+                {SDLK_h, Arcade::Inputs::IKEY_H},
+                {SDLK_i, Arcade::Inputs::IKEY_I},
+                {SDLK_j, Arcade::Inputs::IKEY_J},
+                {SDLK_k, Arcade::Inputs::IKEY_K},
+                {SDLK_l, Arcade::Inputs::IKEY_L},
+                {SDLK_m, Arcade::Inputs::IKEY_M},
+                {SDLK_n, Arcade::Inputs::IKEY_N},
+                {SDLK_o, Arcade::Inputs::IKEY_O},
+                {SDLK_p, Arcade::Inputs::IKEY_P},
+                {SDLK_q, Arcade::Inputs::IKEY_Q},
+                {SDLK_r, Arcade::Inputs::IKEY_R},
+                {SDLK_s, Arcade::Inputs::IKEY_S},
+                {SDLK_t, Arcade::Inputs::IKEY_T},
+                {SDLK_u, Arcade::Inputs::IKEY_U},
+                {SDLK_v, Arcade::Inputs::IKEY_V},
+                {SDLK_w, Arcade::Inputs::IKEY_W},
+                {SDLK_x, Arcade::Inputs::IKEY_X},
+                {SDLK_y, Arcade::Inputs::IKEY_Y},
+                {SDLK_z, Arcade::Inputs::IKEY_Z}
+            };
     };
 }

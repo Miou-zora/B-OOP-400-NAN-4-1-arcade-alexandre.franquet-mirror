@@ -186,8 +186,7 @@ bool Arcade::Core::loadGame(const std::string &GameName)
         }
         if (_game.first.isLibOpen())
             _game.first.closeLib();
-        std::shared_ptr<Arcade::IGame> var = _game.first.loadGameLib(GameName);
-        _game.second = var;
+        _game.second = _game.first.loadGameLib(GameName);
         _game.second.get()->load();
         _currentScene = Arcade::Scenes::IN_GAME;
     } catch (const LoaderException &e) {
