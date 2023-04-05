@@ -261,7 +261,6 @@ void Arcade::SnakeGame::update(Arcade::ILib &lib, float milliseconds)
         move();
         _second = 0;
         _allObjects.clear();
-        print_tab(_int_map);
     }
 
     (void) lib;
