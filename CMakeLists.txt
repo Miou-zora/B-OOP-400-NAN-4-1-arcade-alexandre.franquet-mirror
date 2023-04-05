@@ -22,7 +22,7 @@ add_subdirectory(tests/debug_lib)
 
 add_subdirectory(lib/graphics/SDL2)
 add_subdirectory(lib/graphics)
-add_subdirectory(lib)
+add_subdirectory(lib/game)
 
 project(arcade)
 
