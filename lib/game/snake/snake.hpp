@@ -50,6 +50,8 @@ namespace Arcade {
             void moveSnakeLeft(void);
             void moveSnakeRight(void);
 
+            void check_collisions(int x, int y, int direction);
+
 
         private:
             std::vector<std::shared_ptr<Arcade::AObject>> _allObjects;
@@ -57,6 +59,7 @@ namespace Arcade {
             std::vector<std::vector<int>> _int_map;
             std::vector<std::string> _snake;
             std::string _food;
+            bool _isAlive = true;
             int _score = 0;
             int _highScore = 0;
             int _speed = 1;
