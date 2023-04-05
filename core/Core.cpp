@@ -114,32 +114,32 @@ void Arcade::Core::updateMainMenu(Arcade::ILib &lib)
 
 void Arcade::Core::renderMainMenu(Arcade::ILib &lib)
 {
-    lib.drawText("ARCADE", Arcade::Colors::BLUE, 100, {800,0});
-    lib.drawText("Games", Arcade::Colors::BLUE, 100, {10,150});
-    lib.drawText("Libraries", Arcade::Colors::BLUE, 100, {490,150});
-    lib.drawText("HighScores", Arcade::Colors::BLUE, 75, {970,175});
-    lib.drawText("UserName", Arcade::Colors::BLUE, 100, {1440,150});
+    lib.drawText("ARCADE", Arcade::Colors::BLUE, 5, {40, 0});
+    lib.drawText("Games", Arcade::Colors::BLUE, 5, {1, 8});
+    lib.drawText("Libraries", Arcade::Colors::BLUE, 5, {25, 8});
+    lib.drawText("HighScores", Arcade::Colors::BLUE, 4, {49, 9});
+    lib.drawText("UserName", Arcade::Colors::BLUE, 5, {72,8});
     for (size_t i = 0; i < _menuObjects.size(); i++)
         lib.drawObjets(_menuObjects[i]);
     for (size_t i = 0; i < _gamesPath.size(); i++)
-        lib.drawText(_gamesPath[i], Arcade::Colors::BLUE, 40, {10,300 + (i * 150)});
+        lib.drawText(_gamesPath[i], Arcade::Colors::BLUE, 2, {1,16 + (i * 8)});
     for (size_t i = 0; i < _libsPath.size(); i++)
-        lib.drawText(_libsPath[i], Arcade::Colors::BLUE, 40, {490,300 + (i * 150)});
-    lib.drawShapes(Arcade::Shapes::SQUARE, Arcade::Colors::BLUE, {480, 150}, {2, 1080});
-    lib.drawShapes(Arcade::Shapes::SQUARE, Arcade::Colors::BLUE, {960, 150}, {2, 1080});
-    lib.drawShapes(Arcade::Shapes::SQUARE, Arcade::Colors::BLUE, {1440, 150}, {2, 1080});
-    lib.drawShapes(Arcade::Shapes::SQUARE, Arcade::Colors::BLUE, {0, 150}, {2000, 2});
-    lib.drawShapes(Arcade::Shapes::SQUARE, Arcade::Colors::BLUE, {0, 300}, {2000, 2});
+        lib.drawText(_libsPath[i], Arcade::Colors::BLUE, 2, {24,16 + (i * 8)});
+    lib.drawShapes(Arcade::Shapes::SQUARE, Arcade::Colors::BLUE, {24, 8}, {2, 54});
+    lib.drawShapes(Arcade::Shapes::SQUARE, Arcade::Colors::BLUE, {48, 8}, {2, 54});
+    lib.drawShapes(Arcade::Shapes::SQUARE, Arcade::Colors::BLUE, {72, 8}, {2, 54});
+    lib.drawShapes(Arcade::Shapes::SQUARE, Arcade::Colors::BLUE, {0, 8}, {100, 1});
+    lib.drawShapes(Arcade::Shapes::SQUARE, Arcade::Colors::BLUE, {0, 16}, {100, 1});
 }
 
 void Arcade::Core::globalInputs(Arcade::ILib &lib)
 {
-    if (lib.isKeyPressed(Arcade::Inputs::IKEY_Q) && !lib.isWindowClosed()) {
+    if (lib.isKeyPressed(Arcade::Inputs::IKEY_S) && !lib.isWindowClosed()) {
         _currentScene = Arcade::Scenes::LEAVE;
         lib.closeWindow();
         return;
     }
-    if (lib.isKeyPressed(Arcade::Inputs::IKEY_H) && !lib.isWindowClosed()) {
+    if (lib.isKeyPressed(Arcade::Inputs::IKEY_D) && !lib.isWindowClosed()) {
         if (_currentGame == _gamesPath.size() - 1) {
             _currentGame = 0;
         } else {
@@ -148,13 +148,17 @@ void Arcade::Core::globalInputs(Arcade::ILib &lib)
         loadGame(_gamesPath[_currentGame]);
         return;
     }
-    if (lib.isKeyPressed(Arcade::Inputs::IKEY_G) && !lib.isWindowClosed()) {
+    if (lib.isKeyPressed(Arcade::Inputs::IKEY_B) && !lib.isWindowClosed()) {
         if (_currentLib == _libsPath.size() - 1) {
             _currentLib = 0;
         } else {
             _currentLib++;
         }
         loadLib(_libsPath[_currentLib]);
+    }
+    if (lib.isKeyPressed(Arcade::Inputs::IKEY_M) && !lib.isWindowClosed()) {
+        _currentScene = Arcade::Scenes::MAIN_MENU;
+        return;
     }
 }
 
