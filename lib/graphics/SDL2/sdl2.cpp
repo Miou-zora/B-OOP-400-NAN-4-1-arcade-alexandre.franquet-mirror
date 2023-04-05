@@ -18,17 +18,28 @@ extern "C"
 
 Arcade::SdlDisplayModule::SdlDisplayModule(void)
 {
-
+    if (SDL_Init(SDL_INIT_VIDEO) != 0 )
+    {
+        std::cerr << "Arcade::SdlDisplayModule::SdlDisplayModule: " << SDL_GetError() << ".\n" << std::endl;
+    }
 }
 
 Arcade::SdlDisplayModule::~SdlDisplayModule()
 {
-
+    SDL_Quit();
 }
 
 void Arcade::SdlDisplayModule::createWindow(void)
 {
-
+    _window = SDL_CreateWindow("Arcade SDL",SDL_WINDOWPOS_UNDEFINED,
+                                                              SDL_WINDOWPOS_UNDEFINED,
+                                                              600,
+                                                              600,
+                                                              SDL_WINDOW_SHOWN);
+    if (_window == nullptr)
+    {
+        std::cerr << "Arcade::SdlDisplayModule::createWindow: " << SDL_GetError() << ".\n" << std::endl;
+    }
 }
 
 void Arcade::SdlDisplayModule::closeWindow(void)

@@ -38,6 +38,7 @@ namespace Arcade {
         private:
             SDL_Window *_window;
             SDL_Renderer *_renderer;
+            SDL_Event _event;
             // std::map<std::string, SDL_Surface> _textures;
             // std::map<std::string, SDL_Texture> _sprites;
 
