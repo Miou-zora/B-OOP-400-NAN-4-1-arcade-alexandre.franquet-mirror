@@ -16,10 +16,10 @@ namespace Arcade {
 
     class SnakeGame : public virtual AGame {
         enum DIRECTION {
-            UP,
+            RIGHT=1,
             DOWN,
             LEFT,
-            RIGHT
+            UP
         };
         /**
          *  @brief The class AGame is the abstract class of the Game
@@ -38,15 +38,31 @@ namespace Arcade {
             void unload(void) final override;
 
             void generateMap(void);
+            void fill_tab_int();
+            void generateSnake(void);
+
+            int change_tail(void);
+            void moveSnake(void);
+            void changeKeyDirection(Arcade::ILib &lib);
+            void move(void);
+            void moveSnakeUp(void);
+            int moveSnakeDown(void);
+            void moveSnakeLeft(void);
+            void moveSnakeRight(void);
+
 
         private:
             std::vector<std::shared_ptr<Arcade::AObject>> _allObjects;
             std::vector<std::string> _map;
+            std::vector<std::vector<int>> _int_map;
             std::vector<std::string> _snake;
             std::string _food;
             int _score = 0;
             int _highScore = 0;
             int _speed = 1;
+            int _size_snake = 4;
+            int _direction = RIGHT;
+            float _second = 0;
 
     };
 }
