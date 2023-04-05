@@ -40,6 +40,7 @@ namespace Arcade {
             void generateMap(void);
             void fill_tab_int();
             void generateSnake(void);
+            int findValHead();
 
             int change_tail(void);
             void moveSnake(void);
@@ -50,7 +51,7 @@ namespace Arcade {
             void moveSnakeLeft(void);
             void moveSnakeRight(void);
 
-            void check_collisions(int x, int y, int direction);
+            void check_collisions(int x, int y);
 
 
         private:
@@ -62,7 +63,6 @@ namespace Arcade {
             bool _isAlive = true;
             int _score = 0;
             int _highScore = 0;
-            int _speed = 1;
             int _size_snake = 4;
             int _direction = RIGHT;
             float _second = 0;
