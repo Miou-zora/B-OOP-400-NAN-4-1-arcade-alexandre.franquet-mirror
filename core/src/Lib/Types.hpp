@@ -17,6 +17,8 @@ namespace Arcade {
     };
 
     enum Inputs {
+        IKEY_UP,
+        IKEY_DOWN,
         IKEY_LEFT,
         IKEY_RIGHT,
         IKEY_SPACE,
