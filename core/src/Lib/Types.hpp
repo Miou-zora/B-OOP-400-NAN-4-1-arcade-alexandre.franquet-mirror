@@ -7,22 +7,16 @@
 
 #pragma once
 
-#define DISPLAY_ENTRY_POINT "DisplayEntryPoint"
-#define GAME_ENTRY_POINT "GameEntryPoint"
-#define TERMINAL_WIDTH 30
-#define TERMINAL_HEIGHT 30
-#define COEF_WINDOW_WIDTH 20
-#define COEF_WINDOW_HEIGHT 20
-#define WINDOW_WIDTH 600
-#define WINDOW_HEIGHT 600
-
-#define SQUARE_SIZE 20
-#define DIAMETER 20
-#define TRIANGLE_SIZE 20
-
 namespace Arcade {
 
     enum Shapes {
+        SQUARE,
+        CIRCLE,
+        TRIANGLE,
+        NO_SHAPE
+    };
+
+    enum Inputs {
         IKEY_LEFT,
         IKEY_RIGHT,
         IKEY_SPACE,
@@ -67,4 +61,17 @@ namespace Arcade {
         IKEY_Z,
         NO_KEY
     };
-};
+
+    enum Colors {
+        BLACK,
+        WHITE,
+        RED,
+        GREEN,
+        BLUE,
+        YELLOW,
+        MAGENTA,
+        CYAN,
+        TRANSPARENT,
+        NO_COLOR
+    };
+}
