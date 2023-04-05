@@ -114,7 +114,6 @@ void Arcade::Core::updateMainMenu(Arcade::ILib &lib)
 
 void Arcade::Core::renderMainMenu(Arcade::ILib &lib)
 {
-    lib.clearWindow();
     lib.drawText("ARCADE", Arcade::Colors::BLUE, 100, {800,0});
     lib.drawText("Games", Arcade::Colors::BLUE, 100, {10,150});
     lib.drawText("Libraries", Arcade::Colors::BLUE, 100, {490,150});
@@ -131,7 +130,6 @@ void Arcade::Core::renderMainMenu(Arcade::ILib &lib)
     lib.drawShapes(Arcade::Shapes::SQUARE, Arcade::Colors::BLUE, {1440, 150}, {2, 1080});
     lib.drawShapes(Arcade::Shapes::SQUARE, Arcade::Colors::BLUE, {0, 150}, {2000, 2});
     lib.drawShapes(Arcade::Shapes::SQUARE, Arcade::Colors::BLUE, {0, 300}, {2000, 2});
-    lib.renderWindow();
 }
 
 void Arcade::Core::globalInputs(Arcade::ILib &lib)
@@ -170,21 +168,26 @@ void Arcade::Core::updateDeltaTime(void)
 void Arcade::Core::loop()
 {
     while (_currentScene != Arcade::Scenes::LEAVE) {
-        updateDeltaTime();
+        _lib.second->clearWindow();
         _lib.second.get()->updateEvent();
         globalInputs(*_lib.second.get());
+        updateDeltaTime();
         runScene(_currentScene);
+        _lib.second->renderWindow();
     }
 }
 
 bool Arcade::Core::loadGame(const std::string &GameName)
 {
     try {
-        if (_game.second)
+        if (_game.second) {
             _game.second.get()->unload();
+            _game.second.reset();
+        }
         if (_game.first.isLibOpen())
             _game.first.closeLib();
-        _game.second = _game.first.loadGameLib(GameName);
+        std::shared_ptr<Arcade::IGame> var = _game.first.loadGameLib(GameName);
+        _game.second = var;
         _game.second.get()->load();
         _currentScene = Arcade::Scenes::IN_GAME;
     } catch (const LoaderException &e) {
@@ -197,8 +200,10 @@ bool Arcade::Core::loadGame(const std::string &GameName)
 bool Arcade::Core::loadLib(const std::string &LibName)
 {
     try {
-        if (_lib.second)
+        if (_lib.second) {
             _lib.second.get()->closeWindow();
+            _lib.second.reset();
+        }
         if (_lib.first.isLibOpen())
             _lib.first.closeLib();
         _lib.second = _lib.first.loadGraphicalLib(LibName);
