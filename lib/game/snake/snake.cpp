@@ -287,11 +287,8 @@ void Arcade::SnakeGame::update(Arcade::ILib &lib, float milliseconds)
         move();
         changeKeyDirection(lib);
         generateSnake();
-        print_tab(_int_map);
         _second -= 0.1;
     }
-    std::cout << _isAlive << std::endl;
-
     (void) lib;
 }
 
