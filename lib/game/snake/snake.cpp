@@ -126,11 +126,14 @@ void Arcade::SnakeGame::moveSnakeUp()
     for (size_t y = 0; y < _map.size(); y++) {
         for (size_t x = 0; x < _map[y].size(); x++) {
             if (_map[y][x] == 'S') {
-                _map[y][x] = 's';
-                _map[y-1][x] = 'S';
-                _int_map[y-1][x] = UP;
-                _int_map[y][x] = UP;
-                break;
+                if (_int_map[y-1][x] != -1) {
+                    _map[y][x] = 's';
+                    _map[y-1][x] = 'S';
+                    _int_map[y-1][x] = UP;
+                    _int_map[y][x] = UP;
+                    break;
+                }
+                check_collisions(x, y-1, UP);
             }
         }
     }
@@ -142,12 +145,15 @@ int  Arcade::SnakeGame::moveSnakeDown()
     for (size_t y = 0; y < _map.size(); y++) {
         for (size_t x = 0; x < _map[y].size(); x++) {
             if (_map[y][x] == 'S') {
-                _map[y][x] = 's';
-                _map[y+1][x] = 'S';
-                _int_map[y+1][x] = DOWN;
-                _int_map[y][x] = DOWN;
-                change_tail();
-                return(0);
+                if (_int_map[y+1][x] != -1) {
+                    _map[y][x] = 's';
+                    _map[y+1][x] = 'S';
+                    _int_map[y+1][x] = DOWN;
+                    _int_map[y][x] = DOWN;
+                    change_tail();
+                    return(0);
+                }
+                check_collisions(x, y+1, DOWN);
             }
         }
     }
@@ -159,11 +165,14 @@ void Arcade::SnakeGame::moveSnakeLeft()
     for (size_t y = 0; y < _map.size(); y++) {
         for (size_t x = 0; x < _map[y].size(); x++) {
             if (_map[y][x] == 'S') {
-                _map[y][x] = 's';
-                _map[y][x-1] = 'S';
-                _int_map[y][x-1] = LEFT;
-                _int_map[y][x] = LEFT;
-                break;
+                if (_int_map[y][x-1] != -1) {
+                    _map[y][x] = 's';
+                    _map[y][x-1] = 'S';
+                    _int_map[y][x-1] = LEFT;
+                    _int_map[y][x] = LEFT;
+                    break;
+                }
+                check_collisions(x-1, y, LEFT);
             }
         }
     }
@@ -172,7 +181,7 @@ void Arcade::SnakeGame::moveSnakeLeft()
 
 int Arcade::SnakeGame::change_tail(void)
 {
-    if (_isAlive) {
+    if (_isAlive == true) {
         for (size_t y = 0; y < _map.size(); y++) {
             for (size_t x = 0; x < _map[y].size(); x++) {
                 if (_map[y][x] == '-') {
@@ -222,7 +231,7 @@ void Arcade::SnakeGame::moveSnakeRight()
                     _int_map[y][x+1] = RIGHT;
                     break;
                 }
-                check_collisions(x, y, RIGHT);
+                check_collisions(x+1, y, RIGHT);
             }
         }
     }
@@ -282,8 +291,8 @@ void Arcade::SnakeGame::update(Arcade::ILib &lib, float milliseconds)
     generateSnake();
 
     _second += milliseconds/1000;
-    changeKeyDirection(lib);
-    if (_second >= 0.1) {
+    if (_second >= 0.1 && _isAlive == true) {
+        changeKeyDirection(lib);
         move();
         _second = 0;
         _allObjects.clear();
