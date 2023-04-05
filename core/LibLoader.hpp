@@ -69,6 +69,11 @@ namespace Arcade {
                         throw LoaderException(dlerror());
                 }
 
+                bool isLibOpen() const
+                {
+                    return _handle != nullptr;
+                }
+
                 private:
                     void *_handle;
         };

@@ -30,11 +30,13 @@ void Arcade::SfmlLib::updateEvent(void) {
     while (_window.pollEvent(_event)) {
         if (_event.type == sf::Event::Closed)
             _keys[Arcade::Inputs::IKEY_Q] = true;
-        if (_event.type == sf::Event::KeyPressed) {
-            _keys[_keyMap[_event.key.code]] = true;
-        }
-        if (_event.type == sf::Event::KeyReleased) {
-            _keys[_keyMap[_event.key.code]] = false;
+        if (_keyMap.count(_event.key.code)) {
+            if (_event.type == sf::Event::KeyPressed) {
+                    _keys[_keyMap[_event.key.code]] = true;
+            }
+            if (_event.type == sf::Event::KeyReleased) {
+                    _keys[_keyMap[_event.key.code]] = false;
+            }
         }
     }
 }
