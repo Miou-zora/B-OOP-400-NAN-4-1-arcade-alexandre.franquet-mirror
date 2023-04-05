@@ -5,4 +5,5 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}../../../.lib")
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "./../..")
 
 set(SDL2_SRC sdl2.cpp)
-add_library(_arcade_sdl2lib SHARED ${SDL2_SRC})
+add_library(arcade_sdl2 SHARED ${SDL2_SRC})
+set_target_properties(arcade_sdl2 PROPERTIES PREFIX "")
