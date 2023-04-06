@@ -75,7 +75,7 @@ void Arcade::SfmlLib::renderWindow(void)
 void Arcade::SfmlLib::drawObjets(std::shared_ptr<Arcade::IObject> object) {
     std::string fp = object->getFilePath();
     if (object->getFilePath().compare("") == 0) {
-        drawShapes(object->getShape(), object->getColor(), object->getPosition(), (object->getSize()));
+        drawShapes(object->getShape(), object->getColor(), object->getPosition(), object->getSize());
         return;
     }
     bool isTextured = _textures[fp].loadFromFile(object->getFilePath());
