@@ -90,7 +90,7 @@ void Arcade::NcursesDisplayModule::drawObjets(std::shared_ptr<Arcade::IObject> o
 {
     if (object->getShape() == Arcade::Shapes::SQUARE) {
         attron(COLOR_PAIR(object->getColor()));
-        mvprintw(object->getPosition().second, object->getPosition().first, " ");
+        mvprintw(object->getPosition().second, object->getPosition().first * 2, "  ");
         attroff(COLOR_PAIR(object->getColor()));
     }
 }
@@ -110,7 +110,7 @@ void Arcade::NcursesDisplayModule::drawShapes(Arcade::Shapes shape, Arcade::Colo
 void Arcade::NcursesDisplayModule::drawText(std::shared_ptr<Arcade::Text> text)
 {
     attron(COLOR_PAIR(text->getColor()));
-    mvprintw(text->getPosition().second, text->getPosition().first, text->getText().c_str());
+    mvprintw(text->getPosition().second, text->getPosition().first * 2, text->getText().c_str());
     attroff(COLOR_PAIR(text->getColor()));
 }
 
@@ -118,7 +118,7 @@ void Arcade::NcursesDisplayModule::drawText(std::shared_ptr<Arcade::Text> text)
 void Arcade::NcursesDisplayModule::drawText(std::string str, Arcade::Colors color, ssize_t size, std::pair<ssize_t, ssize_t> pos)
 {
     attron(COLOR_PAIR(color));
-    mvprintw(pos.second, pos.first, str.c_str());
+    mvprintw(pos.second, pos.first * 2, str.c_str());
     attroff(COLOR_PAIR(color));
     (void)size;
 }
