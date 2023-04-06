@@ -42,7 +42,7 @@ namespace Arcade {
             void generateSnake(void);
             int findValHead();
 
-            int change_tail(void);
+            int delete_tail(void);
             void moveSnake(void);
             void changeKeyDirection(Arcade::ILib &lib);
             void move(void);
@@ -60,13 +60,13 @@ namespace Arcade {
             std::vector<std::vector<int>> _int_map;
             std::vector<std::string> _snake;
             std::string _food;
-            bool _isAlive = true;
-            int _score = 0;
-            int _highScore = 0;
-            int _size_snake = 4;
-            int _direction = RIGHT;
-            float _second = 0;
-            float _timeToUpdate = 0.1;
+            bool _isAlive;
+            int _score;
+            int _highScore;
+            int _size_snake;
+            int _direction;
+            float _second;
+            float _timeToUpdate;
 
     };
 }

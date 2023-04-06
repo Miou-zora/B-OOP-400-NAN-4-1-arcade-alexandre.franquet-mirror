@@ -92,6 +92,13 @@ Arcade::SnakeGame::SnakeGame(void)
         {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
         {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
     };
+    _isAlive = true;
+    _score = 0;
+    _highScore = 0;
+    _size_snake = 4;
+    _direction = RIGHT;
+    _second = 0;
+    _timeToUpdate = 0.1;
 
     fill_tab_int();
 }
@@ -149,7 +156,7 @@ void Arcade::SnakeGame::moveSnakeUp()
             }
         }
     }
-    change_tail();
+    delete_tail();
 }
 
 int  Arcade::SnakeGame::moveSnakeDown()
@@ -163,7 +170,7 @@ int  Arcade::SnakeGame::moveSnakeDown()
                     _map[y+1][x] = 'S';
                     _int_map[y+1][x] = DOWN;
                     _int_map[y][x] = DOWN;
-                    change_tail();
+                    delete_tail();
                     return(0);
                 }
             }
@@ -188,10 +195,10 @@ void Arcade::SnakeGame::moveSnakeLeft()
             }
         }
     }
-    change_tail();
+    delete_tail();
 }
 
-int Arcade::SnakeGame::change_tail(void)
+int Arcade::SnakeGame::delete_tail(void)
 {
     if (!_isAlive) {
         return (0);
@@ -248,7 +255,7 @@ void Arcade::SnakeGame::moveSnakeRight()
             }
         }
     }
-    change_tail();
+    delete_tail();
 }
 
 void Arcade::SnakeGame::changeKeyDirection(Arcade::ILib &lib)
