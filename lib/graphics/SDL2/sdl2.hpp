@@ -7,9 +7,9 @@
 
 #pragma once
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_ttf.h>
 #include <map>
 #include "../core/src/Lib/ALib.hpp"
-
 namespace Arcade {
     class SdlDisplayModule : virtual public Arcade::ALib {
         /**
@@ -37,11 +37,14 @@ namespace Arcade {
 
         private:
             SDL_Window *_window;
-            // SDL_Event _event;
+            SDL_Renderer *_renderer;
+            SDL_Surface *_surface;
+            SDL_Texture *_texture;
             // std::map<std::string, SDL_Surface> _textures;
             // std::map<std::string, SDL_Texture> _sprites;
 
-            // SDL_Color arcadeColorToSfColor(Arcade::Colors color);
+            std::map<std::string, TTF_Font *> _fonts;
+            SDL_Color arcadeColorToSfColor(Arcade::Colors color);
             // std::unique_ptr<SDL_S> arcadeShapeToSfShape(Arcade::Shapes shape, std::pair<ssize_t, ssize_t> size);
 
             std::map<SDL_Keycode, Arcade::Inputs> _keyMap = {
