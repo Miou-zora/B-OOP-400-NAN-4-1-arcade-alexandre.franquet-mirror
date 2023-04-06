@@ -101,24 +101,23 @@ Arcade::SnakeGame::SnakeGame(void)
     _timeToUpdate = 0.1;
 
     fill_tab_int();
-    srand(time(0));
+
 }
 
 void Arcade::SnakeGame::generateFood()
 {
-    int x = rand() % 20;
-    int y = rand() % 20;
+    int x = rand() % 19;
+    int y = rand() % 19;
 
     if (_int_map[y][x] == EMPTY) {
         _int_map[y][x] = FOOD;
-        _map[y][x] = _food;
         std::shared_ptr<Arcade::AObject> food = std::make_shared<Arcade::AObject>();
         food->setShape(Arcade::Shapes::SQUARE);
-        food->setPosition({50*x+450, 50*y});
-        food->setSize({50, 50});
+        food->setPosition({x, y});
+        food->setSize({1, 1});
         food->setColor(Arcade::Colors::WHITE);
         food->setFilePath("");
-        _foodObject = food;
+        _foodObjects.push_back(food);
     }
     else {
         generateFood();
@@ -136,6 +135,7 @@ int Arcade::SnakeGame::findValHead()
     }
     return (0);
 }
+
 
 Arcade::SnakeGame::~SnakeGame()
 {
@@ -168,6 +168,11 @@ void Arcade::SnakeGame::moveSnakeUp()
         for (size_t x = 0; x < _map[y].size(); x++) {
             if (_map[y][x] == 'S') {
                 check_collisions(x, y-1);
+                if (isEatingFood(x, y-1) == true) {
+                    _foodObjects.clear();
+                    generateFood();
+                    _score += 10;
+                }
                 if (_isAlive) {
                     _map[y][x] = 's';
                     _map[y-1][x] = 'S';
@@ -187,6 +192,11 @@ int  Arcade::SnakeGame::moveSnakeDown()
         for (size_t x = 0; x < _map[y].size(); x++) {
             if (_map[y][x] == 'S') {
                 check_collisions(x, y+1);
+                if (isEatingFood(x, y+1) == true) {
+                    _foodObjects.clear();
+                    generateFood();
+                    _score += 10;
+                }
                 if (_isAlive) {
                     _map[y][x] = 's';
                     _map[y+1][x] = 'S';
@@ -207,6 +217,11 @@ void Arcade::SnakeGame::moveSnakeLeft()
         for (size_t x = 0; x < _map[y].size(); x++) {
             if (_map[y][x] == 'S') {
                 check_collisions(x-1, y);
+                if (isEatingFood(x-1, y) == true) {
+                    _foodObjects.clear();
+                    generateFood();
+                    _score += 10;
+                }
                 if (_isAlive) {
                     _map[y][x] = 's';
                     _map[y][x-1] = 'S';
@@ -267,6 +282,11 @@ void Arcade::SnakeGame::moveSnakeRight()
         for (size_t x = 0; x < _map[y].size(); x++) {
             if (_map[y][x] == 'S') {
                 check_collisions(x+1, y);
+                if (isEatingFood(x+1, y) == true) {
+                    _foodObjects.clear();
+                    generateFood();
+                    _score += 10;
+                }
                 if (_isAlive) {
                     _map[y][x] = 's';
                     _int_map[y][x] = RIGHT;
@@ -303,6 +323,14 @@ void Arcade::SnakeGame::check_collisions(int x, int y)
     if (_int_map[y][x] == WALL || _int_map[y][x] > EMPTY) {
         _isAlive = false;
     }
+}
+
+bool Arcade::SnakeGame::isEatingFood(int x, int y)
+{
+    if (_int_map[y][x] == FOOD) {
+        return (true);
+    }
+    return (false);
 }
 
 void Arcade::SnakeGame::update(Arcade::ILib &lib, float milliseconds)
@@ -384,7 +412,7 @@ void Arcade::SnakeGame::render(Arcade::ILib &lib)
         lib.drawObjets(object);
     }
 
-    lib.drawObjets(_foodObject);
+    lib.drawObjets(*_foodObjects.begin());
 
     for (auto &object : _snakeObjects)
         lib.drawObjets(object);
