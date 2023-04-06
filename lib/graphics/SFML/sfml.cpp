@@ -75,7 +75,7 @@ void Arcade::SfmlLib::renderWindow(void)
 void Arcade::SfmlLib::drawObjets(std::shared_ptr<Arcade::IObject> object) {
     std::string fp = object->getFilePath();
     if (object->getFilePath().compare("") == 0) {
-        drawShapes(object->getShape(), object->getColor(), object->getPosition(), object->getSize());
+        drawShapes(object->getShape(), object->getColor(), object->getPosition(), (object->getSize()));
         return;
     }
     bool isTextured = _textures[fp].loadFromFile(object->getFilePath());
@@ -89,7 +89,11 @@ void Arcade::SfmlLib::drawObjets(std::shared_ptr<Arcade::IObject> object) {
 }
 
 void Arcade::SfmlLib::drawShapes(Arcade::Shapes shape, Arcade::Colors color, std::pair<ssize_t, ssize_t> pos, std::pair<ssize_t, ssize_t> size) {
-    std::unique_ptr<sf::Shape> sfShape = arcadeShapeToSfShape(shape, size);
+    size.first *= 30;
+    size.second *= 30;
+    pos.first *=30;
+    pos.second *=30;
+    std::unique_ptr<sf::Shape> sfShape = arcadeShapeToSfShape(shape, (size));
     sfShape->setFillColor(arcadeColorToSfColor(color));
     sfShape->setPosition(pos.first, pos.second);
     _window.draw(*sfShape);
