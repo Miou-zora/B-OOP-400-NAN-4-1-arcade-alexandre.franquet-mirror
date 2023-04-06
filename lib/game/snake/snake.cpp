@@ -285,13 +285,12 @@ void Arcade::SnakeGame::check_collisions(int x, int y)
 
 void Arcade::SnakeGame::update(Arcade::ILib &lib, float milliseconds)
 {
-    generateMap();
     generateSnake();
 
     _second += milliseconds/1000;
 
     if (_second >= _timeToUpdate && _isAlive) {
-        _allObjects.clear();
+        _snakeObjects.clear();
         move();
         changeKeyDirection(lib);
         generateSnake();
@@ -314,20 +313,19 @@ void Arcade::SnakeGame::generateMap(void)
             if (_map[y][x] == '#') {
                 std::shared_ptr<Arcade::AObject> wall = std::make_shared<Arcade::AObject>();
                 wall->setShape(Arcade::Shapes::SQUARE);
-                wall->setPosition({50*x + 450, 50*y});
-                wall->setSize({50, 50});
+                wall->setPosition({x, y});
+                wall->setSize({1, 1});
                 wall->setColor(Arcade::Colors::RED);
                 wall->setFilePath("");
-                _allObjects.push_back(wall);
-            }
-            if (_map[y][x] == ' ') {
+                _mapObjects.push_back(wall);
+            } else {
                 std::shared_ptr<Arcade::AObject> empty = std::make_shared<Arcade::AObject>();
                 empty->setShape(Arcade::Shapes::SQUARE);
-                empty->setPosition({50*x+450, 50*y});
-                empty->setSize({50, 50});
+                empty->setPosition({x, y});
+                empty->setSize({1, 1});
                 empty->setColor(Arcade::Colors::GREEN);
                 empty->setFilePath("");
-                _allObjects.push_back(empty);
+                _mapObjects.push_back(empty);
             }
         }
     }
@@ -340,11 +338,11 @@ void Arcade::SnakeGame::generateSnake(void)
             if (_map[y][x] == 'S' || _map[y][x] == 's' || _map[y][x] == '-') {
                 std::shared_ptr<Arcade::AObject> snake = std::make_shared<Arcade::AObject>();
                 snake->setShape(Arcade::Shapes::SQUARE);
-                snake->setPosition({50*x+450, 50*y});
-                snake->setSize({50, 50});
+                snake->setPosition({x, y});
+                snake->setSize({1, 1});
                 snake->setColor(Arcade::Colors::BLUE);
                 snake->setFilePath("");
-                _allObjects.push_back(snake);
+                _snakeObjects.push_back(snake);
             }
         }
     }
@@ -358,7 +356,11 @@ void Arcade::SnakeGame::load(void)
 
 void Arcade::SnakeGame::render(Arcade::ILib &lib)
 {
-    for (auto &object : _allObjects) {
+
+    for (auto &object : _mapObjects) {
         lib.drawObjets(object);
     }
+    for (auto &object : _snakeObjects)
+        lib.drawObjets(object);
+    //lib.drawText("Snake", Arcade::Colors::WHITE, 1, {0, 0});
 }

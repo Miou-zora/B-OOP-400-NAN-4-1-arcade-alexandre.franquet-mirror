@@ -21,6 +21,11 @@ namespace Arcade {
             LEFT,
             UP
         };
+        enum MAP_COMPONENT {
+            FOOD = -2,
+            WALL,
+            EMPTY,
+        };
         /**
          *  @brief The class AGame is the abstract class of the Game
          *  @details The methods are overriden but useless in this class
@@ -38,9 +43,10 @@ namespace Arcade {
             void unload(void) final override;
 
             void generateMap(void);
-            void fill_tab_int();
+            void updateMap(void);
+            void fill_tab_int(void);
             void generateSnake(void);
-            int findValHead();
+            int findValHead(void);
 
             int delete_tail(void);
             void moveSnake(void);
@@ -55,7 +61,8 @@ namespace Arcade {
 
 
         private:
-            std::vector<std::shared_ptr<Arcade::AObject>> _allObjects;
+            std::vector<std::shared_ptr<Arcade::AObject>> _mapObjects;
+            std::vector<std::shared_ptr<Arcade::AObject>> _snakeObjects;
             std::vector<std::string> _map;
             std::vector<std::vector<int>> _int_map;
             std::vector<std::string> _snake;
