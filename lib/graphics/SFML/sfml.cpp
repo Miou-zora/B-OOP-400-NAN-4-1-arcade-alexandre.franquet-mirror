@@ -89,7 +89,11 @@ void Arcade::SfmlLib::drawObjets(std::shared_ptr<Arcade::IObject> object) {
 }
 
 void Arcade::SfmlLib::drawShapes(Arcade::Shapes shape, Arcade::Colors color, std::pair<ssize_t, ssize_t> pos, std::pair<ssize_t, ssize_t> size) {
-    std::unique_ptr<sf::Shape> sfShape = arcadeShapeToSfShape(shape, size);
+    size.first *= 30;
+    size.second *= 30;
+    pos.first *=30;
+    pos.second *=30;
+    std::unique_ptr<sf::Shape> sfShape = arcadeShapeToSfShape(shape, (size));
     sfShape->setFillColor(arcadeColorToSfColor(color));
     sfShape->setPosition(pos.first, pos.second);
     _window.draw(*sfShape);
