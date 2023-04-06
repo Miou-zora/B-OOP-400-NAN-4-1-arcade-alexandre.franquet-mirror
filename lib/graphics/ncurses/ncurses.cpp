@@ -80,9 +80,6 @@ void Arcade::NcursesDisplayModule::updateEvent(void)
 {
     int ch = getch();
 
-    for (auto &it : _keyMap) {
-        _keys[it.second] = false;
-    }
     if (ch != ERR) {
         _keys[_keyMap[ch]] = true;
     }
@@ -129,12 +126,14 @@ void Arcade::NcursesDisplayModule::drawText(std::string str, Arcade::Colors colo
 
 bool Arcade::NcursesDisplayModule::isKeyPressed(Arcade::Inputs key)
 {
-    return (_keys[key]);
+    bool return_value = _keys[key];
+    _keys[key] = false;
+    return (return_value);
 }
 
 
 bool Arcade::NcursesDisplayModule::isKeyReleased(Arcade::Inputs key)
 {
-    return (!_keys[key]);
+    return (!isKeyPressed(key));
 }
 

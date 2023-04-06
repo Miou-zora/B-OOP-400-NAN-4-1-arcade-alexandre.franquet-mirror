@@ -71,7 +71,11 @@ namespace Arcade {
                 {'z', Arcade::IKEY_Z},
                 {' ', Arcade::IKEY_SPACE},
                 {'\n', Arcade::IKEY_ENTER},
-                {'\t', Arcade::IKEY_TAB}
+                {'\t', Arcade::IKEY_TAB},
+                {260, Arcade::IKEY_LEFT},
+                {259, Arcade::IKEY_UP},
+                {261, Arcade::IKEY_RIGHT},
+                {258, Arcade::IKEY_DOWN}
             };
     };
 }
