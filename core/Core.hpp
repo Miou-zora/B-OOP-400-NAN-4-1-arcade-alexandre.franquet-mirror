@@ -48,6 +48,7 @@ namespace Arcade {
             void updateMainMenu(Arcade::ILib &lib);
             void renderMainMenu(Arcade::ILib &lib);
             void initMenu();
+            void wait(double time);
 
             void globalInputs(Arcade::ILib &lib);
 

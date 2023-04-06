@@ -21,6 +21,11 @@ namespace Arcade {
             LEFT,
             UP
         };
+        enum MAP_COMPONENT {
+            FOOD = -2,
+            WALL,
+            EMPTY,
+        };
         /**
          *  @brief The class AGame is the abstract class of the Game
          *  @details The methods are overriden but useless in this class
@@ -38,10 +43,12 @@ namespace Arcade {
             void unload(void) final override;
 
             void generateMap(void);
-            void fill_tab_int();
+            void updateMap(void);
+            void fill_tab_int(void);
             void generateSnake(void);
+            int findValHead(void);
 
-            int change_tail(void);
+            int delete_tail(void);
             void moveSnake(void);
             void changeKeyDirection(Arcade::ILib &lib);
             void move(void);
@@ -50,19 +57,23 @@ namespace Arcade {
             void moveSnakeLeft(void);
             void moveSnakeRight(void);
 
+            void check_collisions(int x, int y);
+
 
         private:
-            std::vector<std::shared_ptr<Arcade::AObject>> _allObjects;
+            std::vector<std::shared_ptr<Arcade::AObject>> _mapObjects;
+            std::vector<std::shared_ptr<Arcade::AObject>> _snakeObjects;
             std::vector<std::string> _map;
             std::vector<std::vector<int>> _int_map;
             std::vector<std::string> _snake;
             std::string _food;
-            int _score = 0;
-            int _highScore = 0;
-            int _speed = 1;
-            int _size_snake = 4;
-            int _direction = RIGHT;
-            float _second = 0;
+            bool _isAlive;
+            int _score;
+            int _highScore;
+            int _size_snake;
+            int _direction;
+            float _second;
+            float _timeToUpdate;
 
     };
 }
