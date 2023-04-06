@@ -362,5 +362,4 @@ void Arcade::SnakeGame::render(Arcade::ILib &lib)
     }
     for (auto &object : _snakeObjects)
         lib.drawObjets(object);
-    //lib.drawText("Snake", Arcade::Colors::WHITE, 1, {0, 0});
 }
