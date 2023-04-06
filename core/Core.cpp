@@ -165,13 +165,22 @@ void Arcade::Core::updateDeltaTime(void)
     _startTime = endTime;
 }
 
+void Arcade::Core::wait(double time)
+{
+    clock_t time_to_wait = clock() + time * CLOCKS_PER_SEC;
+
+    while (clock() < time_to_wait) {
+        globalInputs(*_lib.second.get());
+    }
+}
+
 void Arcade::Core::loop()
 {
     while (_currentScene != Arcade::Scenes::LEAVE) {
-        _lib.second->clearWindow();
-        _lib.second->updateEvent();
-        globalInputs(*_lib.second.get());
+        _lib.second.get()->updateEvent();
         updateDeltaTime();
+        wait(0.01);
+        _lib.second->clearWindow();
         runScene(_currentScene);
         _lib.second->renderWindow();
     }

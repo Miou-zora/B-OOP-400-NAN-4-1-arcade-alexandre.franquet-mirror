@@ -58,7 +58,7 @@ void Arcade::NcursesDisplayModule::closeWindow(void)
 
 void Arcade::NcursesDisplayModule::clearWindow(void)
 {
-    clear();
+    erase();
 }
 
 void Arcade::NcursesDisplayModule::renderWindow(void)
