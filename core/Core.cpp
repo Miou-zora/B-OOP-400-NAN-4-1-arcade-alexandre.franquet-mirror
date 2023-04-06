@@ -169,13 +169,22 @@ void Arcade::Core::updateDeltaTime(void)
     _startTime = endTime;
 }
 
+void Arcade::Core::wait(double time)
+{
+    clock_t time_to_wait = clock() + time * CLOCKS_PER_SEC;
+
+    while (clock() < time_to_wait) {
+        globalInputs(*_lib.second.get());
+    }
+}
+
 void Arcade::Core::loop()
 {
     while (_currentScene != Arcade::Scenes::LEAVE) {
-        _lib.second->clearWindow();
         _lib.second.get()->updateEvent();
-        globalInputs(*_lib.second.get());
         updateDeltaTime();
+        wait(0.01);
+        _lib.second->clearWindow();
         runScene(_currentScene);
         _lib.second->renderWindow();
     }
@@ -190,8 +199,7 @@ bool Arcade::Core::loadGame(const std::string &GameName)
         }
         if (_game.first.isLibOpen())
             _game.first.closeLib();
-        std::shared_ptr<Arcade::IGame> var = _game.first.loadGameLib(GameName);
-        _game.second = var;
+        _game.second = _game.first.loadGameLib(GameName);
         _game.second.get()->load();
         _currentScene = Arcade::Scenes::IN_GAME;
     } catch (const LoaderException &e) {
