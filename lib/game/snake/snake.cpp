@@ -290,7 +290,6 @@ void Arcade::SnakeGame::update(Arcade::ILib &lib, float milliseconds)
         generateSnake();
         _second -= _timeToUpdate;
     }
-    (void) lib;
 }
 
 void Arcade::SnakeGame::reset()

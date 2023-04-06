@@ -66,7 +66,7 @@ namespace Arcade {
             int _size_snake = 4;
             int _direction = RIGHT;
             float _second = 0;
-            float _timeToUpdate = 0;
+            float _timeToUpdate = 0.1;
 
     };
 }
