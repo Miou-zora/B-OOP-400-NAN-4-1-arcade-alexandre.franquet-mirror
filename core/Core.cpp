@@ -134,12 +134,12 @@ void Arcade::Core::renderMainMenu(Arcade::ILib &lib)
 
 void Arcade::Core::globalInputs(Arcade::ILib &lib)
 {
-    if (lib.isKeyPressed(Arcade::Inputs::IKEY_Q) && !lib.isWindowClosed()) {
+    if (lib.isKeyPressed(Arcade::Inputs::IKEY_S) && !lib.isWindowClosed()) {
         _currentScene = Arcade::Scenes::LEAVE;
         lib.closeWindow();
         return;
     }
-    if (lib.isKeyPressed(Arcade::Inputs::IKEY_H) && !lib.isWindowClosed()) {
+    if (lib.isKeyPressed(Arcade::Inputs::IKEY_D) && !lib.isWindowClosed()) {
         if (_currentGame == _gamesPath.size() - 1) {
             _currentGame = 0;
         } else {
@@ -148,13 +148,18 @@ void Arcade::Core::globalInputs(Arcade::ILib &lib)
         loadGame(_gamesPath[_currentGame]);
         return;
     }
-    if (lib.isKeyPressed(Arcade::Inputs::IKEY_G) && !lib.isWindowClosed()) {
+    if (lib.isKeyPressed(Arcade::Inputs::IKEY_B) && !lib.isWindowClosed()) {
         if (_currentLib == _libsPath.size() - 1) {
             _currentLib = 0;
         } else {
             _currentLib++;
         }
         loadLib(_libsPath[_currentLib]);
+        return;
+    }
+    if (lib.isKeyPressed(Arcade::Inputs::IKEY_M) && !lib.isWindowClosed()) {
+        _currentScene = Arcade::Scenes::MAIN_MENU;
+        return;
     }
 }
 
