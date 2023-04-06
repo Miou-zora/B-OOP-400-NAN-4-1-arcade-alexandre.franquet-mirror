@@ -7,6 +7,7 @@
 
 #include "ncurses.hpp"
 #include <iostream>
+#include "AObjects.hpp"
 
 extern "C"
 {
@@ -35,7 +36,7 @@ void Arcade::NcursesDisplayModule::createWindow(void)
     noecho();
     keypad(stdscr, true);
     nodelay(stdscr, true);
-    curs_set(FALSE);
+    curs_set(false);
     refresh();
     start_color();
     init_pair(Arcade::Colors::RED, COLOR_RED, COLOR_BLACK);
@@ -51,6 +52,8 @@ void Arcade::NcursesDisplayModule::createWindow(void)
 void Arcade::NcursesDisplayModule::closeWindow(void)
 {
     keypad(stdscr, false);
+    nodelay(stdscr, false);
+    curs_set(true);
     echo();
     endwin();
     _window = false;
@@ -96,19 +99,19 @@ void Arcade::NcursesDisplayModule::drawObjets(std::shared_ptr<Arcade::IObject> o
 
 void Arcade::NcursesDisplayModule::drawShapes(Arcade::Shapes shape, Arcade::Colors color, std::pair<ssize_t, ssize_t> pos, std::pair<ssize_t, ssize_t> size)
 {
-    if (shape == Arcade::Shapes::SQUARE) {
-        attron(COLOR_PAIR(color));
-        mvprintw((pos.first - 450) / 50, (pos.second - 450) / 50, "[]");
-        attroff(COLOR_PAIR(color));
-    }
-    (void)size;
+    std::shared_ptr<Arcade::IObject> object = std::make_shared<Arcade::AObject>();
+    object->setShape(shape);
+    object->setColor(color);
+    object->setPosition(pos);
+    object->setSize(size);
+    drawObjets(object);
 }
 
 
 void Arcade::NcursesDisplayModule::drawText(std::shared_ptr<Arcade::Text> text)
 {
     attron(COLOR_PAIR(text->getColor()));
-    mvprintw(text->getPosition().first / 50, text->getPosition().second / 50, text->getText().c_str());
+    mvprintw(text->getPosition().first, text->getPosition().second, text->getText().c_str());
     attroff(COLOR_PAIR(text->getColor()));
 }
 
@@ -116,7 +119,7 @@ void Arcade::NcursesDisplayModule::drawText(std::shared_ptr<Arcade::Text> text)
 void Arcade::NcursesDisplayModule::drawText(std::string str, Arcade::Colors color, ssize_t size, std::pair<ssize_t, ssize_t> pos)
 {
     attron(COLOR_PAIR(color));
-    mvprintw(pos.first / 50, pos.second / 50, str.c_str());
+    mvprintw(pos.first, pos.second, str.c_str());
     attroff(COLOR_PAIR(color));
     (void)size;
 }
