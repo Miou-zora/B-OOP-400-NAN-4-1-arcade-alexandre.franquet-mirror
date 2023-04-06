@@ -37,13 +37,6 @@ namespace Arcade {
 
         private:
             bool _window;
-            // SDL_Window *_window;
-            // SDL_Event _event;
-            // std::map<std::string, SDL_Surface> _textures;
-            // std::map<std::string, SDL_Texture> _sprites;
-
-            // SDL_Color arcadeColorToSfColor(Arcade::Colors color);
-            // std::unique_ptr<SDL_S> arcadeShapeToSfShape(Arcade::Shapes shape, std::pair<ssize_t, ssize_t> size);
 
             std::map<int/*ncurses input*/, Arcade::Inputs> _keyMap = {
                 {'A', Arcade::IKEY_UP},
