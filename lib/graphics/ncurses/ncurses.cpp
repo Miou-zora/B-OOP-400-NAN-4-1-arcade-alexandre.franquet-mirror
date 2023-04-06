@@ -90,7 +90,15 @@ void Arcade::NcursesDisplayModule::drawObjets(std::shared_ptr<Arcade::IObject> o
 {
     if (object->getShape() == Arcade::Shapes::SQUARE) {
         attron(COLOR_PAIR(object->getColor()));
-        mvprintw(object->getPosition().second, object->getPosition().first * 2, "  ");
+        mvprintw(object->getPosition().second, object->getPosition().first * 2, "[]");
+        attroff(COLOR_PAIR(object->getColor()));
+    } else if (object->getShape() == Arcade::Shapes::CIRCLE) {
+        attron(COLOR_PAIR(object->getColor()));
+        mvprintw(object->getPosition().second, object->getPosition().first * 2, "()");
+        attroff(COLOR_PAIR(object->getColor()));
+    } else if (object->getShape() == Arcade::Shapes::TRIANGLE) {
+        attron(COLOR_PAIR(object->getColor()));
+        mvprintw(object->getPosition().second, object->getPosition().first * 2, "<>");
         attroff(COLOR_PAIR(object->getColor()));
     }
 }
