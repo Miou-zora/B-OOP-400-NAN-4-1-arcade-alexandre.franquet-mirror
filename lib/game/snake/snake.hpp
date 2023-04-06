@@ -21,7 +21,6 @@ namespace Arcade {
             LEFT,
             UP
         };
-
         enum MAP_COMPONENT {
             FOOD = -2,
             WALL,
@@ -44,9 +43,9 @@ namespace Arcade {
             void unload(void) final override;
 
             void generateMap(void);
-            void fill_tab_int(void);
             void generateSnake(void);
             void generateFood(void);
+            void fill_tab_int(void);
             int findValHead(void);
 
             int delete_tail(void);
@@ -62,7 +61,8 @@ namespace Arcade {
 
 
         private:
-            std::vector<std::shared_ptr<Arcade::AObject>> _allObjects;
+            std::vector<std::shared_ptr<Arcade::AObject>> _mapObjects;
+            std::vector<std::shared_ptr<Arcade::AObject>> _snakeObjects;
             std::vector<std::string> _map;
             std::vector<std::vector<int>> _int_map;
             std::vector<std::string> _snake;

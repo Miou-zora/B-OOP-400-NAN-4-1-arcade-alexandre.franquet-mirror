@@ -89,7 +89,11 @@ void Arcade::SfmlLib::drawObjets(std::shared_ptr<Arcade::IObject> object) {
 }
 
 void Arcade::SfmlLib::drawShapes(Arcade::Shapes shape, Arcade::Colors color, std::pair<ssize_t, ssize_t> pos, std::pair<ssize_t, ssize_t> size) {
-    std::unique_ptr<sf::Shape> sfShape = arcadeShapeToSfShape(shape, size);
+    size.first *= 30;
+    size.second *= 30;
+    pos.first *=30;
+    pos.second *=30;
+    std::unique_ptr<sf::Shape> sfShape = arcadeShapeToSfShape(shape, (size));
     sfShape->setFillColor(arcadeColorToSfColor(color));
     sfShape->setPosition(pos.first, pos.second);
     _window.draw(*sfShape);
@@ -97,7 +101,7 @@ void Arcade::SfmlLib::drawShapes(Arcade::Shapes shape, Arcade::Colors color, std
 
 void Arcade::SfmlLib::drawText(std::shared_ptr<Arcade::Text> text) {
     if (_fonts.find("arial.ttf") == _fonts.end())
-        _fonts["arial.ttf"].loadFromFile("./lib/graphics/SFML/arial.ttf");
+        _fonts["arial.ttf"].loadFromFile("./lib/graphics/arial.ttf");
     _texts[text->getText()].setFont(_fonts["arial.ttf"]);
     _texts[text->getText()].setString(text->getText());
     _texts[text->getText()].setCharacterSize(20);
