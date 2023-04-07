@@ -1,0 +1,131 @@
+\hypertarget{classArcade_1_1LibLoader}{}\doxysection{Arcade\+::Lib\+Loader\texorpdfstring{$<$}{<} Lib\+Interface \texorpdfstring{$>$}{>} Class Template Reference}
+\label{classArcade_1_1LibLoader}\index{Arcade::LibLoader$<$ LibInterface $>$@{Arcade::LibLoader$<$ LibInterface $>$}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+std\+::shared\+\_\+ptr$<$ Lib\+Interface $>$ \mbox{\hyperlink{classArcade_1_1LibLoader_aea0cac002cc9afad1c073b05a1eab435}{load\+Graphical\+Lib}} (const std\+::string \&lib\+Path)
+\begin{DoxyCompactList}\small\item\em Loads a library. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ Lib\+Interface $>$ \mbox{\hyperlink{classArcade_1_1LibLoader_a1c139810541d671a950d5f56db590687}{load\+Game\+Lib}} (const std\+::string \&lib\+Path)
+\item 
+void \mbox{\hyperlink{classArcade_1_1LibLoader_acd31a60b86e513da59e116e35cb2042d}{close\+Lib}} ()
+\item 
+bool \mbox{\hyperlink{classArcade_1_1LibLoader_a1d49c4292ac7b5591adefd140acf8845}{is\+Lib\+Open}} () const
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classArcade_1_1LibLoader_add624acfe8e69e5e1f580c72c794c149}\label{classArcade_1_1LibLoader_add624acfe8e69e5e1f580c72c794c149}} 
+\index{Arcade::LibLoader$<$ LibInterface $>$@{Arcade::LibLoader$<$ LibInterface $>$}!LibLoader@{LibLoader}}
+\index{LibLoader@{LibLoader}!Arcade::LibLoader$<$ LibInterface $>$@{Arcade::LibLoader$<$ LibInterface $>$}}
+\doxysubsubsection{\texorpdfstring{LibLoader()}{LibLoader()}}
+{\footnotesize\ttfamily template$<$typename Lib\+Interface $>$ \\
+\mbox{\hyperlink{classArcade_1_1LibLoader}{Arcade\+::\+Lib\+Loader}}$<$ Lib\+Interface $>$\+::\+Lib\+Loader (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{24 \{\};}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classArcade_1_1LibLoader_ac4358d08da750e17702504fb22598a4e}\label{classArcade_1_1LibLoader_ac4358d08da750e17702504fb22598a4e}} 
+\index{Arcade::LibLoader$<$ LibInterface $>$@{Arcade::LibLoader$<$ LibInterface $>$}!````~LibLoader@{$\sim$LibLoader}}
+\index{````~LibLoader@{$\sim$LibLoader}!Arcade::LibLoader$<$ LibInterface $>$@{Arcade::LibLoader$<$ LibInterface $>$}}
+\doxysubsubsection{\texorpdfstring{$\sim$LibLoader()}{~LibLoader()}}
+{\footnotesize\ttfamily template$<$typename Lib\+Interface $>$ \\
+\mbox{\hyperlink{classArcade_1_1LibLoader}{Arcade\+::\+Lib\+Loader}}$<$ Lib\+Interface $>$\+::$\sim$\mbox{\hyperlink{classArcade_1_1LibLoader}{Lib\+Loader}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{25 \{\};}
+
+\end{DoxyCode}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classArcade_1_1LibLoader_acd31a60b86e513da59e116e35cb2042d}\label{classArcade_1_1LibLoader_acd31a60b86e513da59e116e35cb2042d}} 
+\index{Arcade::LibLoader$<$ LibInterface $>$@{Arcade::LibLoader$<$ LibInterface $>$}!closeLib@{closeLib}}
+\index{closeLib@{closeLib}!Arcade::LibLoader$<$ LibInterface $>$@{Arcade::LibLoader$<$ LibInterface $>$}}
+\doxysubsubsection{\texorpdfstring{closeLib()}{closeLib()}}
+{\footnotesize\ttfamily template$<$typename Lib\+Interface $>$ \\
+void \mbox{\hyperlink{classArcade_1_1LibLoader}{Arcade\+::\+Lib\+Loader}}$<$ Lib\+Interface $>$\+::close\+Lib (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{58                 \{}
+\DoxyCodeLine{59                     \textcolor{keywordflow}{if} (dlclose(\_handle) != 0)}
+\DoxyCodeLine{60                         \textcolor{keywordflow}{throw} LoaderException(dlerror());}
+\DoxyCodeLine{61                 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classArcade_1_1LibLoader_a1d49c4292ac7b5591adefd140acf8845}\label{classArcade_1_1LibLoader_a1d49c4292ac7b5591adefd140acf8845}} 
+\index{Arcade::LibLoader$<$ LibInterface $>$@{Arcade::LibLoader$<$ LibInterface $>$}!isLibOpen@{isLibOpen}}
+\index{isLibOpen@{isLibOpen}!Arcade::LibLoader$<$ LibInterface $>$@{Arcade::LibLoader$<$ LibInterface $>$}}
+\doxysubsubsection{\texorpdfstring{isLibOpen()}{isLibOpen()}}
+{\footnotesize\ttfamily template$<$typename Lib\+Interface $>$ \\
+bool \mbox{\hyperlink{classArcade_1_1LibLoader}{Arcade\+::\+Lib\+Loader}}$<$ Lib\+Interface $>$\+::is\+Lib\+Open (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{64                 \{}
+\DoxyCodeLine{65                     \textcolor{keywordflow}{return} \_handle != \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{66                 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classArcade_1_1LibLoader_a1c139810541d671a950d5f56db590687}\label{classArcade_1_1LibLoader_a1c139810541d671a950d5f56db590687}} 
+\index{Arcade::LibLoader$<$ LibInterface $>$@{Arcade::LibLoader$<$ LibInterface $>$}!loadGameLib@{loadGameLib}}
+\index{loadGameLib@{loadGameLib}!Arcade::LibLoader$<$ LibInterface $>$@{Arcade::LibLoader$<$ LibInterface $>$}}
+\doxysubsubsection{\texorpdfstring{loadGameLib()}{loadGameLib()}}
+{\footnotesize\ttfamily template$<$typename Lib\+Interface $>$ \\
+std\+::shared\+\_\+ptr$<$ Lib\+Interface $>$ \mbox{\hyperlink{classArcade_1_1LibLoader}{Arcade\+::\+Lib\+Loader}}$<$ Lib\+Interface $>$\+::load\+Game\+Lib (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{lib\+Path }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{46                 \{}
+\DoxyCodeLine{47                     \_handle = dlopen(libPath.c\_str(), RTLD\_LAZY);}
+\DoxyCodeLine{48                     LibInterface *(*builder)() = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{49                     \textcolor{keywordflow}{if} (!\_handle)}
+\DoxyCodeLine{50                         \textcolor{keywordflow}{throw} LoaderException(dlerror());}
+\DoxyCodeLine{51                     builder = \textcolor{keyword}{reinterpret\_cast<}LibInterface *(*)()\textcolor{keyword}{>}(dlsym(\_handle, \textcolor{stringliteral}{"{}GameEntryPoint"{}}));}
+\DoxyCodeLine{52                     \textcolor{keywordflow}{if} (!builder)}
+\DoxyCodeLine{53                         \textcolor{keywordflow}{throw} LoaderException(dlerror());}
+\DoxyCodeLine{54                     \textcolor{keywordflow}{return} std::shared\_ptr<LibInterface>(builder());}
+\DoxyCodeLine{55                 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classArcade_1_1LibLoader_aea0cac002cc9afad1c073b05a1eab435}\label{classArcade_1_1LibLoader_aea0cac002cc9afad1c073b05a1eab435}} 
+\index{Arcade::LibLoader$<$ LibInterface $>$@{Arcade::LibLoader$<$ LibInterface $>$}!loadGraphicalLib@{loadGraphicalLib}}
+\index{loadGraphicalLib@{loadGraphicalLib}!Arcade::LibLoader$<$ LibInterface $>$@{Arcade::LibLoader$<$ LibInterface $>$}}
+\doxysubsubsection{\texorpdfstring{loadGraphicalLib()}{loadGraphicalLib()}}
+{\footnotesize\ttfamily template$<$typename Lib\+Interface $>$ \\
+std\+::shared\+\_\+ptr$<$ Lib\+Interface $>$ \mbox{\hyperlink{classArcade_1_1LibLoader}{Arcade\+::\+Lib\+Loader}}$<$ Lib\+Interface $>$\+::load\+Graphical\+Lib (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{lib\+Path }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Loads a library. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em lib\+Path} & The name of the library to load \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A shared pointer to the library
+\end{DoxyReturn}
+The library must be in the ./lib folder 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{34                 \{}
+\DoxyCodeLine{35                     \_handle = dlopen(libPath.c\_str(), RTLD\_LAZY);}
+\DoxyCodeLine{36                     LibInterface *(*builder)() = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{37                     \textcolor{keywordflow}{if} (!\_handle)}
+\DoxyCodeLine{38                         \textcolor{keywordflow}{throw} LoaderException(dlerror());}
+\DoxyCodeLine{39                     builder = \textcolor{keyword}{reinterpret\_cast<}LibInterface *(*)()\textcolor{keyword}{>}(dlsym(\_handle, \textcolor{stringliteral}{"{}DisplayEntryPoint"{}}));}
+\DoxyCodeLine{40                     \textcolor{keywordflow}{if} (!builder)}
+\DoxyCodeLine{41                         \textcolor{keywordflow}{throw} LoaderException(dlerror());}
+\DoxyCodeLine{42                     \textcolor{keywordflow}{return} std::shared\_ptr<LibInterface>(builder());}
+\DoxyCodeLine{43                 \}}
+
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+core/Lib\+Loader.\+hpp\end{DoxyCompactItemize}
