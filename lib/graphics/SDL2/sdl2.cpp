@@ -79,7 +79,7 @@ void Arcade::SdlDisplayModule::updateEvent(void)
     SDL_Event event;
     while (SDL_PollEvent(&event)) {
         if (event.type == SDL_QUIT)
-            _keys[Arcade::Inputs::IKEY_Q] = true;
+            _keys[Arcade::Inputs::IKEY_S] = true;
         if (_keyMap.count(event.key.keysym.sym)) {
             if (event.type == SDL_KEYDOWN) {
                 _keys[_keyMap[event.key.keysym.sym]] = true;

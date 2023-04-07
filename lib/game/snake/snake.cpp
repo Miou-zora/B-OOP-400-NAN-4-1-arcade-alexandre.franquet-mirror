@@ -101,7 +101,6 @@ Arcade::SnakeGame::SnakeGame(void)
     _timeToUpdate = 0.1;
     _eating = false;
     _state = MENU;
-
     fill_tab_int();
 
 }
@@ -373,5 +372,4 @@ void Arcade::SnakeGame::render(Arcade::ILib &lib)
         lib.drawText(std::string("Snake"), WHITE, 3, {5, 5});
         lib.drawText(std::string("Press Enter to start"), WHITE, 2, {1, 10});
     }
-
 }
