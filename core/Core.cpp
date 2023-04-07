@@ -39,10 +39,10 @@ Arcade::Core::~Core()
 void Arcade::Core::initMenu()
 {
     std::shared_ptr<Arcade::AObject> game = std::make_shared<Arcade::AObject>();
-    game->setPosition({100, 100});
+    game->setPosition({1, 1});
     game->setShape(Arcade::Shapes::SQUARE);
-    game->setSize({100, 100});
-    game->setColor(Arcade::Colors::WHITE);
+    game->setSize({1, 1});
+    game->setColor(Arcade::Colors::RED);
     _menuObjects.push_back(game);
 }
 
@@ -110,7 +110,17 @@ void Arcade::Core::updateMainMenu(Arcade::ILib &lib)
 
 void Arcade::Core::renderMainMenu(Arcade::ILib &lib)
 {
-    (void)lib;
+    lib.drawText("Arcade", Arcade::Colors::WHITE, 50, {1, 1});
+    lib.drawText("Games", Arcade::Colors::WHITE, 50, {1, 3});
+    lib.drawText("Libs", Arcade::Colors::WHITE, 50, {20, 3});
+    lib.drawText("Scores", Arcade::Colors::WHITE, 50, {40, 3});
+    lib.drawText("UseName", Arcade::Colors::WHITE, 50, {50, 3});
+    for (size_t i = 0; i < _menuObjects.size(); i++)
+        lib.drawObjets(_menuObjects[i]);
+    for (size_t i = 0; i < _gamesPath.size(); i++)
+        lib.drawText(_gamesPath[i], Arcade::Colors::BLUE, 40, {1,5 + (i * 3)});
+    for (size_t i = 0; i < _libsPath.size(); i++)
+        lib.drawText(_libsPath[i], Arcade::Colors::BLUE, 40, {20,5 + (i * 3)});
 }
 
 void Arcade::Core::globalInputs(Arcade::ILib &lib)
