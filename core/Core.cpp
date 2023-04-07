@@ -8,6 +8,7 @@
 #include "Core.hpp"
 
 Arcade::Core::Core(std::string libFilePath)
+    : _currentScene(Arcade::Scenes::MAIN_MENU), _currentGame(0)
 {
     try {
         storeLibsPath();
@@ -17,12 +18,10 @@ Arcade::Core::Core(std::string libFilePath)
         exit(84);
     }
     _startTime = std::chrono::high_resolution_clock::now();
-    _currentScene = Arcade::Scenes::MAIN_MENU;
     for (size_t i = 0; i < _libsPath.size(); i++) {
         if (_libsPath[i] == libFilePath)
             _currentLib = i;
     }
-    _currentGame = 0;
     if (_libsPath.size() == 0 || _gamesPath.size() == 0) {
         std::cerr << "No library found" << std::endl;
         exit(84);
