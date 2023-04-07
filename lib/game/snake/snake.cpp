@@ -46,52 +46,6 @@ void print_tab(std::vector<std::vector<int>> map)
 
 Arcade::SnakeGame::SnakeGame(void)
 {
-    _map = {
-        "####################",
-        "#                  #",
-        "#                  #",
-        "#                  #",
-        "#                  #",
-        "#                  #",
-        "#  -ssS            #",
-        "#                  #",
-        "#                  #",
-        "#                  #",
-        "#                  #",
-        "#                  #",
-        "#                  #",
-        "#                  #",
-        "#                  #",
-        "#                  #",
-        "#                  #",
-        "#                  #",
-        "#                  #",
-        "####################"
-    };
-    _snake = {"-ssS"};
-    _food = 'f';
-    _int_map = {
-        {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-        {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-        {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-        {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-        {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-        {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-        {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-        {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-        {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-        {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-        {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-        {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-        {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-        {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-        {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-        {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-        {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-        {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-        {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-        {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-    };
     _isAlive = true;
     _score = 0;
     _highScore = 0;
@@ -101,7 +55,6 @@ Arcade::SnakeGame::SnakeGame(void)
     _timeToUpdate = 0.1;
     _eating = false;
     _state = MENU;
-    fill_tab_int();
 
 }
 
@@ -270,6 +223,7 @@ void Arcade::SnakeGame::update(Arcade::ILib &lib, float milliseconds)
 {
 
     _second += milliseconds/1000;
+    changeKeyDirection(lib);
     if (_state == MENU && lib.isKeyPressed(IKEY_ENTER)) {
         _state = GAME;
         _second = 0;
@@ -284,14 +238,34 @@ void Arcade::SnakeGame::update(Arcade::ILib &lib, float milliseconds)
             _timeToUpdate = 0.1;
         _snakeObjects.clear();
         move();
-        changeKeyDirection(lib);
         generateSnake();
         _second -= _timeToUpdate;
+    }
+
+    if (lib.isKeyPressed(IKEY_ESC)) {
+        _state = PAUSE;
+    }
+    if (_state == PAUSE && lib.isKeyPressed(IKEY_ENTER)) {
+        _state = GAME;
+        _second = 0;
     }
 }
 
 void Arcade::SnakeGame::reset()
 {
+    _mapObjects.clear();
+    _snakeObjects.clear();
+    _foodObjects.clear();
+    _map.clear();
+    _int_map.clear();
+    _direction = RIGHT;
+    _isAlive = true;
+    _score = 0;
+    _timeToUpdate = 0.1;
+    _second = 0;
+    _state = MENU;
+    _eating = false;
+    load();
 }
 
 void Arcade::SnakeGame::unload()
@@ -351,6 +325,53 @@ void Arcade::SnakeGame::generateSnake(void)
 
 void Arcade::SnakeGame::load(void)
 {
+    _map = {
+        "####################",
+        "#                  #",
+        "#                  #",
+        "#                  #",
+        "#                  #",
+        "#                  #",
+        "#  -ssS            #",
+        "#                  #",
+        "#                  #",
+        "#                  #",
+        "#                  #",
+        "#                  #",
+        "#                  #",
+        "#                  #",
+        "#                  #",
+        "#                  #",
+        "#                  #",
+        "#                  #",
+        "#                  #",
+        "####################"
+    };
+    _snake = {"-ssS"};
+    _food = 'f';
+    _int_map = {
+        {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+        {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+        {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+        {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+        {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+        {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+        {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+        {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+        {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+        {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+        {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+        {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+        {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+        {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+        {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+        {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+        {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+        {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+        {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+        {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+    };
+    fill_tab_int();
     generateMap();
     generateSnake();
     generateFood();
@@ -371,5 +392,17 @@ void Arcade::SnakeGame::render(Arcade::ILib &lib)
     if (_state == MENU) {
         lib.drawText(std::string("Snake"), WHITE, 3, {5, 5});
         lib.drawText(std::string("Press Enter to start"), WHITE, 2, {1, 10});
+    }
+
+    if (_state == PAUSE) {
+        for (auto &object : _mapObjects) {
+            lib.drawObjets(object);
+        }
+        lib.drawObjets(*_foodObjects.begin());
+        for (auto &object : _snakeObjects)
+            lib.drawObjets(object);
+        lib.drawText(std::string("Score : " + std::to_string(_score)), WHITE, 1, {20,0});
+        lib.drawText(std::string("Pause"), WHITE, 3, {5, 5});
+        lib.drawText(std::string("Press Enter to continue"), WHITE, 2, {1, 10});
     }
 }
