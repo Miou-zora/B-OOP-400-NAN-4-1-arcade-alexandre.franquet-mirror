@@ -5,4 +5,5 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}../../../.lib")
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "./../..")
 
 set(ncurses_SRC ncurses.cpp)
-add_library(_arcade_ncurseslib SHARED ${ncurses_SRC})
+add_library(arcade_ncurses SHARED ${ncurses_SRC})
+set_target_properties(arcade_ncurses PROPERTIES PREFIX "")
