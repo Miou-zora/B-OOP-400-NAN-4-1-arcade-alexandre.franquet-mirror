@@ -38,7 +38,7 @@ namespace Arcade {
              * @brief Set the Shape object
              * @param shape
              */
-            virtual void setShape(Arcade::Shapes) = 0;
+            virtual void setShape(Arcade::Shapes shape) = 0;
 
             /**
              * @brief Get the Position object
@@ -50,7 +50,7 @@ namespace Arcade {
              * @brief Set the Position object
              * @param position
              */
-            virtual void setPosition(std::pair<ssize_t, ssize_t>) = 0;
+            virtual void setPosition(std::pair<ssize_t, ssize_t> position) = 0;
 
             /**
              * @brief Get the Size object
@@ -62,17 +62,17 @@ namespace Arcade {
              * @brief Set the Size object
              * @param size
              */
-            virtual void setSize(std::pair<ssize_t, ssize_t>) = 0;
-
-            /**
-             * @brief Get the Color object
-             * @return Arcade::Colors
-             */
-            virtual void setColor(Arcade::Colors) = 0;
+            virtual void setSize(std::pair<ssize_t, ssize_t> size) = 0;
 
             /**
              * @brief Set the Color object
              * @param color
+             */
+            virtual void setColor(Arcade::Colors color) = 0;
+
+            /**
+             * @brief Get the Color object
+             * @return Arcade::Colors
              */
             virtual Arcade::Colors getColor(void) const = 0;
 
@@ -86,6 +86,6 @@ namespace Arcade {
              * @brief Set the Texture object
              * @param texture
              */
-            virtual void setFilePath(std::string) = 0;
+            virtual void setFilePath(std::string texture) = 0;
     };
 };

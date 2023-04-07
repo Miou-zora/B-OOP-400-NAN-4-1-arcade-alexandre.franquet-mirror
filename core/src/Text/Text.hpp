@@ -50,7 +50,7 @@ namespace Arcade {
              * @brief Set the Text object
              * @param text
              */
-            void setText(std::string) { _text = _text; };
+            void setText(std::string text) { _text = text; };
 
             /**
              * @brief Get the Position object
@@ -62,17 +62,17 @@ namespace Arcade {
              * @brief Set the Position object
              * @param position
              */
-            void setPosition(std::pair<ssize_t, ssize_t>) { _position = _position; };
-
-            /**
-             * @brief Get the Color object
-             * @return Arcade::Colors
-             */
-            void setColor(Arcade::Colors) { _color = _color; };
+            void setPosition(std::pair<ssize_t, ssize_t> position) { _position = position; };
 
             /**
              * @brief Set the Color object
              * @param color
+             */
+            void setColor(Arcade::Colors color) { _color = color; };
+
+            /**
+             * @brief Get the Color object
+             * @return Arcade::Colors
              */
             Arcade::Colors getColor(void) const { return _color; };
 

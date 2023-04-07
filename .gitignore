@@ -12,3 +12,4 @@ CMakeDoxyfile.in
 build
 doc/html
 doc/latex
+highscore.txt
