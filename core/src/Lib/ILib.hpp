@@ -12,10 +12,10 @@
 #include "IObject.hpp"
 
 namespace Arcade {
+    /**
+     * @brief Interface for the graphical library
+     */
     class ILib {
-        /**
-         * @brief Interface for the graphical library
-         */
         public:
             /**
              * @brief Construct a new ILib object
@@ -32,8 +32,7 @@ namespace Arcade {
              *
              * @param input The key to check
              *
-             * @return true if the key is pressed
-             * @return false if the key is not pressed
+             * @return true if the key is pressed, false otherwise
              */
             virtual bool isKeyPressed(Arcade::Inputs input) = 0;
 
@@ -42,16 +41,14 @@ namespace Arcade {
              *
              * @param input The key to check
              *
-             * @return true if the key is released
-             * @return false if the key is not released
+             * @return true if the key is released, false otherwise
              */
             virtual bool isKeyReleased(Arcade::Inputs input) = 0;
 
             /**
              * @brief Check if the window is closed
              *
-             * @return true if the window is closed
-             * @return false if the window is not closed
+             * @return true if the window is closed, false otherwise
              */
             virtual bool isWindowClosed(void) = 0;
 

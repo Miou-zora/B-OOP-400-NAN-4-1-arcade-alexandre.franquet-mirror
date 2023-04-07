@@ -10,10 +10,10 @@
 #include "Lib/Types.hpp"
 
 namespace Arcade {
+    /**
+     * @brief Abstract class for every entities in games
+     */
     class AObject : virtual public Arcade::IObject {
-        /**
-         * @brief The abstract class for every entities in games
-         */
         public:
             AObject(void) = default;
             ~AObject() = default;
@@ -31,10 +31,15 @@ namespace Arcade {
             void setFilePath(std::string texture) final override {_texture = texture;};
 
         protected:
+            /// @brief The shape of the object
             Arcade::Shapes _shape;
+            /// @brief The position of the object
             std::pair<ssize_t, ssize_t> _position;
+            /// @brief The size of the object
             std::pair<ssize_t, ssize_t> _size;
+            /// @brief The color of the object
             Arcade::Colors _color;
+            /// @brief The texture of the object
             std::string _texture;
     };
 }
