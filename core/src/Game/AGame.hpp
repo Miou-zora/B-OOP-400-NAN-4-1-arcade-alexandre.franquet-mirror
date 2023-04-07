@@ -10,13 +10,10 @@
 
 namespace Arcade
 {
+    /**
+     *  @brief Abstract class for the game
+     **/
     class AGame : virtual public Arcade::IGame {
-        /**
-         *  @brief The class AGame is the abstract class of the Game
-         *  @details The methods are overriden but useless in this class
-         *  @details But the attributes are used in the inherited classes
-         **/
-
         public:
             AGame(void) = default;
             ~AGame() = default;
@@ -27,9 +24,13 @@ namespace Arcade
             std::string getGameName(void) const final override {return _name;};
 
         protected:
+            /// @brief The name of the game
             std::string _name;
+            /// @brief The actual state of the game
             Arcade::gameState _state;
+            /// @brief The actual score of the game
             ssize_t _score;
+            /// @brief The high score of the game
             ssize_t _highScore;
     };
 }
