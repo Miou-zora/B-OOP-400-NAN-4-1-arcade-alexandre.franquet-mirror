@@ -65,6 +65,7 @@ namespace Arcade {
             std::vector<std::vector<int>> _int_map;
             std::vector<std::string> _snake;
             std::vector<std::shared_ptr<Arcade::AObject>> _foodObjects;
+            std::shared_ptr<Arcade::Text> _scoreText;
             char _food;
             bool _isAlive;
             int _score;

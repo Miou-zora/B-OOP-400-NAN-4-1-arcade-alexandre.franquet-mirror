@@ -358,4 +358,6 @@ void Arcade::SnakeGame::render(Arcade::ILib &lib)
 
     for (auto &object : _snakeObjects)
         lib.drawObjets(object);
+
+    lib.drawText(std::string("Score : " + std::to_string(_score)), WHITE, 20, {20,0});
 }
