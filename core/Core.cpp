@@ -110,7 +110,7 @@ void Arcade::Core::updateMainMenu(Arcade::ILib &lib)
 
 void Arcade::Core::renderMainMenu(Arcade::ILib &lib)
 {
-    (void)lib;
+    lib.drawText("Arcade", Arcade::Colors::WHITE, 10, {1, 1});
 }
 
 void Arcade::Core::globalInputs(Arcade::ILib &lib)

@@ -45,11 +45,12 @@ void Arcade::SdlDisplayModule::createWindow(void)
     if (_renderer == nullptr)
         std::cerr << "Arcade::SdlDisplayModule::createWindow: " << SDL_GetError() << ".\n" << std::endl;
     SDL_RenderPresent(_renderer);
+    _font = TTF_OpenFont("lib/graphics/arial.ttf", 24);
 }
 
 void Arcade::SdlDisplayModule::closeWindow(void)
 {
-    TTF_CloseFont(_fonts["arial.ttf"]);
+    TTF_CloseFont(_font);
     SDL_DestroyRenderer(_renderer);
     SDL_DestroyWindow(_window);
     TTF_Quit();
@@ -95,10 +96,10 @@ void Arcade::SdlDisplayModule::drawObjets(std::shared_ptr<Arcade::IObject> objec
 {
     if (object->getShape() == Arcade::Shapes::SQUARE) {
         SDL_Rect rect;
-        rect.x = object->getPosition().first;
-        rect.y = object->getPosition().second;
-        rect.w = object->getSize().first;
-        rect.h = object->getSize().second;
+        rect.x = object->getPosition().first * 30;
+        rect.y = object->getPosition().second * 30;
+        rect.w = object->getSize().first * 30;
+        rect.h = object->getSize().second * 30;
         SDL_Color color = arcadeColorToSfColor(object->getColor());
         SDL_SetRenderDrawColor(_renderer, color.r, color.g, color.b, color.a);
         SDL_RenderFillRect(_renderer, &rect);
@@ -135,10 +136,10 @@ void Arcade::SdlDisplayModule::drawShapes(Arcade::Shapes shape, Arcade::Colors c
 {
     if (shape == Arcade::Shapes::SQUARE) {
         SDL_Rect rect;
-        rect.x = pos.first;
-        rect.y = pos.second;
-        rect.w = size.first;
-        rect.h = size.second;
+        rect.x = pos.first * 30;
+        rect.y = pos.second * 30;
+        rect.w = size.first * 30;
+        rect.h = size.second * 30;
         SDL_Color color = arcadeColorToSfColor(colors);
         SDL_SetRenderDrawColor(_renderer, color.r, color.g, color.b, color.a);
         SDL_RenderFillRect(_renderer, &rect);
@@ -148,40 +149,36 @@ void Arcade::SdlDisplayModule::drawShapes(Arcade::Shapes shape, Arcade::Colors c
 
 void Arcade::SdlDisplayModule::drawText(std::shared_ptr<Arcade::Text> text)
 {
-    std::cout << "drawTextt" << std::endl;
-    if (_fonts.count("arial.ttf") == 0) {
-        _fonts["arial.ttf"] = TTF_OpenFont("../arial.ttf", 100);
-        if (_fonts["arial.ttf"] == nullptr)
-            std::cerr << "Arcade::SdlDisplayModule::drawText: " << SDL_GetError() << ".\n" << std::endl;
-    }
-    SDL_Color sdlColor = arcadeColorToSfColor(text->getColor());
-    SDL_Surface *surface = TTF_RenderText_Solid(_fonts["arial.ttf"], text->getText().c_str(), sdlColor);
-    SDL_Texture *texture = SDL_CreateTextureFromSurface(_renderer, surface);
-    SDL_Rect rectt;
-    rectt.x = text->getPosition().first;
-    rectt.y = text->getPosition().second;
-    rectt.w = 100;
-    rectt.h = 100;
-    SDL_RenderCopy(_renderer, texture, NULL, &rectt);
+    (void)text;
 }
 
 
 void Arcade::SdlDisplayModule::drawText(std::string str, Arcade::Colors color, ssize_t size, std::pair<ssize_t, ssize_t> pos)
 {
-    if (_fonts.count("arial.ttf") == 0) {
-        _fonts["arial.ttf"] = TTF_OpenFont("./lib/graphics/arial.ttf", 25);
-        if (_fonts["arial.ttf"] == nullptr)
-            std::cerr << "Arcade::SdlDisplayModule::drawText: " << SDL_GetError() << ".\n" << std::endl;
+    std::cout << "drawText" << std::endl;
+    if (_font == nullptr) {
+        std::cerr << "Arcade::SdlDisplayModule::drawText:" << std::endl;
+        return;
     }
     SDL_Color sdlColor = arcadeColorToSfColor(color);
-    SDL_Surface *surface = TTF_RenderText_Solid(_fonts["arial.ttf"], str.c_str(), sdlColor);
+    SDL_Surface *surface = TTF_RenderText_Blended(_font, str.c_str(), sdlColor);
+    if (surface == nullptr) {
+        std::cerr << "Arcade::SdlDisplayModule::drawText: " << SDL_GetError() << ".\n" << std::endl;
+        return;
+    }
     SDL_Texture *texture = SDL_CreateTextureFromSurface(_renderer, surface);
+    if (texture == nullptr) {
+        std::cerr << "Arcade::SdlDisplayModule::drawText: " << SDL_GetError() << ".\n" << std::endl;
+        return;
+    }
     SDL_Rect rect;
-    rect.x = pos.first;
-    rect.y = pos.second;
-    rect.w = size;
-    rect.h = size;
+    rect.x = pos.first * 30;
+    rect.y = pos.second * 30;
+    rect.w = size * 30;
+    rect.h = size * 30;
     SDL_RenderCopy(_renderer, texture, NULL, &rect);
+    SDL_FreeSurface(surface);
+    SDL_DestroyTexture(texture);
 }
 
 
