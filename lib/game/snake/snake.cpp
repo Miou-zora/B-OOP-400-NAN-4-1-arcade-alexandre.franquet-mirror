@@ -125,6 +125,8 @@ int Arcade::SnakeGame::moveFunction(int x, int y, int dir)
                     _foodObjects.clear();
                     generateFood();
                     _score += 1;
+                    if (_score > _highScore)
+                        _highScore = _score;
                     _eating = true;
                 }
                 if (_isAlive) {
@@ -259,6 +261,17 @@ void Arcade::SnakeGame::update(Arcade::ILib &lib, float milliseconds)
             reset();
         }
     }
+    if (!_isAlive) {
+        std::ofstream file("highscore.txt");
+        if (file.is_open()) {
+            if (_highScore > _score) {
+                file << _highScore;
+            } else {
+                file << _score;
+            }
+            file.close();
+        }
+    }
 }
 
 void Arcade::SnakeGame::reset()
@@ -333,6 +346,26 @@ void Arcade::SnakeGame::generateSnake(void)
     }
 }
 
+void Arcade::SnakeGame::loadHighScore()
+{
+    std::ifstream file("highscore.txt");
+    std::string line;
+
+    if (file.is_open()) {
+        while (getline(file, line)) {
+            if (std::stoi(line) > _highScore)
+            _highScore = std::stoi(line);
+        }
+        file.close();
+    } else {
+        std::ofstream newFile("highscore.txt");
+        if (newFile.is_open()) {
+            newFile << _highScore;
+            newFile.close();
+        }
+    }
+}
+
 void Arcade::SnakeGame::load(void)
 {
     _map = {
@@ -385,6 +418,7 @@ void Arcade::SnakeGame::load(void)
     generateMap();
     generateSnake();
     generateFood();
+    loadHighScore();
 }
 
 void Arcade::SnakeGame::displayPause(Arcade::ILib &lib)
@@ -414,6 +448,7 @@ void Arcade::SnakeGame::render(Arcade::ILib &lib)
         for (auto &object : _snakeObjects)
             lib.drawObjets(object);
         lib.drawText(std::string("Score : " + std::to_string(_score)), WHITE, 1, {20,0});
+        lib.drawText(std::string("Highscore : " + std::to_string(_highScore)), WHITE, 1, {20,1});
     }
 
     if (_state == MENU) {
