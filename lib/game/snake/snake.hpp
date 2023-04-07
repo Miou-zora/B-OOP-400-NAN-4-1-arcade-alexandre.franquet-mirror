@@ -62,6 +62,7 @@ namespace Arcade {
             void displayPause(Arcade::ILib &lib);
 
             void loadHighScore();
+            int checkWinGame();
 
 
         private:
