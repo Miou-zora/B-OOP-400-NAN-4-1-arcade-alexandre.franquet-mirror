@@ -52,10 +52,7 @@ namespace Arcade {
             void moveSnake(void);
             void changeKeyDirection(Arcade::ILib &lib);
             void move(void);
-            void moveSnakeUp(void);
-            int moveSnakeDown(void);
-            void moveSnakeLeft(void);
-            void moveSnakeRight(void);
+            int moveFunction(int x, int y, int dir);
 
             void check_collisions(int x, int y);
             bool isEatingFood(int x, int y);
@@ -76,6 +73,7 @@ namespace Arcade {
             int _direction;
             float _second;
             float _timeToUpdate;
+            bool _eating;
 
     };
 }

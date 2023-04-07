@@ -99,6 +99,7 @@ Arcade::SnakeGame::SnakeGame(void)
     _direction = RIGHT;
     _second = 0;
     _timeToUpdate = 0.1;
+    _eating = false;
 
     fill_tab_int();
 
@@ -143,66 +144,45 @@ Arcade::SnakeGame::~SnakeGame()
 
 void Arcade::SnakeGame::moveSnake()
 {
-
     switch (_direction) {
         case UP:
-            moveSnakeUp();
+        moveFunction(0, -1, UP);
             break;
         case DOWN:
-            moveSnakeDown();
+            moveFunction(0, 1, DOWN);
             break;
         case LEFT:
-            moveSnakeLeft();
+            moveFunction(-1, 0, LEFT);
             break;
         case RIGHT:
-            moveSnakeRight();
+            moveFunction(1, 0, RIGHT);
             break;
         default:
             break;
     }
 }
 
-void Arcade::SnakeGame::moveSnakeUp()
+int Arcade::SnakeGame::moveFunction(int x, int y, int dir)
 {
-    for (size_t y = 0; y < _map.size(); y++) {
-        for (size_t x = 0; x < _map[y].size(); x++) {
-            if (_map[y][x] == 'S') {
-                check_collisions(x, y-1);
-                if (isEatingFood(x, y-1) == true) {
+    for (size_t i = 0; i < _map.size(); i++) {
+        for (size_t j = 0; j < _map[i].size(); j++) {
+            if (_map[i][j] == 'S') {
+                check_collisions(j+x, i+y);
+                if (isEatingFood(j+x, i+y)) {
                     _foodObjects.clear();
                     generateFood();
-                    _score += 10;
+                    _score += 1;
+                    _eating = true;
                 }
                 if (_isAlive) {
-                    _map[y][x] = 's';
-                    _map[y-1][x] = 'S';
-                    _int_map[y-1][x] = UP;
-                    _int_map[y][x] = UP;
-                    break;
-                }
-            }
-        }
-    }
-    delete_tail();
-}
-
-int  Arcade::SnakeGame::moveSnakeDown()
-{
-    for (size_t y = 0; y < _map.size(); y++) {
-        for (size_t x = 0; x < _map[y].size(); x++) {
-            if (_map[y][x] == 'S') {
-                check_collisions(x, y+1);
-                if (isEatingFood(x, y+1) == true) {
-                    _foodObjects.clear();
-                    generateFood();
-                    _score += 10;
-                }
-                if (_isAlive) {
-                    _map[y][x] = 's';
-                    _map[y+1][x] = 'S';
-                    _int_map[y+1][x] = DOWN;
-                    _int_map[y][x] = DOWN;
-                    delete_tail();
+                    _map[i][j] = 's';
+                    _map[i +y][j+x] = 'S';
+                    _int_map[i+y][j+x] = dir;
+                    _int_map[i][j] = dir;
+                    if (!_eating) {
+                        delete_tail();
+                    }
+                    _eating = false;
                     return(0);
                 }
             }
@@ -211,29 +191,6 @@ int  Arcade::SnakeGame::moveSnakeDown()
     return (0);
 }
 
-void Arcade::SnakeGame::moveSnakeLeft()
-{
-    for (size_t y = 0; y < _map.size(); y++) {
-        for (size_t x = 0; x < _map[y].size(); x++) {
-            if (_map[y][x] == 'S') {
-                check_collisions(x-1, y);
-                if (isEatingFood(x-1, y) == true) {
-                    _foodObjects.clear();
-                    generateFood();
-                    _score += 10;
-                }
-                if (_isAlive) {
-                    _map[y][x] = 's';
-                    _map[y][x-1] = 'S';
-                    _int_map[y][x-1] = LEFT;
-                    _int_map[y][x] = LEFT;
-                    break;
-                }
-            }
-        }
-    }
-    delete_tail();
-}
 
 int Arcade::SnakeGame::delete_tail(void)
 {
@@ -274,30 +231,6 @@ int Arcade::SnakeGame::delete_tail(void)
         }
     }
     return (0);
-}
-
-void Arcade::SnakeGame::moveSnakeRight()
-{
-    for (size_t y = 0; y < _map.size(); y++) {
-        for (size_t x = 0; x < _map[y].size(); x++) {
-            if (_map[y][x] == 'S') {
-                check_collisions(x+1, y);
-                if (isEatingFood(x+1, y) == true) {
-                    _foodObjects.clear();
-                    generateFood();
-                    _score += 10;
-                }
-                if (_isAlive) {
-                    _map[y][x] = 's';
-                    _int_map[y][x] = RIGHT;
-                    _map[y][x+1] = 'S';
-                    _int_map[y][x+1] = RIGHT;
-                    break;
-                }
-            }
-        }
-    }
-    delete_tail();
 }
 
 void Arcade::SnakeGame::changeKeyDirection(Arcade::ILib &lib)
@@ -385,12 +318,21 @@ void Arcade::SnakeGame::generateSnake(void)
 {
     for (size_t y = 0; y < _map.size(); y++) {
         for (size_t x = 0; x < _map[y].size(); x++) {
-            if (_map[y][x] == 'S' || _map[y][x] == 's' || _map[y][x] == '-') {
+            if (_map[y][x] == 's' || _map[y][x] == '-') {
                 std::shared_ptr<Arcade::AObject> snake = std::make_shared<Arcade::AObject>();
                 snake->setShape(Arcade::Shapes::SQUARE);
                 snake->setPosition({x, y});
                 snake->setSize({1, 1});
                 snake->setColor(Arcade::Colors::BLUE);
+                snake->setFilePath("");
+                _snakeObjects.push_back(snake);
+            }
+            if (_map[y][x] == 'S') {
+                std::shared_ptr<Arcade::AObject> snake = std::make_shared<Arcade::AObject>();
+                snake->setShape(Arcade::Shapes::SQUARE);
+                snake->setPosition({x, y});
+                snake->setSize({1, 1});
+                snake->setColor(Arcade::Colors::MAGENTA);
                 snake->setFilePath("");
                 _snakeObjects.push_back(snake);
             }
