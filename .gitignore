@@ -8,3 +8,7 @@ Testing
 tests_run
 arcade
 *.so
+CMakeDoxyfile.in
+build
+doc/html
+doc/latex

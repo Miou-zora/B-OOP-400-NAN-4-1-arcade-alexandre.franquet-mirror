@@ -11,32 +11,81 @@
 
 namespace Arcade {
 
-    /*Shapes for the IObjects */
-
+    /**
+     * @brief Interface for the object
+     * @details The methods are pure virtual and must be overriden in the inherited classes
+     **/
     class IObject {
-
-        /**
-         * @brief The class IObject is the interface of the Objects
-         * @details The methods are pure virtual and must be overriden in the inherited classes
-         **/
-
         public:
+            /**
+             * @brief Construct a new IObject object
+             * @details It is used to draw something with graphical library
+             */
             IObject(void) = default;
+
+            /**
+             * @brief Destroy the IObject object
+             */
             virtual ~IObject() = default;
 
+            /**
+             * @brief Get the Shape object
+             * @return Arcade::Shapes
+             */
             virtual Arcade::Shapes getShape(void) const = 0;
+
+            /**
+             * @brief Set the Shape object
+             * @param shape
+             */
             virtual void setShape(Arcade::Shapes) = 0;
 
+            /**
+             * @brief Get the Position object
+             * @return std::pair<ssize_t, ssize_t>
+             */
             virtual std::pair<ssize_t, ssize_t> getPosition(void) const = 0;
+
+            /**
+             * @brief Set the Position object
+             * @param position
+             */
             virtual void setPosition(std::pair<ssize_t, ssize_t>) = 0;
 
+            /**
+             * @brief Get the Size object
+             * @return std::pair<ssize_t, ssize_t>
+             */
             virtual std::pair<ssize_t, ssize_t> getSize(void) const = 0;
+
+            /**
+             * @brief Set the Size object
+             * @param size
+             */
             virtual void setSize(std::pair<ssize_t, ssize_t>) = 0;
 
+            /**
+             * @brief Get the Color object
+             * @return Arcade::Colors
+             */
             virtual void setColor(Arcade::Colors) = 0;
+
+            /**
+             * @brief Set the Color object
+             * @param color
+             */
             virtual Arcade::Colors getColor(void) const = 0;
 
+            /**
+             * @brief Get the Texture object
+             * @return std::string
+             */
             virtual std::string getFilePath(void) const = 0;
+
+            /**
+             * @brief Set the Texture object
+             * @param texture
+             */
             virtual void setFilePath(std::string) = 0;
     };
 };

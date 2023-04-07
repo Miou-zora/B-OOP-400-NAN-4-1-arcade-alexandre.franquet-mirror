@@ -8,14 +8,14 @@
 #pragma once
 
 namespace Arcade {
-
+    /// @brief All shapes that can be used to draw entities
     enum Shapes {
         SQUARE,
         CIRCLE,
         TRIANGLE,
         NO_SHAPE
     };
-
+    /// @brief All the inputs that can be used
     enum Inputs {
         IKEY_UP,
         IKEY_DOWN,
@@ -62,7 +62,7 @@ namespace Arcade {
         IKEY_Z,
         NO_KEY
     };
-
+    /// @brief All the colors that can be used
     enum Colors {
         BLACK,
         WHITE,

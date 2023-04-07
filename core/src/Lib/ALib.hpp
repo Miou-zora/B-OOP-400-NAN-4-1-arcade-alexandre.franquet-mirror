@@ -11,6 +11,9 @@
 #include <unordered_map>
 
 namespace Arcade {
+    /**
+     * @brief Abstract class for the graphical library
+     */
     class ALib : virtual public Arcade::ILib {
         public:
             ALib(void) = default;
@@ -26,11 +29,15 @@ namespace Arcade {
             bool isKeyReleased(Arcade::Inputs) override { return false; }
 
         private:
+            /// @brief The scale of the window
             std::pair<ssize_t, ssize_t> _scale;
+            /// @brief The size of the window
             std::pair<ssize_t, ssize_t> _size;
 
         protected:
+            /// @brief The map of all key pressed or not
             std::unordered_map<Arcade::Inputs, bool> _keys;
+            /// @brief The name of the library
             std::string _name;
     };
 }
