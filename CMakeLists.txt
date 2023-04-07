@@ -21,7 +21,6 @@ include_directories(${INCLUDE_SRC})
 add_subdirectory(tests/debug_lib)
 
 add_subdirectory(lib/graphics)
-add_subdirectory(lib/graphics/ncurses)
 add_subdirectory(lib/game)
 
 project(arcade)
