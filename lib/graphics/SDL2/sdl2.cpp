@@ -155,7 +155,6 @@ void Arcade::SdlDisplayModule::drawText(std::shared_ptr<Arcade::Text> text)
 
 void Arcade::SdlDisplayModule::drawText(std::string str, Arcade::Colors color, ssize_t size, std::pair<ssize_t, ssize_t> pos)
 {
-    std::cout << "drawText" << std::endl;
     if (_font == nullptr) {
         std::cerr << "Arcade::SdlDisplayModule::drawText:" << std::endl;
         return;
