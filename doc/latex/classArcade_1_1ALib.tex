@@ -1,0 +1,224 @@
+\hypertarget{classArcade_1_1ALib}{}\doxysection{Arcade\+::ALib Class Reference}
+\label{classArcade_1_1ALib}\index{Arcade::ALib@{Arcade::ALib}}
+
+
+Abstract class for the graphical library.  
+
+
+
+
+{\ttfamily \#include $<$ALib.\+hpp$>$}
+
+Inheritance diagram for Arcade\+::ALib\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classArcade_1_1ALib}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classArcade_1_1ALib_a966cf0c51144891db161b992f65b7122}{set\+Scale}} (std\+::pair$<$ ssize\+\_\+t, ssize\+\_\+t $>$ scale) final override
+\begin{DoxyCompactList}\small\item\em Set the Scale of the window. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classArcade_1_1ALib_acddd9fef30b47badd9a559de7df02e80}{set\+Scale}} (ssize\+\_\+t scale) final override
+\begin{DoxyCompactList}\small\item\em Set the Scale of the window. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classArcade_1_1ALib_af322f9fd69b607b90550f9c6ea995165}{set\+Size}} (std\+::pair$<$ ssize\+\_\+t, ssize\+\_\+t $>$ size) final override
+\begin{DoxyCompactList}\small\item\em Set the Size of the window. \end{DoxyCompactList}\item 
+std\+::pair$<$ ssize\+\_\+t, ssize\+\_\+t $>$ \mbox{\hyperlink{classArcade_1_1ALib_a858d285f67b0ef4f740574ec81222f7a}{get\+Scale}} (void) const final override
+\begin{DoxyCompactList}\small\item\em Get the Scale of the window. \end{DoxyCompactList}\item 
+std\+::pair$<$ ssize\+\_\+t, ssize\+\_\+t $>$ \mbox{\hyperlink{classArcade_1_1ALib_aa5207a04b54743f3f3510cd0017dfc2b}{get\+Size}} (void) const final override
+\begin{DoxyCompactList}\small\item\em Get the Size of the window. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classArcade_1_1ALib_a535800c22074d6316c2f8cba0d273b18}{is\+Key\+Pressed}} (Arcade\+::\+Inputs) override
+\begin{DoxyCompactList}\small\item\em Check if a key is pressed. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classArcade_1_1ALib_a6e4b95e406584ef026a49d11b325a62e}{is\+Key\+Released}} (Arcade\+::\+Inputs) override
+\begin{DoxyCompactList}\small\item\em Check if a key is released. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classArcade_1_1ALib_ab8d7dd07937044a909f6a47720bdea48}\label{classArcade_1_1ALib_ab8d7dd07937044a909f6a47720bdea48}} 
+std\+::unordered\+\_\+map$<$ Arcade\+::\+Inputs, bool $>$ {\bfseries \+\_\+keys}
+\begin{DoxyCompactList}\small\item\em The map of all key pressed or not. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classArcade_1_1ALib_a99a860bde0fbeedcca27d8400eba58be}\label{classArcade_1_1ALib_a99a860bde0fbeedcca27d8400eba58be}} 
+std\+::string {\bfseries \+\_\+name}
+\begin{DoxyCompactList}\small\item\em The name of the library. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Abstract class for the graphical library. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classArcade_1_1ALib_a858d285f67b0ef4f740574ec81222f7a}\label{classArcade_1_1ALib_a858d285f67b0ef4f740574ec81222f7a}} 
+\index{Arcade::ALib@{Arcade::ALib}!getScale@{getScale}}
+\index{getScale@{getScale}!Arcade::ALib@{Arcade::ALib}}
+\doxysubsubsection{\texorpdfstring{getScale()}{getScale()}}
+{\footnotesize\ttfamily std\+::pair$<$ ssize\+\_\+t, ssize\+\_\+t $>$ Arcade\+::\+ALib\+::get\+Scale (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [final]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Get the Scale of the window. 
+
+\begin{DoxyReturn}{Returns}
+std\+::pair$<$ssize\+\_\+t, ssize\+\_\+t$>$ 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classArcade_1_1ILib_a2299a669257211da0b0d89efccfb233a}{Arcade\+::\+ILib}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{25 \{ \textcolor{keywordflow}{return} \_scale; \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classArcade_1_1ALib_aa5207a04b54743f3f3510cd0017dfc2b}\label{classArcade_1_1ALib_aa5207a04b54743f3f3510cd0017dfc2b}} 
+\index{Arcade::ALib@{Arcade::ALib}!getSize@{getSize}}
+\index{getSize@{getSize}!Arcade::ALib@{Arcade::ALib}}
+\doxysubsubsection{\texorpdfstring{getSize()}{getSize()}}
+{\footnotesize\ttfamily std\+::pair$<$ ssize\+\_\+t, ssize\+\_\+t $>$ Arcade\+::\+ALib\+::get\+Size (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [final]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Get the Size of the window. 
+
+\begin{DoxyReturn}{Returns}
+std\+::pair$<$ssize\+\_\+t, ssize\+\_\+t$>$ 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classArcade_1_1ILib_ad862652b85b655eab407be61da1f58b9}{Arcade\+::\+ILib}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{26 \{ \textcolor{keywordflow}{return} \_size; \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classArcade_1_1ALib_a535800c22074d6316c2f8cba0d273b18}\label{classArcade_1_1ALib_a535800c22074d6316c2f8cba0d273b18}} 
+\index{Arcade::ALib@{Arcade::ALib}!isKeyPressed@{isKeyPressed}}
+\index{isKeyPressed@{isKeyPressed}!Arcade::ALib@{Arcade::ALib}}
+\doxysubsubsection{\texorpdfstring{isKeyPressed()}{isKeyPressed()}}
+{\footnotesize\ttfamily bool Arcade\+::\+ALib\+::is\+Key\+Pressed (\begin{DoxyParamCaption}\item[{Arcade\+::\+Inputs}]{input }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Check if a key is pressed. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em input} & The key to check\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the key is pressed, false otherwise 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classArcade_1_1ILib_a39b4e7757688e1c5eebef2b69fb5e96b}{Arcade\+::\+ILib}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{28 \{ \textcolor{keywordflow}{return} \textcolor{keyword}{false}; \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classArcade_1_1ALib_a6e4b95e406584ef026a49d11b325a62e}\label{classArcade_1_1ALib_a6e4b95e406584ef026a49d11b325a62e}} 
+\index{Arcade::ALib@{Arcade::ALib}!isKeyReleased@{isKeyReleased}}
+\index{isKeyReleased@{isKeyReleased}!Arcade::ALib@{Arcade::ALib}}
+\doxysubsubsection{\texorpdfstring{isKeyReleased()}{isKeyReleased()}}
+{\footnotesize\ttfamily bool Arcade\+::\+ALib\+::is\+Key\+Released (\begin{DoxyParamCaption}\item[{Arcade\+::\+Inputs}]{input }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Check if a key is released. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em input} & The key to check\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the key is released, false otherwise 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classArcade_1_1ILib_ab6a4e6bd47ee2f71722baf36c85a8b36}{Arcade\+::\+ILib}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{29 \{ \textcolor{keywordflow}{return} \textcolor{keyword}{false}; \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classArcade_1_1ALib_acddd9fef30b47badd9a559de7df02e80}\label{classArcade_1_1ALib_acddd9fef30b47badd9a559de7df02e80}} 
+\index{Arcade::ALib@{Arcade::ALib}!setScale@{setScale}}
+\index{setScale@{setScale}!Arcade::ALib@{Arcade::ALib}}
+\doxysubsubsection{\texorpdfstring{setScale()}{setScale()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void Arcade\+::\+ALib\+::set\+Scale (\begin{DoxyParamCaption}\item[{ssize\+\_\+t}]{scale }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [final]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Set the Scale of the window. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em scale} & The scale to set \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classArcade_1_1ILib_ab1802d2dd4bafd1524eff13d083020c9}{Arcade\+::\+ILib}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{23 \{ \_scale = std::pair<ssize\_t, ssize\_t>(scale, scale); \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classArcade_1_1ALib_a966cf0c51144891db161b992f65b7122}\label{classArcade_1_1ALib_a966cf0c51144891db161b992f65b7122}} 
+\index{Arcade::ALib@{Arcade::ALib}!setScale@{setScale}}
+\index{setScale@{setScale}!Arcade::ALib@{Arcade::ALib}}
+\doxysubsubsection{\texorpdfstring{setScale()}{setScale()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void Arcade\+::\+ALib\+::set\+Scale (\begin{DoxyParamCaption}\item[{std\+::pair$<$ ssize\+\_\+t, ssize\+\_\+t $>$}]{scale }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [final]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Set the Scale of the window. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em scale} & The scale to set \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classArcade_1_1ILib_ad8ae9516fea3a3199edf605eaed7e905}{Arcade\+::\+ILib}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{22 \{ \_scale = scale; \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classArcade_1_1ALib_af322f9fd69b607b90550f9c6ea995165}\label{classArcade_1_1ALib_af322f9fd69b607b90550f9c6ea995165}} 
+\index{Arcade::ALib@{Arcade::ALib}!setSize@{setSize}}
+\index{setSize@{setSize}!Arcade::ALib@{Arcade::ALib}}
+\doxysubsubsection{\texorpdfstring{setSize()}{setSize()}}
+{\footnotesize\ttfamily void Arcade\+::\+ALib\+::set\+Size (\begin{DoxyParamCaption}\item[{std\+::pair$<$ ssize\+\_\+t, ssize\+\_\+t $>$}]{size }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [final]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Set the Size of the window. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em size} & The size to set \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classArcade_1_1ILib_af6ec092d0776bdb5511a499a577fcf7a}{Arcade\+::\+ILib}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{24 \{ \_size = size; \}}
+
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+core/src/\+Lib/ALib.\+hpp\end{DoxyCompactItemize}
