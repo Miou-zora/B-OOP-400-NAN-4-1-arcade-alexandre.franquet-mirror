@@ -29,3 +29,13 @@ arcade_nibbler.so
 Then you'll have a makefile build. But not an Epitech one. Use `make clean` instead of the `make fclean`.
 
 You should watch this video to understand cmake : [CMake](https://www.youtube.com/watch?v=mKZ-i-UfGgQ&ab_channel=kandodev)
+
+By `Dlore` made up of:
+ - [Alexandre Franquet | Miouzora](https://github.com/Miou-zora)
+ - [Quentin Brejoin | Queng](https://github.com/queng123)
+ - [Guylain Thomas | Jibea](https://github.com/Jibea)
+
+In collaboration with `C11H17NO3` made up of:
+ - [Timothee Lesellier | Big T](https://github.com/BigT-Dev)
+ - [Lylian Hay | VyOk](https://github.com/lhay9)
+ - [Mathis Evain | Kibatsu](https://github.com/Kibatsu03)
