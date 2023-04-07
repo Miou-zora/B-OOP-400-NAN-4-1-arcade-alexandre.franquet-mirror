@@ -219,16 +219,8 @@ bool Arcade::SnakeGame::isEatingFood(int x, int y)
     return (false);
 }
 
-void Arcade::SnakeGame::update(Arcade::ILib &lib, float milliseconds)
+void Arcade::SnakeGame::updateMove(Arcade::ILib &lib)
 {
-
-    _second += milliseconds/1000;
-    changeKeyDirection(lib);
-    if (_state == MENU && lib.isKeyPressed(IKEY_ENTER)) {
-        _state = GAME;
-        _second = 0;
-    }
-
     if (_second >= _timeToUpdate && _isAlive && _state == GAME) {
         if (lib.isKeyPressed(IKEY_SHIFT))
             _timeToUpdate = 0.18;
@@ -241,6 +233,19 @@ void Arcade::SnakeGame::update(Arcade::ILib &lib, float milliseconds)
         generateSnake();
         _second -= _timeToUpdate;
     }
+}
+
+void Arcade::SnakeGame::update(Arcade::ILib &lib, float milliseconds)
+{
+    _second += milliseconds/1000;
+    changeKeyDirection(lib);
+
+    if (_state == MENU && lib.isKeyPressed(IKEY_ENTER)) {
+        _state = GAME;
+        _second = 0;
+    }
+
+    updateMove(lib);
 
     if (lib.isKeyPressed(IKEY_ESC)) {
         _state = PAUSE;
@@ -248,6 +253,11 @@ void Arcade::SnakeGame::update(Arcade::ILib &lib, float milliseconds)
     if (_state == PAUSE && lib.isKeyPressed(IKEY_ENTER)) {
         _state = GAME;
         _second = 0;
+    }
+    if (_state == PAUSE || _state == GAME) {
+        if (lib.isKeyPressed(IKEY_R)) {
+            reset();
+        }
     }
 }
 

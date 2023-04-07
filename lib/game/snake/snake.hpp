@@ -46,6 +46,7 @@ namespace Arcade {
             void generateSnake(void);
             void generateFood(void);
             void fill_tab_int(void);
+            void updateMove(Arcade::ILib &lib);
             int findValHead(void);
 
             int delete_tail(void);
