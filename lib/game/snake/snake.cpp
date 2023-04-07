@@ -237,17 +237,33 @@ void Arcade::SnakeGame::updateMove(Arcade::ILib &lib)
     }
 }
 
+int Arcade::SnakeGame::checkWinGame()
+{
+    for (size_t y = 0; y < _int_map.size(); y++) {
+        for (size_t x = 0; x < _int_map[y].size(); x++) {
+            if (_int_map[y][x] == EMPTY || _int_map[y][x] == FOOD) {
+                return(0);
+            }
+        }
+    }
+    _state = END;
+    return(0);
+}
+
 void Arcade::SnakeGame::update(Arcade::ILib &lib, float milliseconds)
 {
     _second += milliseconds/1000;
     changeKeyDirection(lib);
+    checkWinGame();
 
     if (_state == MENU && lib.isKeyPressed(IKEY_ENTER)) {
         _state = GAME;
         _second = 0;
     }
 
-    updateMove(lib);
+    if (_state == GAME) {
+        updateMove(lib);
+    }
 
     if (lib.isKeyPressed(IKEY_ESC)) {
         _state = PAUSE;
@@ -256,7 +272,7 @@ void Arcade::SnakeGame::update(Arcade::ILib &lib, float milliseconds)
         _state = GAME;
         _second = 0;
     }
-    if (_state == PAUSE || _state == GAME) {
+    if (_state == PAUSE || _state == GAME || _state == END) {
         if (lib.isKeyPressed(IKEY_R)) {
             reset();
         }
@@ -440,6 +456,11 @@ void Arcade::SnakeGame::render(Arcade::ILib &lib)
         lib.drawText(std::string("Game Over"), BLACK, 3, {3, 5});
         lib.drawText(std::string("Press R to restart"), BLACK, 2, {1, 10});
     }
+    if (_state == END) {
+        lib.drawText(std::string("You Win "), WHITE, 3, {3, 5});
+        lib.drawText(std::string("Press Enter to start"), WHITE, 2, {1, 10});
+    }
+
     if (_state == GAME) {
         for (auto &object : _mapObjects) {
             lib.drawObjets(object);
