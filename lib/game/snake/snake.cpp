@@ -387,8 +387,25 @@ void Arcade::SnakeGame::load(void)
     generateFood();
 }
 
+void Arcade::SnakeGame::displayPause(Arcade::ILib &lib)
+{
+    for (auto &object : _mapObjects) {
+            lib.drawObjets(object);
+        }
+    lib.drawObjets(*_foodObjects.begin());
+    for (auto &object : _snakeObjects)
+        lib.drawObjets(object);
+    lib.drawText(std::string("Score : " + std::to_string(_score)), WHITE, 1, {20,0});
+    lib.drawText(std::string("Pause"), WHITE, 3, {5, 5});
+    lib.drawText(std::string("Press Enter to continue"), WHITE, 2, {1, 10});
+}
+
 void Arcade::SnakeGame::render(Arcade::ILib &lib)
 {
+    if (!_isAlive) {
+        lib.drawText(std::string("Game Over"), BLACK, 3, {3, 5});
+        lib.drawText(std::string("Press R to restart"), BLACK, 2, {1, 10});
+    }
     if (_state == GAME) {
         for (auto &object : _mapObjects) {
             lib.drawObjets(object);
@@ -405,14 +422,6 @@ void Arcade::SnakeGame::render(Arcade::ILib &lib)
     }
 
     if (_state == PAUSE) {
-        for (auto &object : _mapObjects) {
-            lib.drawObjets(object);
-        }
-        lib.drawObjets(*_foodObjects.begin());
-        for (auto &object : _snakeObjects)
-            lib.drawObjets(object);
-        lib.drawText(std::string("Score : " + std::to_string(_score)), WHITE, 1, {20,0});
-        lib.drawText(std::string("Pause"), WHITE, 3, {5, 5});
-        lib.drawText(std::string("Press Enter to continue"), WHITE, 2, {1, 10});
+        displayPause(lib);
     }
 }
