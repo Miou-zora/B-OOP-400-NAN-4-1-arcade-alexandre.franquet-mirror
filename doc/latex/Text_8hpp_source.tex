@@ -1,0 +1,47 @@
+\hypertarget{Text_8hpp_source}{}\doxysection{Text.\+hpp}
+\label{Text_8hpp_source}\index{core/src/Text/Text.hpp@{core/src/Text/Text.hpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{/*}}
+\DoxyCodeLine{2 \textcolor{comment}{** EPITECH PROJECT, 2023}}
+\DoxyCodeLine{3 \textcolor{comment}{** arcade-\/archi}}
+\DoxyCodeLine{4 \textcolor{comment}{** File description:}}
+\DoxyCodeLine{5 \textcolor{comment}{** IText}}
+\DoxyCodeLine{6 \textcolor{comment}{*/}}
+\DoxyCodeLine{7 }
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#include <string>}}
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#include <utility>}}
+\DoxyCodeLine{11 \textcolor{preprocessor}{\#include "{}Lib/Types.hpp"{}}}
+\DoxyCodeLine{12 }
+\DoxyCodeLine{13 }
+\DoxyCodeLine{14 \textcolor{keyword}{namespace }Arcade \{}
+\DoxyCodeLine{15 }
+\DoxyCodeLine{19     \textcolor{keyword}{class }\mbox{\hyperlink{classArcade_1_1Text}{Text}} \{}
+\DoxyCodeLine{20         \textcolor{keyword}{public}:}
+\DoxyCodeLine{26             \mbox{\hyperlink{classArcade_1_1Text_a41bb9d4ebe2ce7962964126d076f905b}{Text}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{27 }
+\DoxyCodeLine{36             \mbox{\hyperlink{classArcade_1_1Text_a25fe53011e4829e7bd2517e73a5e7ed9}{Text}}(std::string text, std::pair<ssize\_t, ssize\_t> pos, Arcade::Colors color);}
+\DoxyCodeLine{37 }
+\DoxyCodeLine{41             \mbox{\hyperlink{classArcade_1_1Text_a2fb0fe8852c158262082c512f0ea13a8}{\string~Text}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{42 }
+\DoxyCodeLine{47             std::string \mbox{\hyperlink{classArcade_1_1Text_ade36f541b7e267adfd2eb696da5ca789}{getText}}(\textcolor{keywordtype}{void})\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} \_text;\};}
+\DoxyCodeLine{48 }
+\DoxyCodeLine{53             \textcolor{keywordtype}{void} \mbox{\hyperlink{classArcade_1_1Text_a409189d71ec102f220df6138d1dcbb80}{setText}}(std::string) \{ \_text = \_text; \};}
+\DoxyCodeLine{54 }
+\DoxyCodeLine{59             std::pair<ssize\_t, ssize\_t> \mbox{\hyperlink{classArcade_1_1Text_acb3b1506334ce4ec69815ef09474cef2}{getPosition}}(\textcolor{keywordtype}{void})\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} \_position; \};}
+\DoxyCodeLine{60 }
+\DoxyCodeLine{65             \textcolor{keywordtype}{void} \mbox{\hyperlink{classArcade_1_1Text_a4bd9f924da37e2ca544dfa6b88e95887}{setPosition}}(std::pair<ssize\_t, ssize\_t>) \{ \_position = \_position; \};}
+\DoxyCodeLine{66 }
+\DoxyCodeLine{71             \textcolor{keywordtype}{void} \mbox{\hyperlink{classArcade_1_1Text_aacd0be3d2890f5e8b4819e46ee7f9ead}{setColor}}(Arcade::Colors) \{ \_color = \_color; \};}
+\DoxyCodeLine{72 }
+\DoxyCodeLine{77             Arcade::Colors \mbox{\hyperlink{classArcade_1_1Text_a60b1a72f598323bdf06e8fc98419db95}{getColor}}(\textcolor{keywordtype}{void})\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} \_color; \};}
+\DoxyCodeLine{78 }
+\DoxyCodeLine{79         \textcolor{keyword}{private}:}
+\DoxyCodeLine{81             std::string \_text;}
+\DoxyCodeLine{83             std::pair<ssize\_t, ssize\_t> \_position;}
+\DoxyCodeLine{85             Arcade::Colors \_color;}
+\DoxyCodeLine{86     \};}
+\DoxyCodeLine{87 \};}
+
+\end{DoxyCode}

@@ -1,0 +1,46 @@
+\hypertarget{IObject_8hpp_source}{}\doxysection{IObject.\+hpp}
+\label{IObject_8hpp_source}\index{core/src/Object/IObject.hpp@{core/src/Object/IObject.hpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{/*}}
+\DoxyCodeLine{2 \textcolor{comment}{** EPITECH PROJECT, 2023}}
+\DoxyCodeLine{3 \textcolor{comment}{** arcade-\/archi}}
+\DoxyCodeLine{4 \textcolor{comment}{** File description:}}
+\DoxyCodeLine{5 \textcolor{comment}{** IObject}}
+\DoxyCodeLine{6 \textcolor{comment}{*/}}
+\DoxyCodeLine{7 }
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#include <utility>}}
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#include "{}Lib/Types.hpp"{}}}
+\DoxyCodeLine{11 }
+\DoxyCodeLine{12 \textcolor{keyword}{namespace }Arcade \{}
+\DoxyCodeLine{13 }
+\DoxyCodeLine{18     \textcolor{keyword}{class }\mbox{\hyperlink{classArcade_1_1IObject}{IObject}} \{}
+\DoxyCodeLine{19         \textcolor{keyword}{public}:}
+\DoxyCodeLine{24             \mbox{\hyperlink{classArcade_1_1IObject_a94f8eace1d8320b7a35918eae542f1f0}{IObject}}(\textcolor{keywordtype}{void}) = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{25 }
+\DoxyCodeLine{29             \textcolor{keyword}{virtual} \mbox{\hyperlink{classArcade_1_1IObject_abb5ccb6ab88a0e88f8a30bb9c7a65bc3}{\string~IObject}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{30 }
+\DoxyCodeLine{35             \textcolor{keyword}{virtual} Arcade::Shapes \mbox{\hyperlink{classArcade_1_1IObject_a2dde783429fcccc9c5b072a26c88be74}{getShape}}(\textcolor{keywordtype}{void}) \textcolor{keyword}{const} = 0;}
+\DoxyCodeLine{36 }
+\DoxyCodeLine{41             \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classArcade_1_1IObject_a6e1892acd2891a4d69de72a468b5bea5}{setShape}}(Arcade::Shapes) = 0;}
+\DoxyCodeLine{42 }
+\DoxyCodeLine{47             \textcolor{keyword}{virtual} std::pair<ssize\_t, ssize\_t> \mbox{\hyperlink{classArcade_1_1IObject_a596bdada0fb1da0efba23e57a4bc16c4}{getPosition}}(\textcolor{keywordtype}{void}) \textcolor{keyword}{const} = 0;}
+\DoxyCodeLine{48 }
+\DoxyCodeLine{53             \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classArcade_1_1IObject_af8c87e1e4950f6e09c24be53e8e08c1e}{setPosition}}(std::pair<ssize\_t, ssize\_t>) = 0;}
+\DoxyCodeLine{54 }
+\DoxyCodeLine{59             \textcolor{keyword}{virtual} std::pair<ssize\_t, ssize\_t> \mbox{\hyperlink{classArcade_1_1IObject_a4aecc1c14429795d8b5c0b3d5e0a492c}{getSize}}(\textcolor{keywordtype}{void}) \textcolor{keyword}{const} = 0;}
+\DoxyCodeLine{60 }
+\DoxyCodeLine{65             \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classArcade_1_1IObject_ad56fc5c77cd31446750a9bed4fbc7741}{setSize}}(std::pair<ssize\_t, ssize\_t>) = 0;}
+\DoxyCodeLine{66 }
+\DoxyCodeLine{71             \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classArcade_1_1IObject_aac40dda6a818b2691698c0c960522c5a}{setColor}}(Arcade::Colors) = 0;}
+\DoxyCodeLine{72 }
+\DoxyCodeLine{77             \textcolor{keyword}{virtual} Arcade::Colors \mbox{\hyperlink{classArcade_1_1IObject_a3885906c6ad59e43ff4bd8da02a0e332}{getColor}}(\textcolor{keywordtype}{void}) \textcolor{keyword}{const} = 0;}
+\DoxyCodeLine{78 }
+\DoxyCodeLine{83             \textcolor{keyword}{virtual} std::string \mbox{\hyperlink{classArcade_1_1IObject_ac4a29257577eaeaee8ad240b49c4ade5}{getFilePath}}(\textcolor{keywordtype}{void}) \textcolor{keyword}{const} = 0;}
+\DoxyCodeLine{84 }
+\DoxyCodeLine{89             \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classArcade_1_1IObject_a9a4f0b9d2cf388a6faa853074e385d84}{setFilePath}}(std::string) = 0;}
+\DoxyCodeLine{90     \};}
+\DoxyCodeLine{91 \};}
+
+\end{DoxyCode}
