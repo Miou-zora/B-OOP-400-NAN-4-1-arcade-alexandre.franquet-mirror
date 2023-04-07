@@ -58,6 +58,8 @@ namespace Arcade {
             void check_collisions(int x, int y);
             bool isEatingFood(int x, int y);
 
+            void displayPause(Arcade::ILib &lib);
+
 
         private:
             std::vector<std::shared_ptr<Arcade::AObject>> _mapObjects;
