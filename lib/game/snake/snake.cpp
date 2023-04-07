@@ -100,6 +100,7 @@ Arcade::SnakeGame::SnakeGame(void)
     _second = 0;
     _timeToUpdate = 0.1;
     _eating = false;
+    _state = MENU;
 
     fill_tab_int();
 
@@ -268,11 +269,20 @@ bool Arcade::SnakeGame::isEatingFood(int x, int y)
 
 void Arcade::SnakeGame::update(Arcade::ILib &lib, float milliseconds)
 {
-    generateSnake();
 
     _second += milliseconds/1000;
+    if (_state == MENU && lib.isKeyPressed(IKEY_ENTER)) {
+        _state = GAME;
+        _second = 0;
+    }
 
-    if (_second >= _timeToUpdate && _isAlive) {
+    if (_second >= _timeToUpdate && _isAlive && _state == GAME) {
+        if (lib.isKeyPressed(IKEY_SHIFT))
+            _timeToUpdate = 0.18;
+        else if (lib.isKeyPressed(IKEY_SPACE))
+            _timeToUpdate = 0.06;
+        else
+            _timeToUpdate = 0.1;
         _snakeObjects.clear();
         move();
         changeKeyDirection(lib);
@@ -349,15 +359,19 @@ void Arcade::SnakeGame::load(void)
 
 void Arcade::SnakeGame::render(Arcade::ILib &lib)
 {
-
-    for (auto &object : _mapObjects) {
-        lib.drawObjets(object);
+    if (_state == GAME) {
+        for (auto &object : _mapObjects) {
+            lib.drawObjets(object);
+        }
+        lib.drawObjets(*_foodObjects.begin());
+        for (auto &object : _snakeObjects)
+            lib.drawObjets(object);
+        lib.drawText(std::string("Score : " + std::to_string(_score)), WHITE, 1, {20,0});
     }
 
-    lib.drawObjets(*_foodObjects.begin());
+    if (_state == MENU) {
+        lib.drawText(std::string("Snake"), WHITE, 3, {5, 5});
+        lib.drawText(std::string("Press Enter to start"), WHITE, 2, {1, 10});
+    }
 
-    for (auto &object : _snakeObjects)
-        lib.drawObjets(object);
-
-    lib.drawText(std::string("Score : " + std::to_string(_score)), WHITE, 20, {20,0});
 }

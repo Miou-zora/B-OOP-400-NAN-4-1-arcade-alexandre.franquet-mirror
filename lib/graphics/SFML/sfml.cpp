@@ -115,9 +115,9 @@ void Arcade::SfmlLib::drawText(std::string str, Arcade::Colors color, ssize_t si
         _fonts["arial.ttf"].loadFromFile("./lib/graphics/arial.ttf");
     _texts[str].setFont(_fonts["arial.ttf"]);
     _texts[str].setString(str);
-    _texts[str].setCharacterSize(size);
+    _texts[str].setCharacterSize(30 * size);
     _texts[str].setFillColor(arcadeColorToSfColor(color));
-    _texts[str].setPosition(pos.first, pos.second);
+    _texts[str].setPosition(30*pos.first, 30*pos.second);
     _window.draw(_texts[str]);
 }
 
