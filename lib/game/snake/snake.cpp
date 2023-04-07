@@ -125,6 +125,8 @@ int Arcade::SnakeGame::moveFunction(int x, int y, int dir)
                     _foodObjects.clear();
                     generateFood();
                     _score += 1;
+                    if (_score > _highScore)
+                        _highScore = _score;
                     _eating = true;
                 }
                 if (_isAlive) {
@@ -235,17 +237,33 @@ void Arcade::SnakeGame::updateMove(Arcade::ILib &lib)
     }
 }
 
+int Arcade::SnakeGame::checkWinGame()
+{
+    for (size_t y = 0; y < _int_map.size(); y++) {
+        for (size_t x = 0; x < _int_map[y].size(); x++) {
+            if (_int_map[y][x] == EMPTY || _int_map[y][x] == FOOD) {
+                return(0);
+            }
+        }
+    }
+    _state = END;
+    return(0);
+}
+
 void Arcade::SnakeGame::update(Arcade::ILib &lib, float milliseconds)
 {
     _second += milliseconds/1000;
     changeKeyDirection(lib);
+    checkWinGame();
 
     if (_state == MENU && lib.isKeyPressed(IKEY_ENTER)) {
         _state = GAME;
         _second = 0;
     }
 
-    updateMove(lib);
+    if (_state == GAME) {
+        updateMove(lib);
+    }
 
     if (lib.isKeyPressed(IKEY_ESC)) {
         _state = PAUSE;
@@ -254,9 +272,20 @@ void Arcade::SnakeGame::update(Arcade::ILib &lib, float milliseconds)
         _state = GAME;
         _second = 0;
     }
-    if (_state == PAUSE || _state == GAME) {
+    if (_state == PAUSE || _state == GAME || _state == END) {
         if (lib.isKeyPressed(IKEY_R)) {
             reset();
+        }
+    }
+    if (!_isAlive) {
+        std::ofstream file("highscore.txt");
+        if (file.is_open()) {
+            if (_highScore > _score) {
+                file << _highScore;
+            } else {
+                file << _score;
+            }
+            file.close();
         }
     }
 }
@@ -333,6 +362,26 @@ void Arcade::SnakeGame::generateSnake(void)
     }
 }
 
+void Arcade::SnakeGame::loadHighScore()
+{
+    std::ifstream file("highscore.txt");
+    std::string line;
+
+    if (file.is_open()) {
+        while (getline(file, line)) {
+            if (std::stoi(line) > _highScore)
+            _highScore = std::stoi(line);
+        }
+        file.close();
+    } else {
+        std::ofstream newFile("highscore.txt");
+        if (newFile.is_open()) {
+            newFile << _highScore;
+            newFile.close();
+        }
+    }
+}
+
 void Arcade::SnakeGame::load(void)
 {
     _map = {
@@ -385,6 +434,7 @@ void Arcade::SnakeGame::load(void)
     generateMap();
     generateSnake();
     generateFood();
+    loadHighScore();
 }
 
 void Arcade::SnakeGame::displayPause(Arcade::ILib &lib)
@@ -406,6 +456,11 @@ void Arcade::SnakeGame::render(Arcade::ILib &lib)
         lib.drawText(std::string("Game Over"), BLACK, 3, {3, 5});
         lib.drawText(std::string("Press R to restart"), BLACK, 2, {1, 10});
     }
+    if (_state == END) {
+        lib.drawText(std::string("You Win "), WHITE, 3, {3, 5});
+        lib.drawText(std::string("Press Enter to start"), WHITE, 2, {1, 10});
+    }
+
     if (_state == GAME) {
         for (auto &object : _mapObjects) {
             lib.drawObjets(object);
@@ -414,6 +469,7 @@ void Arcade::SnakeGame::render(Arcade::ILib &lib)
         for (auto &object : _snakeObjects)
             lib.drawObjets(object);
         lib.drawText(std::string("Score : " + std::to_string(_score)), WHITE, 1, {20,0});
+        lib.drawText(std::string("Highscore : " + std::to_string(_highScore)), WHITE, 1, {20,1});
     }
 
     if (_state == MENU) {

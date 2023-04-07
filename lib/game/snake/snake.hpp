@@ -11,6 +11,7 @@
 #include "AObjects.hpp"
 #include <memory>
 #include <vector>
+#include <fstream>
 
 namespace Arcade {
 
@@ -59,6 +60,9 @@ namespace Arcade {
             bool isEatingFood(int x, int y);
 
             void displayPause(Arcade::ILib &lib);
+
+            void loadHighScore();
+            int checkWinGame();
 
 
         private:
