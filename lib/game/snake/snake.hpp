@@ -43,9 +43,9 @@ namespace Arcade {
             void unload(void) final override;
 
             void generateMap(void);
-            void updateMap(void);
-            void fill_tab_int(void);
             void generateSnake(void);
+            void generateFood(void);
+            void fill_tab_int(void);
             int findValHead(void);
 
             int delete_tail(void);
@@ -58,6 +58,7 @@ namespace Arcade {
             void moveSnakeRight(void);
 
             void check_collisions(int x, int y);
+            bool isEatingFood(int x, int y);
 
 
         private:
@@ -66,7 +67,8 @@ namespace Arcade {
             std::vector<std::string> _map;
             std::vector<std::vector<int>> _int_map;
             std::vector<std::string> _snake;
-            std::string _food;
+            std::vector<std::shared_ptr<Arcade::AObject>> _foodObjects;
+            char _food;
             bool _isAlive;
             int _score;
             int _highScore;

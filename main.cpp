@@ -17,6 +17,7 @@
 int main(int ac, char **argv)
 {
     (void) argv;
+    srand(time(0));
 
     if (ac != 2) {
         return (84);
