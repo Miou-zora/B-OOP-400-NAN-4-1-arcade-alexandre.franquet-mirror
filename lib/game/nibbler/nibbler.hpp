@@ -63,6 +63,10 @@ namespace Arcade {
 
             void loadHighScore();
             int checkWinGame();
+            std::pair<int, int> updateHeadPos();
+            bool checkIfAutomaticMovePossible(int x, int y);
+            bool moveFreeDir(int x, int y);
+            bool checkOldDirIsPossible();
 
 
         private:
@@ -73,12 +77,14 @@ namespace Arcade {
             std::vector<std::string> _snake;
             std::vector<std::shared_ptr<Arcade::AObject>> _foodObjects;
             std::shared_ptr<Arcade::Text> _scoreText;
+            std::pair<int, int> _headPos;
+
             char _food;
             bool _isAlive;
             int _score;
             int _highScore;
             int _size_snake;
-            bool _isCollWall = false;
+            bool _isCollWall;
             int _direction;
             float _second;
             float _timeToUpdate;

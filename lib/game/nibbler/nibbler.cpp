@@ -55,6 +55,7 @@ Arcade::NibblerGame::NibblerGame(void)
     _second = 0;
     _timeToUpdate = 0.1;
     _eating = false;
+    _isCollWall = false;
     _state = MENU;
 
 }
@@ -116,12 +117,63 @@ void Arcade::NibblerGame::moveSnake()
     }
 }
 
+bool Arcade::NibblerGame::moveFreeDir(int x, int y)
+{
+    if (_int_map[y-1][x] == EMPTY) {
+        _direction = UP;
+        _isCollWall = false;
+        moveFunction(0, -1, UP);
+        return (true);
+    }
+    if (_int_map[y+1][x] == EMPTY) {
+        _direction = DOWN;
+        _isCollWall = false;
+        moveFunction(0, 1, DOWN);
+        return (true);
+    }
+    if (_int_map[y][x-1] == EMPTY) {
+        _direction = LEFT;
+        _isCollWall = false;
+        moveFunction(-1, 0, LEFT);
+        return (true);
+    }
+    if (_int_map[y][x+1] == EMPTY) {
+        _direction = RIGHT;
+        _isCollWall = false;
+        moveFunction(1, 0, RIGHT);
+        return (true);
+    }
+    return false;
+}
+
+bool Arcade::NibblerGame::checkIfAutomaticMovePossible(int x, int y)
+{
+    int countLeftRight = 0;
+    int countUpDown = 0;
+
+    if ((_int_map[y-1][x] == EMPTY || _int_map[y-1][x] == FOOD) && _direction != UP)
+        countUpDown++;
+    if ((_int_map[y+1][x] == EMPTY || _int_map[y+1][x] == FOOD) && _direction != DOWN)
+        countUpDown++;
+    if ((_int_map[y][x-1] == EMPTY || _int_map[y][x-1] == FOOD) && _direction != LEFT)
+        countLeftRight++;
+    if ((_int_map[y][x+1] == EMPTY || _int_map[y][x+1] == FOOD) && _direction != RIGHT)
+        countLeftRight++;
+    if (countUpDown == 2 || countLeftRight == 2)
+        return (false);
+    else
+        return (moveFreeDir(x, y));
+}
 int Arcade::NibblerGame::moveFunction(int x, int y, int dir)
 {
     for (size_t i = 0; i < _map.size(); i++) {
         for (size_t j = 0; j < _map[i].size(); j++) {
             if (_map[i][j] == 'S') {
                 check_collisions(j+x, i+y);
+                if (_isCollWall && checkIfAutomaticMovePossible(j, i))
+                    return (0);
+                if (_isCollWall)
+                    return (0);
                 if (isEatingFood(j+x, i+y)) {
                     _foodObjects.clear();
                     generateFood();
@@ -189,22 +241,50 @@ int Arcade::NibblerGame::delete_tail(void)
     return (0);
 }
 
+std::pair<int,int> Arcade::NibblerGame::updateHeadPos()
+{
+    for (size_t y = 0; y < _map.size(); y++) {
+        for (size_t x = 0; x < _map[y].size(); x++) {
+            if (_map[y][x] == 'S') {
+                _headPos = {x, y};
+            }
+        }
+    }
+    return _headPos;
+}
+
 void Arcade::NibblerGame::changeKeyDirection(Arcade::ILib &lib)
 {
-    if (lib.isKeyPressed(Arcade::IKEY_UP) && findValHead() != DOWN)
+    updateHeadPos();
+
+    if (lib.isKeyPressed(Arcade::IKEY_UP) && findValHead() != DOWN) {
+        if (_headPos.second - 1 != -1)
+            _isCollWall = false;
         _direction = UP;
-    if (lib.isKeyPressed( Arcade::IKEY_DOWN) && findValHead() != UP)
+    }
+    if (lib.isKeyPressed( Arcade::IKEY_DOWN) && findValHead() != UP){
+        if (_headPos.second + 1 != -1)
+            _isCollWall = false;
         _direction = DOWN;
-    if (lib.isKeyPressed( Arcade::IKEY_LEFT) && findValHead() != RIGHT)
+    }
+    if (lib.isKeyPressed( Arcade::IKEY_LEFT) && findValHead() != RIGHT){
+        if (_headPos.first - 1 != -1)
+            _isCollWall = false;
         _direction = LEFT;
-    if (lib.isKeyPressed( Arcade::IKEY_RIGHT) && findValHead() != LEFT)
+    }
+    if (lib.isKeyPressed(Arcade::IKEY_RIGHT) && findValHead() != LEFT) {
+        if (_headPos.first + 1 != -1)
+            _isCollWall = false;
         _direction = RIGHT;
+    }
+
 }
 
 void Arcade::NibblerGame::move()
 {
     if (!_isCollWall)
       moveSnake();
+
 }
 
 void Arcade::NibblerGame::check_collisions(int x, int y)
@@ -391,23 +471,23 @@ void Arcade::NibblerGame::load(void)
     _map = {
         "####################",
         "#                  #",
+        "#  ###         ### #",
+        "#        ###       #",
+        "#        # #       #",
+        "#        ###       #",
+        "#  ###         ### #",
+        "#  #             # #",
+        "#  #             # #",
+        "#  #    #####    # #",
+        "#  #    #   #    # #",
+        "#       #   #      #",
+        "#   #           #  #",
         "#                  #",
-        "#                  #",
-        "#                  #",
+        "#    ###     ###   #",
+        "#      #     #     #",
+        "#      #     #     #",
         "#                  #",
         "#  -ssS            #",
-        "#                  #",
-        "#                  #",
-        "#                  #",
-        "#                  #",
-        "#                  #",
-        "#                  #",
-        "#                  #",
-        "#                  #",
-        "#                  #",
-        "#                  #",
-        "#                  #",
-        "#                  #",
         "####################"
     };
     _snake = {"-ssS"};
@@ -457,15 +537,16 @@ void Arcade::NibblerGame::displayPause(Arcade::ILib &lib)
 void Arcade::NibblerGame::render(Arcade::ILib &lib)
 {
     if (!_isAlive) {
-        lib.drawText(std::string("Game Over"), BLACK, 3, {3, 5});
-        lib.drawText(std::string("Press R to restart"), BLACK, 2, {1, 10});
+        lib.drawText(std::string("Game Over"), WHITE, 3, {3, 5});
+        lib.drawText(std::string("Press R to restart"), WHITE, 2, {1, 10});
     }
     if (_state == END) {
         lib.drawText(std::string("You Win "), WHITE, 3, {3, 5});
         lib.drawText(std::string("Press Enter to start"), WHITE, 2, {1, 10});
     }
 
-    if (_state == GAME) {
+    if (_state == GAME && _isAlive) {
+
         for (auto &object : _mapObjects) {
             lib.drawObjets(object);
         }
@@ -476,12 +557,12 @@ void Arcade::NibblerGame::render(Arcade::ILib &lib)
         lib.drawText(std::string("Highscore : " + std::to_string(_highScore)), WHITE, 1, {20,1});
     }
 
-    if (_state == MENU) {
+    if (_state == MENU && _isAlive) {
         lib.drawText(std::string("Nibbler"), WHITE, 3, {5, 5});
         lib.drawText(std::string("Press Enter to start"), WHITE, 2, {1, 10});
     }
 
-    if (_state == PAUSE) {
+    if (_state == PAUSE && _isAlive) {
         displayPause(lib);
     }
 }
