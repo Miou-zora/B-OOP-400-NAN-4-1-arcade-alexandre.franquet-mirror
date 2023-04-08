@@ -55,6 +55,7 @@ Arcade::NibblerGame::NibblerGame(void)
     _second = 0;
     _timeToUpdate = 0.1;
     _eating = false;
+    _isCollWall = false;
     _state = MENU;
 
 }
