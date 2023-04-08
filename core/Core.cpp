@@ -105,22 +105,38 @@ void Arcade::Core::runScene(Arcade::Scenes scene)
 
 void Arcade::Core::updateMainMenu(Arcade::ILib &lib)
 {
-    (void)lib;
+    if (lib.isKeyPressed(Arcade::Inputs::IKEY_DOWN) && _currentGame < _gamesPath.size() - 1) {
+        _currentGame++;
+    }
+    if (lib.isKeyPressed(Arcade::Inputs::IKEY_UP) && _currentGame > 0) {
+        _currentGame--;
+    }
+    if (lib.isKeyPressed(Arcade::Inputs::IKEY_I)) {
+        loadGame(_gamesPath[_currentGame]);
+    }
 }
 
 void Arcade::Core::renderMainMenu(Arcade::ILib &lib)
 {
-    lib.drawText("Arcade", Arcade::Colors::WHITE, 50, {1, 1});
-    lib.drawText("Games", Arcade::Colors::WHITE, 50, {1, 3});
-    lib.drawText("Libs", Arcade::Colors::WHITE, 50, {20, 3});
-    lib.drawText("Scores", Arcade::Colors::WHITE, 50, {40, 3});
-    lib.drawText("UseName", Arcade::Colors::WHITE, 50, {50, 3});
-    for (size_t i = 0; i < _menuObjects.size(); i++)
-        lib.drawObjets(_menuObjects[i]);
-    for (size_t i = 0; i < _gamesPath.size(); i++)
-        lib.drawText(_gamesPath[i], Arcade::Colors::BLUE, 40, {1,5 + (i * 3)});
-    for (size_t i = 0; i < _libsPath.size(); i++)
-        lib.drawText(_libsPath[i], Arcade::Colors::BLUE, 40, {20,5 + (i * 3)});
+    lib.drawText("Arcade press:", Arcade::Colors::BLUE, 2, {1, 1});
+    lib.drawText("\"S\" : quit", Arcade::Colors::BLUE, 2, {1, 3});
+    lib.drawText("\"D\" : game", Arcade::Colors::BLUE, 2, {1, 5});
+    lib.drawText("\"B\" : lib", Arcade::Colors::BLUE, 2, {1, 7});
+    lib.drawText("\"I\" : play", Arcade::Colors::BLUE, 2, {1, 11});
+    lib.drawText("Games", Arcade::Colors::MAGENTA, 2, {20, 1});
+    for (size_t i = 0; i < _gamesPath.size(); i++) {
+        if (_gamesPath[i] == _gamesPath[_currentGame])
+            lib.drawText(_gamesPath[i], Arcade::Colors::RED, 2, {20, 3 + i*2});
+        else
+            lib.drawText(_gamesPath[i], Arcade::Colors::WHITE, 2, {20, 3 + i*2});
+    }
+    lib.drawText("Libs", Arcade::Colors::MAGENTA, 2, {20, 6 + _gamesPath.size()});
+    for (size_t i = 0; i < _libsPath.size(); i++) {
+        if (_libsPath[i] == _libsPath[_currentLib])
+            lib.drawText(_libsPath[i], Arcade::Colors::RED, 2, {20, 10 + _gamesPath.size() + i*2});
+        else
+            lib.drawText(_libsPath[i], Arcade::Colors::WHITE, 2, {20,10 + _gamesPath.size() + i*2});
+    }
 }
 
 void Arcade::Core::globalInputs(Arcade::ILib &lib)
