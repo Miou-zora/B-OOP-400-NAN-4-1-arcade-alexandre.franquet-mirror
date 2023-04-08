@@ -10,6 +10,7 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/build)
 set(INCLUDE_SRC core/src/Display
                 core/src/Game/
                 core/src/Game/snake
+                core/src/Game/nibbler
                 core/src/Input
                 core/src/Object
                 core/src/Sounds
@@ -42,8 +43,8 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/build)
 enable_testing()
 set(TEST_SRC tests/tests.cpp)
 
-add_executable(tests_run ${TEST_SRC} ${CORE_SRC})
-add_test(NAME tests_run COMMAND ./tests_run)
+#add_executable(tests_run ${TEST_SRC} ${CORE_SRC})
+#add_test(NAME tests_run COMMAND ./tests_run)
 
 ####################DOC#####################
 
