@@ -78,6 +78,7 @@ namespace Arcade {
             int _score;
             int _highScore;
             int _size_snake;
+            bool _isCollWall = false;
             int _direction;
             float _second;
             float _timeToUpdate;
