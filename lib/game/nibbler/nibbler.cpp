@@ -564,7 +564,6 @@ void Arcade::NibblerGame::render(Arcade::ILib &lib)
     }
 
     if (_state == PAUSE && _isAlive) {
-    if (_state == PAUSE) {
         displayPause(lib);
     }
 }
