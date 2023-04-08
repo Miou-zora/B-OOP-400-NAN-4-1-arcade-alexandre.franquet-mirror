@@ -204,7 +204,7 @@ void Arcade::NibblerGame::changeKeyDirection(Arcade::ILib &lib)
 void Arcade::NibblerGame::move()
 {
     if (!_isCollWall)
-    moveSnake();
+      moveSnake();
 }
 
 void Arcade::NibblerGame::check_collisions(int x, int y)
@@ -214,7 +214,6 @@ void Arcade::NibblerGame::check_collisions(int x, int y)
     }
     if (_int_map[y][x] == WALL)
         _isCollWall = true;
-
 }
 
 bool Arcade::NibblerGame::isEatingFood(int x, int y)
