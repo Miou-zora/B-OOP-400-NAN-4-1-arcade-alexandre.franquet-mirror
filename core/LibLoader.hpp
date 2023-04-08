@@ -5,11 +5,6 @@
 ** LibLoader
 */
 
-/**
- * @file LibLoader.hpp
- * @brief LibLoader class declaration
- */
-
 #pragma once
 #include <string>
 #include <memory.h>
@@ -17,10 +12,6 @@
 #include "ErrorManagement.hpp"
 
 namespace Arcade {
-    /**
-     * @brief The class LoaderException is the exception thrown when the library cannot be loaded
-     * @param message The message to display
-     */
     template <typename LibInterface>
         class LibLoader {
             /**

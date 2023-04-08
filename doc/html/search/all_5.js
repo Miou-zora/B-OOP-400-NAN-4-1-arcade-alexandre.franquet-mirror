@@ -1,0 +1,14 @@
+var searchData=
+[
+  ['getcolor_0',['getColor',['../classArcade_1_1IObject.html#a3885906c6ad59e43ff4bd8da02a0e332',1,'Arcade::IObject::getColor()'],['../classArcade_1_1Text.html#a60b1a72f598323bdf06e8fc98419db95',1,'Arcade::Text::getColor()'],['../classArcade_1_1AObject.html#a469504d1b69903f834d05e667d94ef62',1,'Arcade::AObject::getColor(void) const final override']]],
+  ['getfilepath_1',['getFilePath',['../classArcade_1_1AObject.html#a96365e5c263f5910ef8f2bbf568f9b25',1,'Arcade::AObject::getFilePath()'],['../classArcade_1_1IObject.html#ac4a29257577eaeaee8ad240b49c4ade5',1,'Arcade::IObject::getFilePath()']]],
+  ['getgamename_2',['getGameName',['../classArcade_1_1AGame.html#ac9601e0320ae3b183352ae0f7143172a',1,'Arcade::AGame::getGameName()'],['../classArcade_1_1IGame.html#aa233a9e625d76a06174e881d7de498df',1,'Arcade::IGame::getGameName()']]],
+  ['gethighscore_3',['getHighScore',['../classArcade_1_1AGame.html#a19421d48a47eeec19648f09a0df6b45b',1,'Arcade::AGame::getHighScore()'],['../classArcade_1_1IGame.html#a5b7dbda2095dbd738527f7f4d7294d45',1,'Arcade::IGame::getHighScore()']]],
+  ['getposition_4',['getPosition',['../classArcade_1_1AObject.html#a4a6b08200f3b0060851906a6b8d2045d',1,'Arcade::AObject::getPosition()'],['../classArcade_1_1IObject.html#a596bdada0fb1da0efba23e57a4bc16c4',1,'Arcade::IObject::getPosition()'],['../classArcade_1_1Text.html#acb3b1506334ce4ec69815ef09474cef2',1,'Arcade::Text::getPosition()']]],
+  ['getscale_5',['getScale',['../classArcade_1_1ALib.html#a858d285f67b0ef4f740574ec81222f7a',1,'Arcade::ALib::getScale()'],['../classArcade_1_1ILib.html#a2299a669257211da0b0d89efccfb233a',1,'Arcade::ILib::getScale()']]],
+  ['getscore_6',['getScore',['../classArcade_1_1AGame.html#acf6cdac98c7ad68cbf52a117c2a086b3',1,'Arcade::AGame::getScore()'],['../classArcade_1_1IGame.html#a5cd0536471708d0d7f8ac4431e0a5513',1,'Arcade::IGame::getScore()']]],
+  ['getshape_7',['getShape',['../classArcade_1_1AObject.html#aa7eaa2a5d5f8dabf363e31d9b2f2e755',1,'Arcade::AObject::getShape()'],['../classArcade_1_1IObject.html#a2dde783429fcccc9c5b072a26c88be74',1,'Arcade::IObject::getShape()']]],
+  ['getsize_8',['getSize',['../classArcade_1_1ALib.html#aa5207a04b54743f3f3510cd0017dfc2b',1,'Arcade::ALib::getSize()'],['../classArcade_1_1ILib.html#ad862652b85b655eab407be61da1f58b9',1,'Arcade::ILib::getSize()'],['../classArcade_1_1AObject.html#aad447dbe665c80e4bf3abcd28d87e5e0',1,'Arcade::AObject::getSize()'],['../classArcade_1_1IObject.html#a4aecc1c14429795d8b5c0b3d5e0a492c',1,'Arcade::IObject::getSize()']]],
+  ['getstate_9',['getState',['../classArcade_1_1AGame.html#a7e677daa0d20f78ec366ade2a70f93e4',1,'Arcade::AGame::getState()'],['../classArcade_1_1IGame.html#a6473483d1ecd0b55cc0c9b6436797182',1,'Arcade::IGame::getState()']]],
+  ['gettext_10',['getText',['../classArcade_1_1Text.html#ade36f541b7e267adfd2eb696da5ca789',1,'Arcade::Text']]]
+];

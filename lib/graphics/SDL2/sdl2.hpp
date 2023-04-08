@@ -38,12 +38,8 @@ namespace Arcade {
         private:
             SDL_Window *_window;
             SDL_Renderer *_renderer;
-            SDL_Surface *_surface;
-            SDL_Texture *_texture;
-            // std::map<std::string, SDL_Surface> _textures;
-            // std::map<std::string, SDL_Texture> _sprites;
+            TTF_Font *_font;
 
-            std::map<std::string, TTF_Font *> _fonts;
             SDL_Color arcadeColorToSfColor(Arcade::Colors color);
             // std::unique_ptr<SDL_S> arcadeShapeToSfShape(Arcade::Shapes shape, std::pair<ssize_t, ssize_t> size);
 
