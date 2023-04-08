@@ -47,6 +47,7 @@ void print_tab(std::vector<std::vector<int>> map)
 Arcade::NibblerGame::NibblerGame(void)
 {
     _isAlive = true;
+    _isCollWall = false;
     _score = 0;
     _highScore = 0;
     _size_snake = 4;
@@ -202,8 +203,8 @@ void Arcade::NibblerGame::changeKeyDirection(Arcade::ILib &lib)
 
 void Arcade::NibblerGame::move()
 {
-    moveSnake();
-
+    if (!_isCollWall)
+      moveSnake();
 }
 
 void Arcade::NibblerGame::check_collisions(int x, int y)
@@ -211,7 +212,8 @@ void Arcade::NibblerGame::check_collisions(int x, int y)
     if (_int_map[y][x] > EMPTY) {
         _isAlive = false;
     }
-    
+    if (_int_map[y][x] == WALL)
+        _isCollWall = true;
 }
 
 bool Arcade::NibblerGame::isEatingFood(int x, int y)
