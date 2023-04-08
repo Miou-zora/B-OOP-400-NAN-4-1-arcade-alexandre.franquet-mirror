@@ -150,13 +150,13 @@ bool Arcade::NibblerGame::checkIfAutomaticMovePossible(int x, int y)
     int countLeftRight = 0;
     int countUpDown = 0;
 
-    if (_int_map[y-1][x] == EMPTY && _direction != UP)
+    if ((_int_map[y-1][x] == EMPTY || _int_map[y-1][x] == FOOD) && _direction != UP)
         countUpDown++;
-    if (_int_map[y+1][x] == EMPTY && _direction != DOWN)
+    if ((_int_map[y+1][x] == EMPTY || _int_map[y+1][x] == FOOD) && _direction != DOWN)
         countUpDown++;
-    if (_int_map[y][x-1] == EMPTY && _direction != LEFT)
+    if ((_int_map[y][x-1] == EMPTY || _int_map[y][x-1] == FOOD) && _direction != LEFT)
         countLeftRight++;
-    if (_int_map[y][x+1] == EMPTY && _direction != RIGHT)
+    if ((_int_map[y][x+1] == EMPTY || _int_map[y][x+1] == FOOD) && _direction != RIGHT)
         countLeftRight++;
     if (countUpDown == 2 || countLeftRight == 2)
         return (false);
