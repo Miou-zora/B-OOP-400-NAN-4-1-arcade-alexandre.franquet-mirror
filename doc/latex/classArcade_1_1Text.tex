@@ -21,16 +21,16 @@ The class \mbox{\hyperlink{classArcade_1_1Text}{Text}} is the generic way to han
 \begin{DoxyCompactList}\small\item\em Destroy the \mbox{\hyperlink{classArcade_1_1Text}{Text}} object. \end{DoxyCompactList}\item 
 std\+::string \mbox{\hyperlink{classArcade_1_1Text_ade36f541b7e267adfd2eb696da5ca789}{get\+Text}} (void) const
 \begin{DoxyCompactList}\small\item\em Get the \mbox{\hyperlink{classArcade_1_1Text}{Text}} object. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classArcade_1_1Text_a409189d71ec102f220df6138d1dcbb80}{set\+Text}} (std\+::string)
+void \mbox{\hyperlink{classArcade_1_1Text_a72aa1020bbae462c01b4f55996ac272a}{set\+Text}} (std\+::string text)
 \begin{DoxyCompactList}\small\item\em Set the \mbox{\hyperlink{classArcade_1_1Text}{Text}} object. \end{DoxyCompactList}\item 
 std\+::pair$<$ ssize\+\_\+t, ssize\+\_\+t $>$ \mbox{\hyperlink{classArcade_1_1Text_acb3b1506334ce4ec69815ef09474cef2}{get\+Position}} (void) const
 \begin{DoxyCompactList}\small\item\em Get the Position object. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classArcade_1_1Text_a4bd9f924da37e2ca544dfa6b88e95887}{set\+Position}} (std\+::pair$<$ ssize\+\_\+t, ssize\+\_\+t $>$)
+void \mbox{\hyperlink{classArcade_1_1Text_a1c77e32c3d60bf887da3c68328abb916}{set\+Position}} (std\+::pair$<$ ssize\+\_\+t, ssize\+\_\+t $>$ position)
 \begin{DoxyCompactList}\small\item\em Set the Position object. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classArcade_1_1Text_aacd0be3d2890f5e8b4819e46ee7f9ead}{set\+Color}} (Arcade\+::\+Colors)
-\begin{DoxyCompactList}\small\item\em Get the Color object. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classArcade_1_1Text_a96514800b0ae4bc72f3629dba3bc2636}{set\+Color}} (Arcade\+::\+Colors color)
+\begin{DoxyCompactList}\small\item\em Set the Color object. \end{DoxyCompactList}\item 
 Arcade\+::\+Colors \mbox{\hyperlink{classArcade_1_1Text_a60b1a72f598323bdf06e8fc98419db95}{get\+Color}} (void) const
-\begin{DoxyCompactList}\small\item\em Set the Color object. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Get the Color object. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
@@ -81,13 +81,11 @@ Must be implemented in the inherited classes
 
 
 
-Set the Color object. 
+Get the Color object. 
 
-
-\begin{DoxyParams}{Parameters}
-{\em color} & \\
-\hline
-\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Arcade\+::\+Colors 
+\end{DoxyReturn}
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{77 \{ \textcolor{keywordflow}{return} \_color; \};}
@@ -129,29 +127,31 @@ std\+::string
 \DoxyCodeLine{47 \{ \textcolor{keywordflow}{return} \_text;\};}
 
 \end{DoxyCode}
-\mbox{\Hypertarget{classArcade_1_1Text_aacd0be3d2890f5e8b4819e46ee7f9ead}\label{classArcade_1_1Text_aacd0be3d2890f5e8b4819e46ee7f9ead}} 
+\mbox{\Hypertarget{classArcade_1_1Text_a96514800b0ae4bc72f3629dba3bc2636}\label{classArcade_1_1Text_a96514800b0ae4bc72f3629dba3bc2636}} 
 \index{Arcade::Text@{Arcade::Text}!setColor@{setColor}}
 \index{setColor@{setColor}!Arcade::Text@{Arcade::Text}}
 \doxysubsubsection{\texorpdfstring{setColor()}{setColor()}}
-{\footnotesize\ttfamily void Arcade\+::\+Text\+::set\+Color (\begin{DoxyParamCaption}\item[{Arcade\+::\+Colors}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void Arcade\+::\+Text\+::set\+Color (\begin{DoxyParamCaption}\item[{Arcade\+::\+Colors}]{color }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
-Get the Color object. 
+Set the Color object. 
 
-\begin{DoxyReturn}{Returns}
-Arcade\+::\+Colors 
-\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em color} & \\
+\hline
+\end{DoxyParams}
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{71 \{ \_color = \_color; \};}
+\DoxyCodeLine{71 \{ \_color = color; \};}
 
 \end{DoxyCode}
-\mbox{\Hypertarget{classArcade_1_1Text_a4bd9f924da37e2ca544dfa6b88e95887}\label{classArcade_1_1Text_a4bd9f924da37e2ca544dfa6b88e95887}} 
+\mbox{\Hypertarget{classArcade_1_1Text_a1c77e32c3d60bf887da3c68328abb916}\label{classArcade_1_1Text_a1c77e32c3d60bf887da3c68328abb916}} 
 \index{Arcade::Text@{Arcade::Text}!setPosition@{setPosition}}
 \index{setPosition@{setPosition}!Arcade::Text@{Arcade::Text}}
 \doxysubsubsection{\texorpdfstring{setPosition()}{setPosition()}}
-{\footnotesize\ttfamily void Arcade\+::\+Text\+::set\+Position (\begin{DoxyParamCaption}\item[{std\+::pair$<$ ssize\+\_\+t, ssize\+\_\+t $>$}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void Arcade\+::\+Text\+::set\+Position (\begin{DoxyParamCaption}\item[{std\+::pair$<$ ssize\+\_\+t, ssize\+\_\+t $>$}]{position }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -164,14 +164,14 @@ Set the Position object.
 \end{DoxyParams}
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{65 \{ \_position = \_position; \};}
+\DoxyCodeLine{65 \{ \_position = position; \};}
 
 \end{DoxyCode}
-\mbox{\Hypertarget{classArcade_1_1Text_a409189d71ec102f220df6138d1dcbb80}\label{classArcade_1_1Text_a409189d71ec102f220df6138d1dcbb80}} 
+\mbox{\Hypertarget{classArcade_1_1Text_a72aa1020bbae462c01b4f55996ac272a}\label{classArcade_1_1Text_a72aa1020bbae462c01b4f55996ac272a}} 
 \index{Arcade::Text@{Arcade::Text}!setText@{setText}}
 \index{setText@{setText}!Arcade::Text@{Arcade::Text}}
 \doxysubsubsection{\texorpdfstring{setText()}{setText()}}
-{\footnotesize\ttfamily void Arcade\+::\+Text\+::set\+Text (\begin{DoxyParamCaption}\item[{std\+::string}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void Arcade\+::\+Text\+::set\+Text (\begin{DoxyParamCaption}\item[{std\+::string}]{text }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -184,7 +184,7 @@ Set the \mbox{\hyperlink{classArcade_1_1Text}{Text}} object.
 \end{DoxyParams}
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{53 \{ \_text = \_text; \};}
+\DoxyCodeLine{53 \{ \_text = text; \};}
 
 \end{DoxyCode}
 

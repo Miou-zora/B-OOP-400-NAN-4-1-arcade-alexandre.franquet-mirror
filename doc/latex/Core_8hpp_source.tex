@@ -1,0 +1,79 @@
+\hypertarget{Core_8hpp_source}{}\doxysection{Core.\+hpp}
+\label{Core_8hpp_source}\index{core/Core.hpp@{core/Core.hpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{/*}}
+\DoxyCodeLine{2 \textcolor{comment}{** EPITECH PROJECT, 2023}}
+\DoxyCodeLine{3 \textcolor{comment}{** B-\/OOP-\/400-\/NAN-\/4-\/1-\/arcade-\/architecture}}
+\DoxyCodeLine{4 \textcolor{comment}{** File description:}}
+\DoxyCodeLine{5 \textcolor{comment}{** Arcade}}
+\DoxyCodeLine{6 \textcolor{comment}{*/}}
+\DoxyCodeLine{7 }
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#include <iostream>}}
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#include <string>}}
+\DoxyCodeLine{11 \textcolor{preprocessor}{\#include <memory>}}
+\DoxyCodeLine{12 \textcolor{preprocessor}{\#include <map>}}
+\DoxyCodeLine{13 \textcolor{preprocessor}{\#include <vector>}}
+\DoxyCodeLine{14 \textcolor{preprocessor}{\#include <filesystem>}}
+\DoxyCodeLine{15 \textcolor{preprocessor}{\#include <algorithm>}}
+\DoxyCodeLine{16 \textcolor{preprocessor}{\#include <time.h>}}
+\DoxyCodeLine{17 \textcolor{preprocessor}{\#include <chrono>}}
+\DoxyCodeLine{18 }
+\DoxyCodeLine{19 \textcolor{preprocessor}{\#include "{}IGame.hpp"{}}}
+\DoxyCodeLine{20 \textcolor{preprocessor}{\#include "{}Lib/ILib.hpp"{}}}
+\DoxyCodeLine{21 \textcolor{preprocessor}{\#include "{}LibLoader.hpp"{}}}
+\DoxyCodeLine{22 \textcolor{preprocessor}{\#include "{}AObjects.hpp"{}}}
+\DoxyCodeLine{23 }
+\DoxyCodeLine{24 \textcolor{keyword}{namespace }Arcade \{}
+\DoxyCodeLine{25     \textcolor{comment}{/*Those are just example */}}
+\DoxyCodeLine{26 }
+\DoxyCodeLine{27     \textcolor{keyword}{enum} Scenes \{}
+\DoxyCodeLine{28         MAIN\_MENU,}
+\DoxyCodeLine{29         IN\_GAME,}
+\DoxyCodeLine{30         LEAVE}
+\DoxyCodeLine{31     \};}
+\DoxyCodeLine{32 }
+\DoxyCodeLine{33     \textcolor{keyword}{class }\mbox{\hyperlink{classArcade_1_1Core}{Core}} \{}
+\DoxyCodeLine{34         \textcolor{keyword}{public}:}
+\DoxyCodeLine{35             \mbox{\hyperlink{classArcade_1_1Core}{Core}}(std::string libFilePath);}
+\DoxyCodeLine{36             \mbox{\hyperlink{classArcade_1_1Core}{\string~Core}}();}
+\DoxyCodeLine{37 }
+\DoxyCodeLine{38             \textcolor{keywordtype}{void} loop();}
+\DoxyCodeLine{39 }
+\DoxyCodeLine{40             \textcolor{keywordtype}{float} getDeltaTime()\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} \_deltaTime; \};}
+\DoxyCodeLine{41 }
+\DoxyCodeLine{42         \textcolor{keyword}{private}:}
+\DoxyCodeLine{43             \textcolor{keywordtype}{void} runScene(Arcade::Scenes scene = Arcade::MAIN\_MENU);}
+\DoxyCodeLine{44             \textcolor{keywordtype}{bool} loadGame(\textcolor{keyword}{const} std::string \&GameName);}
+\DoxyCodeLine{45             \textcolor{keywordtype}{bool} loadLib(\textcolor{keyword}{const} std::string \&LibName);}
+\DoxyCodeLine{46             \textcolor{keywordtype}{void} updateDeltaTime(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{47 }
+\DoxyCodeLine{48             \textcolor{keywordtype}{void} updateMainMenu(\mbox{\hyperlink{classArcade_1_1ILib}{Arcade::ILib}} \&lib);}
+\DoxyCodeLine{49             \textcolor{keywordtype}{void} renderMainMenu(\mbox{\hyperlink{classArcade_1_1ILib}{Arcade::ILib}} \&lib);}
+\DoxyCodeLine{50             \textcolor{keywordtype}{void} initMenu();}
+\DoxyCodeLine{51             \textcolor{keywordtype}{void} wait(\textcolor{keywordtype}{double} time);}
+\DoxyCodeLine{52 }
+\DoxyCodeLine{53             \textcolor{keywordtype}{void} globalInputs(\mbox{\hyperlink{classArcade_1_1ILib}{Arcade::ILib}} \&lib);}
+\DoxyCodeLine{54 }
+\DoxyCodeLine{55             std::vector<std::string> getLibsFromDirectory();}
+\DoxyCodeLine{56             \textcolor{keywordtype}{void} storeLibsPath();}
+\DoxyCodeLine{57 }
+\DoxyCodeLine{58             std::pair<Arcade::LibLoader<Arcade::ILib>, std::shared\_ptr<Arcade::ILib>> \_lib;}
+\DoxyCodeLine{59             std::pair<Arcade::LibLoader<Arcade::IGame>, std::shared\_ptr<Arcade::IGame>> \_game;}
+\DoxyCodeLine{60 }
+\DoxyCodeLine{61             std::vector<std::string> \_gamesPath;}
+\DoxyCodeLine{62             std::vector<std::string> \_libsPath;}
+\DoxyCodeLine{63 }
+\DoxyCodeLine{64             std::size\_t \_currentGame;}
+\DoxyCodeLine{65             std::size\_t \_currentLib;}
+\DoxyCodeLine{66             Arcade::Scenes \_currentScene;}
+\DoxyCodeLine{67 }
+\DoxyCodeLine{68             \textcolor{keywordtype}{double} \_deltaTime;}
+\DoxyCodeLine{69             std::chrono::\_V2::system\_clock::time\_point \_startTime;}
+\DoxyCodeLine{70 }
+\DoxyCodeLine{71             std::vector<std::shared\_ptr<Arcade::IObject>> \_menuObjects;}
+\DoxyCodeLine{72     \};}
+\DoxyCodeLine{73 \};}
+
+\end{DoxyCode}

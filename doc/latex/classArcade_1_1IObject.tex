@@ -25,23 +25,23 @@ virtual {\bfseries $\sim$\+IObject} ()=default
 \begin{DoxyCompactList}\small\item\em Destroy the \mbox{\hyperlink{classArcade_1_1IObject}{IObject}} object. \end{DoxyCompactList}\item 
 virtual Arcade\+::\+Shapes \mbox{\hyperlink{classArcade_1_1IObject_a2dde783429fcccc9c5b072a26c88be74}{get\+Shape}} (void) const =0
 \begin{DoxyCompactList}\small\item\em Get the Shape object. \end{DoxyCompactList}\item 
-virtual void \mbox{\hyperlink{classArcade_1_1IObject_a6e1892acd2891a4d69de72a468b5bea5}{set\+Shape}} (Arcade\+::\+Shapes)=0
+virtual void \mbox{\hyperlink{classArcade_1_1IObject_abf4edc8b093660dc2323ff4f62069d90}{set\+Shape}} (Arcade\+::\+Shapes shape)=0
 \begin{DoxyCompactList}\small\item\em Set the Shape object. \end{DoxyCompactList}\item 
 virtual std\+::pair$<$ ssize\+\_\+t, ssize\+\_\+t $>$ \mbox{\hyperlink{classArcade_1_1IObject_a596bdada0fb1da0efba23e57a4bc16c4}{get\+Position}} (void) const =0
 \begin{DoxyCompactList}\small\item\em Get the Position object. \end{DoxyCompactList}\item 
-virtual void \mbox{\hyperlink{classArcade_1_1IObject_af8c87e1e4950f6e09c24be53e8e08c1e}{set\+Position}} (std\+::pair$<$ ssize\+\_\+t, ssize\+\_\+t $>$)=0
+virtual void \mbox{\hyperlink{classArcade_1_1IObject_ad420422e75c73716cfdc8a68597291fe}{set\+Position}} (std\+::pair$<$ ssize\+\_\+t, ssize\+\_\+t $>$ position)=0
 \begin{DoxyCompactList}\small\item\em Set the Position object. \end{DoxyCompactList}\item 
 virtual std\+::pair$<$ ssize\+\_\+t, ssize\+\_\+t $>$ \mbox{\hyperlink{classArcade_1_1IObject_a4aecc1c14429795d8b5c0b3d5e0a492c}{get\+Size}} (void) const =0
 \begin{DoxyCompactList}\small\item\em Get the Size object. \end{DoxyCompactList}\item 
-virtual void \mbox{\hyperlink{classArcade_1_1IObject_ad56fc5c77cd31446750a9bed4fbc7741}{set\+Size}} (std\+::pair$<$ ssize\+\_\+t, ssize\+\_\+t $>$)=0
+virtual void \mbox{\hyperlink{classArcade_1_1IObject_afa6ad5ff0acbcd338cb8b56c282035f4}{set\+Size}} (std\+::pair$<$ ssize\+\_\+t, ssize\+\_\+t $>$ size)=0
 \begin{DoxyCompactList}\small\item\em Set the Size object. \end{DoxyCompactList}\item 
-virtual void \mbox{\hyperlink{classArcade_1_1IObject_aac40dda6a818b2691698c0c960522c5a}{set\+Color}} (Arcade\+::\+Colors)=0
-\begin{DoxyCompactList}\small\item\em Get the Color object. \end{DoxyCompactList}\item 
-virtual Arcade\+::\+Colors \mbox{\hyperlink{classArcade_1_1IObject_a3885906c6ad59e43ff4bd8da02a0e332}{get\+Color}} (void) const =0
+virtual void \mbox{\hyperlink{classArcade_1_1IObject_a8aa10a905f37ffa0b7841e8c3fbf4890}{set\+Color}} (Arcade\+::\+Colors color)=0
 \begin{DoxyCompactList}\small\item\em Set the Color object. \end{DoxyCompactList}\item 
+virtual Arcade\+::\+Colors \mbox{\hyperlink{classArcade_1_1IObject_a3885906c6ad59e43ff4bd8da02a0e332}{get\+Color}} (void) const =0
+\begin{DoxyCompactList}\small\item\em Get the Color object. \end{DoxyCompactList}\item 
 virtual std\+::string \mbox{\hyperlink{classArcade_1_1IObject_ac4a29257577eaeaee8ad240b49c4ade5}{get\+File\+Path}} (void) const =0
 \begin{DoxyCompactList}\small\item\em Get the Texture object. \end{DoxyCompactList}\item 
-virtual void \mbox{\hyperlink{classArcade_1_1IObject_a9a4f0b9d2cf388a6faa853074e385d84}{set\+File\+Path}} (std\+::string)=0
+virtual void \mbox{\hyperlink{classArcade_1_1IObject_a11aecae389bb5bfffa2cf0034d02f29b}{set\+File\+Path}} (std\+::string texture)=0
 \begin{DoxyCompactList}\small\item\em Set the Texture object. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
@@ -72,13 +72,11 @@ It is used to draw something with graphical library
 
 
 
-Set the Color object. 
+Get the Color object. 
 
-
-\begin{DoxyParams}{Parameters}
-{\em color} & \\
-\hline
-\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Arcade\+::\+Colors 
+\end{DoxyReturn}
 
 
 Implemented in \mbox{\hyperlink{classArcade_1_1AObject_a469504d1b69903f834d05e667d94ef62}{Arcade\+::\+AObject}}.
@@ -151,28 +149,30 @@ std\+::pair$<$ssize\+\_\+t, ssize\+\_\+t$>$
 
 Implemented in \mbox{\hyperlink{classArcade_1_1AObject_aad447dbe665c80e4bf3abcd28d87e5e0}{Arcade\+::\+AObject}}.
 
-\mbox{\Hypertarget{classArcade_1_1IObject_aac40dda6a818b2691698c0c960522c5a}\label{classArcade_1_1IObject_aac40dda6a818b2691698c0c960522c5a}} 
+\mbox{\Hypertarget{classArcade_1_1IObject_a8aa10a905f37ffa0b7841e8c3fbf4890}\label{classArcade_1_1IObject_a8aa10a905f37ffa0b7841e8c3fbf4890}} 
 \index{Arcade::IObject@{Arcade::IObject}!setColor@{setColor}}
 \index{setColor@{setColor}!Arcade::IObject@{Arcade::IObject}}
 \doxysubsubsection{\texorpdfstring{setColor()}{setColor()}}
-{\footnotesize\ttfamily virtual void Arcade\+::\+IObject\+::set\+Color (\begin{DoxyParamCaption}\item[{Arcade\+::\+Colors}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+{\footnotesize\ttfamily virtual void Arcade\+::\+IObject\+::set\+Color (\begin{DoxyParamCaption}\item[{Arcade\+::\+Colors}]{color }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
 
 
 
-Get the Color object. 
+Set the Color object. 
 
-\begin{DoxyReturn}{Returns}
-Arcade\+::\+Colors 
-\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em color} & \\
+\hline
+\end{DoxyParams}
 
 
 Implemented in \mbox{\hyperlink{classArcade_1_1AObject_a438a25f04c55d9bfe676ea5adf8ebe18}{Arcade\+::\+AObject}}.
 
-\mbox{\Hypertarget{classArcade_1_1IObject_a9a4f0b9d2cf388a6faa853074e385d84}\label{classArcade_1_1IObject_a9a4f0b9d2cf388a6faa853074e385d84}} 
+\mbox{\Hypertarget{classArcade_1_1IObject_a11aecae389bb5bfffa2cf0034d02f29b}\label{classArcade_1_1IObject_a11aecae389bb5bfffa2cf0034d02f29b}} 
 \index{Arcade::IObject@{Arcade::IObject}!setFilePath@{setFilePath}}
 \index{setFilePath@{setFilePath}!Arcade::IObject@{Arcade::IObject}}
 \doxysubsubsection{\texorpdfstring{setFilePath()}{setFilePath()}}
-{\footnotesize\ttfamily virtual void Arcade\+::\+IObject\+::set\+File\+Path (\begin{DoxyParamCaption}\item[{std\+::string}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+{\footnotesize\ttfamily virtual void Arcade\+::\+IObject\+::set\+File\+Path (\begin{DoxyParamCaption}\item[{std\+::string}]{texture }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
 
 
 
@@ -187,11 +187,11 @@ Set the Texture object.
 
 Implemented in \mbox{\hyperlink{classArcade_1_1AObject_af65c1a6f550d0ec9bef1f3c0c4b2cc9a}{Arcade\+::\+AObject}}.
 
-\mbox{\Hypertarget{classArcade_1_1IObject_af8c87e1e4950f6e09c24be53e8e08c1e}\label{classArcade_1_1IObject_af8c87e1e4950f6e09c24be53e8e08c1e}} 
+\mbox{\Hypertarget{classArcade_1_1IObject_ad420422e75c73716cfdc8a68597291fe}\label{classArcade_1_1IObject_ad420422e75c73716cfdc8a68597291fe}} 
 \index{Arcade::IObject@{Arcade::IObject}!setPosition@{setPosition}}
 \index{setPosition@{setPosition}!Arcade::IObject@{Arcade::IObject}}
 \doxysubsubsection{\texorpdfstring{setPosition()}{setPosition()}}
-{\footnotesize\ttfamily virtual void Arcade\+::\+IObject\+::set\+Position (\begin{DoxyParamCaption}\item[{std\+::pair$<$ ssize\+\_\+t, ssize\+\_\+t $>$}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+{\footnotesize\ttfamily virtual void Arcade\+::\+IObject\+::set\+Position (\begin{DoxyParamCaption}\item[{std\+::pair$<$ ssize\+\_\+t, ssize\+\_\+t $>$}]{position }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
 
 
 
@@ -206,11 +206,11 @@ Set the Position object.
 
 Implemented in \mbox{\hyperlink{classArcade_1_1AObject_a4eac2b9cc792cf2f27dd1ee98362050f}{Arcade\+::\+AObject}}.
 
-\mbox{\Hypertarget{classArcade_1_1IObject_a6e1892acd2891a4d69de72a468b5bea5}\label{classArcade_1_1IObject_a6e1892acd2891a4d69de72a468b5bea5}} 
+\mbox{\Hypertarget{classArcade_1_1IObject_abf4edc8b093660dc2323ff4f62069d90}\label{classArcade_1_1IObject_abf4edc8b093660dc2323ff4f62069d90}} 
 \index{Arcade::IObject@{Arcade::IObject}!setShape@{setShape}}
 \index{setShape@{setShape}!Arcade::IObject@{Arcade::IObject}}
 \doxysubsubsection{\texorpdfstring{setShape()}{setShape()}}
-{\footnotesize\ttfamily virtual void Arcade\+::\+IObject\+::set\+Shape (\begin{DoxyParamCaption}\item[{Arcade\+::\+Shapes}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+{\footnotesize\ttfamily virtual void Arcade\+::\+IObject\+::set\+Shape (\begin{DoxyParamCaption}\item[{Arcade\+::\+Shapes}]{shape }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
 
 
 
@@ -225,11 +225,11 @@ Set the Shape object.
 
 Implemented in \mbox{\hyperlink{classArcade_1_1AObject_a506fdce14623a56573d33388d1404ff2}{Arcade\+::\+AObject}}.
 
-\mbox{\Hypertarget{classArcade_1_1IObject_ad56fc5c77cd31446750a9bed4fbc7741}\label{classArcade_1_1IObject_ad56fc5c77cd31446750a9bed4fbc7741}} 
+\mbox{\Hypertarget{classArcade_1_1IObject_afa6ad5ff0acbcd338cb8b56c282035f4}\label{classArcade_1_1IObject_afa6ad5ff0acbcd338cb8b56c282035f4}} 
 \index{Arcade::IObject@{Arcade::IObject}!setSize@{setSize}}
 \index{setSize@{setSize}!Arcade::IObject@{Arcade::IObject}}
 \doxysubsubsection{\texorpdfstring{setSize()}{setSize()}}
-{\footnotesize\ttfamily virtual void Arcade\+::\+IObject\+::set\+Size (\begin{DoxyParamCaption}\item[{std\+::pair$<$ ssize\+\_\+t, ssize\+\_\+t $>$}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+{\footnotesize\ttfamily virtual void Arcade\+::\+IObject\+::set\+Size (\begin{DoxyParamCaption}\item[{std\+::pair$<$ ssize\+\_\+t, ssize\+\_\+t $>$}]{size }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
 
 
 

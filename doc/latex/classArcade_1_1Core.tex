@@ -1,0 +1,99 @@
+\hypertarget{classArcade_1_1Core}{}\doxysection{Arcade\+::Core Class Reference}
+\label{classArcade_1_1Core}\index{Arcade::Core@{Arcade::Core}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classArcade_1_1Core_ae4303b5595f40080574ab3b581e81810}{Core}} (std\+::string lib\+File\+Path)
+\item 
+void \mbox{\hyperlink{classArcade_1_1Core_aad8a37dd3635bafe75dbe9084be5a1a9}{loop}} ()
+\item 
+float \mbox{\hyperlink{classArcade_1_1Core_a5c4ba38c849ff0590fb74224fffe9a1a}{get\+Delta\+Time}} () const
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classArcade_1_1Core_ae4303b5595f40080574ab3b581e81810}\label{classArcade_1_1Core_ae4303b5595f40080574ab3b581e81810}} 
+\index{Arcade::Core@{Arcade::Core}!Core@{Core}}
+\index{Core@{Core}!Arcade::Core@{Arcade::Core}}
+\doxysubsubsection{\texorpdfstring{Core()}{Core()}}
+{\footnotesize\ttfamily Arcade\+::\+Core\+::\+Core (\begin{DoxyParamCaption}\item[{std\+::string}]{lib\+File\+Path }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{11 \{}
+\DoxyCodeLine{12     \textcolor{keywordflow}{try} \{}
+\DoxyCodeLine{13         storeLibsPath();}
+\DoxyCodeLine{14         \_lib.second = \_lib.first.loadGraphicalLib(libFilePath);}
+\DoxyCodeLine{15     \} \textcolor{keywordflow}{catch} (\textcolor{keyword}{const} LoaderException \&e) \{}
+\DoxyCodeLine{16         std::cerr << e.what() << std::endl;}
+\DoxyCodeLine{17         exit(84);}
+\DoxyCodeLine{18     \}}
+\DoxyCodeLine{19     \_startTime = std::chrono::high\_resolution\_clock::now();}
+\DoxyCodeLine{20     \_currentScene = Arcade::Scenes::MAIN\_MENU;}
+\DoxyCodeLine{21     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} i = 0; i < \_libsPath.size(); i++) \{}
+\DoxyCodeLine{22         \textcolor{keywordflow}{if} (\_libsPath[i] == libFilePath)}
+\DoxyCodeLine{23             \_currentLib = i;}
+\DoxyCodeLine{24     \}}
+\DoxyCodeLine{25     \_currentGame = 0;}
+\DoxyCodeLine{26     \textcolor{keywordflow}{if} (\_libsPath.size() == 0 || \_gamesPath.size() == 0) \{}
+\DoxyCodeLine{27         std::cerr << \textcolor{stringliteral}{"{}No library found"{}} << std::endl;}
+\DoxyCodeLine{28         exit(84);}
+\DoxyCodeLine{29     \}}
+\DoxyCodeLine{30     \_lib.second.get()-\/>createWindow();}
+\DoxyCodeLine{31     initMenu();}
+\DoxyCodeLine{32 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classArcade_1_1Core_a370e30ef75624c8fadc8d8db4e9bafc0}\label{classArcade_1_1Core_a370e30ef75624c8fadc8d8db4e9bafc0}} 
+\index{Arcade::Core@{Arcade::Core}!````~Core@{$\sim$Core}}
+\index{````~Core@{$\sim$Core}!Arcade::Core@{Arcade::Core}}
+\doxysubsubsection{\texorpdfstring{$\sim$Core()}{~Core()}}
+{\footnotesize\ttfamily Arcade\+::\+Core\+::$\sim$\+Core (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{35 \{}
+\DoxyCodeLine{36     \_lib.first.closeLib();}
+\DoxyCodeLine{37 \}}
+
+\end{DoxyCode}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classArcade_1_1Core_a5c4ba38c849ff0590fb74224fffe9a1a}\label{classArcade_1_1Core_a5c4ba38c849ff0590fb74224fffe9a1a}} 
+\index{Arcade::Core@{Arcade::Core}!getDeltaTime@{getDeltaTime}}
+\index{getDeltaTime@{getDeltaTime}!Arcade::Core@{Arcade::Core}}
+\doxysubsubsection{\texorpdfstring{getDeltaTime()}{getDeltaTime()}}
+{\footnotesize\ttfamily float Arcade\+::\+Core\+::get\+Delta\+Time (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{40 \{ \textcolor{keywordflow}{return} \_deltaTime; \};}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classArcade_1_1Core_aad8a37dd3635bafe75dbe9084be5a1a9}\label{classArcade_1_1Core_aad8a37dd3635bafe75dbe9084be5a1a9}} 
+\index{Arcade::Core@{Arcade::Core}!loop@{loop}}
+\index{loop@{loop}!Arcade::Core@{Arcade::Core}}
+\doxysubsubsection{\texorpdfstring{loop()}{loop()}}
+{\footnotesize\ttfamily void Arcade\+::\+Core\+::loop (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{165 \{}
+\DoxyCodeLine{166     \textcolor{keywordflow}{while} (\_currentScene != Arcade::Scenes::LEAVE) \{}
+\DoxyCodeLine{167         \_lib.second.get()-\/>updateEvent();}
+\DoxyCodeLine{168         updateDeltaTime();}
+\DoxyCodeLine{169         wait(0.01);}
+\DoxyCodeLine{170         \_lib.second-\/>clearWindow();}
+\DoxyCodeLine{171         runScene(\_currentScene);}
+\DoxyCodeLine{172         \_lib.second-\/>renderWindow();}
+\DoxyCodeLine{173     \}}
+\DoxyCodeLine{174 \}}
+
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+core/Core.\+hpp\item 
+core/Core.\+cpp\end{DoxyCompactItemize}

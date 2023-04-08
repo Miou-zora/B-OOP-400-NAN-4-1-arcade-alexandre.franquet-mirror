@@ -39,66 +39,92 @@
 \contentsline {subsubsection}{\numberline {5.3.2.8}setPosition()}{18}{subsubsection.5.3.2.8}%
 \contentsline {subsubsection}{\numberline {5.3.2.9}setShape()}{18}{subsubsection.5.3.2.9}%
 \contentsline {subsubsection}{\numberline {5.3.2.10}setSize()}{18}{subsubsection.5.3.2.10}%
-\contentsline {section}{\numberline {5.4}Arcade\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}::IGame Class Reference}{19}{section.5.4}%
-\contentsline {subsection}{\numberline {5.4.1}Detailed Description}{20}{subsection.5.4.1}%
+\contentsline {section}{\numberline {5.4}Arcade\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}::Core Class Reference}{19}{section.5.4}%
+\contentsline {subsection}{\numberline {5.4.1}Constructor \& Destructor Documentation}{19}{subsection.5.4.1}%
+\contentsline {subsubsection}{\numberline {5.4.1.1}Core()}{19}{subsubsection.5.4.1.1}%
+\contentsline {subsubsection}{\numberline {5.4.1.2}$\sim $Core()}{19}{subsubsection.5.4.1.2}%
 \contentsline {subsection}{\numberline {5.4.2}Member Function Documentation}{20}{subsection.5.4.2}%
-\contentsline {subsubsection}{\numberline {5.4.2.1}getGameName()}{20}{subsubsection.5.4.2.1}%
-\contentsline {subsubsection}{\numberline {5.4.2.2}getHighScore()}{20}{subsubsection.5.4.2.2}%
-\contentsline {subsubsection}{\numberline {5.4.2.3}getScore()}{21}{subsubsection.5.4.2.3}%
-\contentsline {subsubsection}{\numberline {5.4.2.4}getState()}{21}{subsubsection.5.4.2.4}%
-\contentsline {subsubsection}{\numberline {5.4.2.5}load()}{21}{subsubsection.5.4.2.5}%
-\contentsline {subsubsection}{\numberline {5.4.2.6}render()}{21}{subsubsection.5.4.2.6}%
-\contentsline {subsubsection}{\numberline {5.4.2.7}reset()}{22}{subsubsection.5.4.2.7}%
-\contentsline {subsubsection}{\numberline {5.4.2.8}unload()}{22}{subsubsection.5.4.2.8}%
-\contentsline {subsubsection}{\numberline {5.4.2.9}update()}{22}{subsubsection.5.4.2.9}%
-\contentsline {section}{\numberline {5.5}Arcade\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}::ILib Class Reference}{22}{section.5.5}%
-\contentsline {subsection}{\numberline {5.5.1}Detailed Description}{24}{subsection.5.5.1}%
-\contentsline {subsection}{\numberline {5.5.2}Member Function Documentation}{24}{subsection.5.5.2}%
-\contentsline {subsubsection}{\numberline {5.5.2.1}drawObjets()}{24}{subsubsection.5.5.2.1}%
-\contentsline {subsubsection}{\numberline {5.5.2.2}drawShapes()}{24}{subsubsection.5.5.2.2}%
-\contentsline {subsubsection}{\numberline {5.5.2.3}drawText()\hspace {0.1cm}{\footnotesize \ttfamily [1/2]}}{24}{subsubsection.5.5.2.3}%
-\contentsline {subsubsection}{\numberline {5.5.2.4}drawText()\hspace {0.1cm}{\footnotesize \ttfamily [2/2]}}{25}{subsubsection.5.5.2.4}%
-\contentsline {subsubsection}{\numberline {5.5.2.5}getScale()}{25}{subsubsection.5.5.2.5}%
-\contentsline {subsubsection}{\numberline {5.5.2.6}getSize()}{25}{subsubsection.5.5.2.6}%
-\contentsline {subsubsection}{\numberline {5.5.2.7}isKeyPressed()}{26}{subsubsection.5.5.2.7}%
-\contentsline {subsubsection}{\numberline {5.5.2.8}isKeyReleased()}{26}{subsubsection.5.5.2.8}%
-\contentsline {subsubsection}{\numberline {5.5.2.9}isWindowClosed()}{26}{subsubsection.5.5.2.9}%
-\contentsline {subsubsection}{\numberline {5.5.2.10}setScale()\hspace {0.1cm}{\footnotesize \ttfamily [1/2]}}{27}{subsubsection.5.5.2.10}%
-\contentsline {subsubsection}{\numberline {5.5.2.11}setScale()\hspace {0.1cm}{\footnotesize \ttfamily [2/2]}}{27}{subsubsection.5.5.2.11}%
-\contentsline {subsubsection}{\numberline {5.5.2.12}setSize()}{27}{subsubsection.5.5.2.12}%
-\contentsline {section}{\numberline {5.6}Arcade\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}::IObject Class Reference}{28}{section.5.6}%
-\contentsline {subsection}{\numberline {5.6.1}Detailed Description}{28}{subsection.5.6.1}%
-\contentsline {subsection}{\numberline {5.6.2}Constructor \& Destructor Documentation}{29}{subsection.5.6.2}%
-\contentsline {subsubsection}{\numberline {5.6.2.1}IObject()}{29}{subsubsection.5.6.2.1}%
-\contentsline {subsection}{\numberline {5.6.3}Member Function Documentation}{29}{subsection.5.6.3}%
-\contentsline {subsubsection}{\numberline {5.6.3.1}getColor()}{29}{subsubsection.5.6.3.1}%
-\contentsline {subsubsection}{\numberline {5.6.3.2}getFilePath()}{29}{subsubsection.5.6.3.2}%
-\contentsline {subsubsection}{\numberline {5.6.3.3}getPosition()}{30}{subsubsection.5.6.3.3}%
-\contentsline {subsubsection}{\numberline {5.6.3.4}getShape()}{30}{subsubsection.5.6.3.4}%
-\contentsline {subsubsection}{\numberline {5.6.3.5}getSize()}{30}{subsubsection.5.6.3.5}%
-\contentsline {subsubsection}{\numberline {5.6.3.6}setColor()}{30}{subsubsection.5.6.3.6}%
-\contentsline {subsubsection}{\numberline {5.6.3.7}setFilePath()}{30}{subsubsection.5.6.3.7}%
-\contentsline {subsubsection}{\numberline {5.6.3.8}setPosition()}{31}{subsubsection.5.6.3.8}%
-\contentsline {subsubsection}{\numberline {5.6.3.9}setShape()}{31}{subsubsection.5.6.3.9}%
-\contentsline {subsubsection}{\numberline {5.6.3.10}setSize()}{31}{subsubsection.5.6.3.10}%
-\contentsline {section}{\numberline {5.7}Arcade\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}::Text Class Reference}{32}{section.5.7}%
-\contentsline {subsection}{\numberline {5.7.1}Detailed Description}{32}{subsection.5.7.1}%
-\contentsline {subsection}{\numberline {5.7.2}Constructor \& Destructor Documentation}{32}{subsection.5.7.2}%
-\contentsline {subsubsection}{\numberline {5.7.2.1}Text()\hspace {0.1cm}{\footnotesize \ttfamily [1/2]}}{33}{subsubsection.5.7.2.1}%
-\contentsline {subsubsection}{\numberline {5.7.2.2}Text()\hspace {0.1cm}{\footnotesize \ttfamily [2/2]}}{33}{subsubsection.5.7.2.2}%
-\contentsline {subsection}{\numberline {5.7.3}Member Function Documentation}{33}{subsection.5.7.3}%
-\contentsline {subsubsection}{\numberline {5.7.3.1}getColor()}{33}{subsubsection.5.7.3.1}%
-\contentsline {subsubsection}{\numberline {5.7.3.2}getPosition()}{34}{subsubsection.5.7.3.2}%
-\contentsline {subsubsection}{\numberline {5.7.3.3}getText()}{34}{subsubsection.5.7.3.3}%
-\contentsline {subsubsection}{\numberline {5.7.3.4}setColor()}{34}{subsubsection.5.7.3.4}%
-\contentsline {subsubsection}{\numberline {5.7.3.5}setPosition()}{34}{subsubsection.5.7.3.5}%
-\contentsline {subsubsection}{\numberline {5.7.3.6}setText()}{35}{subsubsection.5.7.3.6}%
-\contentsline {chapter}{\numberline {6}File Documentation}{37}{chapter.6}%
-\contentsline {section}{\numberline {6.1}AGame.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}hpp}{37}{section.6.1}%
-\contentsline {section}{\numberline {6.2}IGame.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}hpp}{37}{section.6.2}%
-\contentsline {section}{\numberline {6.3}ALib.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}hpp}{38}{section.6.3}%
-\contentsline {section}{\numberline {6.4}ILib.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}hpp}{38}{section.6.4}%
-\contentsline {section}{\numberline {6.5}Types.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}hpp}{39}{section.6.5}%
-\contentsline {section}{\numberline {6.6}AObjects.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}hpp}{40}{section.6.6}%
-\contentsline {section}{\numberline {6.7}IObject.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}hpp}{41}{section.6.7}%
-\contentsline {section}{\numberline {6.8}Text.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}hpp}{41}{section.6.8}%
+\contentsline {subsubsection}{\numberline {5.4.2.1}getDeltaTime()}{20}{subsubsection.5.4.2.1}%
+\contentsline {subsubsection}{\numberline {5.4.2.2}loop()}{20}{subsubsection.5.4.2.2}%
+\contentsline {section}{\numberline {5.5}Arcade\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}::IGame Class Reference}{20}{section.5.5}%
+\contentsline {subsection}{\numberline {5.5.1}Detailed Description}{21}{subsection.5.5.1}%
+\contentsline {subsection}{\numberline {5.5.2}Member Function Documentation}{21}{subsection.5.5.2}%
+\contentsline {subsubsection}{\numberline {5.5.2.1}getGameName()}{21}{subsubsection.5.5.2.1}%
+\contentsline {subsubsection}{\numberline {5.5.2.2}getHighScore()}{22}{subsubsection.5.5.2.2}%
+\contentsline {subsubsection}{\numberline {5.5.2.3}getScore()}{22}{subsubsection.5.5.2.3}%
+\contentsline {subsubsection}{\numberline {5.5.2.4}getState()}{22}{subsubsection.5.5.2.4}%
+\contentsline {subsubsection}{\numberline {5.5.2.5}load()}{23}{subsubsection.5.5.2.5}%
+\contentsline {subsubsection}{\numberline {5.5.2.6}render()}{23}{subsubsection.5.5.2.6}%
+\contentsline {subsubsection}{\numberline {5.5.2.7}reset()}{24}{subsubsection.5.5.2.7}%
+\contentsline {subsubsection}{\numberline {5.5.2.8}unload()}{24}{subsubsection.5.5.2.8}%
+\contentsline {subsubsection}{\numberline {5.5.2.9}update()}{24}{subsubsection.5.5.2.9}%
+\contentsline {section}{\numberline {5.6}Arcade\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}::ILib Class Reference}{24}{section.5.6}%
+\contentsline {subsection}{\numberline {5.6.1}Detailed Description}{26}{subsection.5.6.1}%
+\contentsline {subsection}{\numberline {5.6.2}Member Function Documentation}{26}{subsection.5.6.2}%
+\contentsline {subsubsection}{\numberline {5.6.2.1}drawObjets()}{26}{subsubsection.5.6.2.1}%
+\contentsline {subsubsection}{\numberline {5.6.2.2}drawShapes()}{26}{subsubsection.5.6.2.2}%
+\contentsline {subsubsection}{\numberline {5.6.2.3}drawText()\hspace {0.1cm}{\footnotesize \ttfamily [1/2]}}{26}{subsubsection.5.6.2.3}%
+\contentsline {subsubsection}{\numberline {5.6.2.4}drawText()\hspace {0.1cm}{\footnotesize \ttfamily [2/2]}}{27}{subsubsection.5.6.2.4}%
+\contentsline {subsubsection}{\numberline {5.6.2.5}getScale()}{27}{subsubsection.5.6.2.5}%
+\contentsline {subsubsection}{\numberline {5.6.2.6}getSize()}{27}{subsubsection.5.6.2.6}%
+\contentsline {subsubsection}{\numberline {5.6.2.7}isKeyPressed()}{28}{subsubsection.5.6.2.7}%
+\contentsline {subsubsection}{\numberline {5.6.2.8}isKeyReleased()}{28}{subsubsection.5.6.2.8}%
+\contentsline {subsubsection}{\numberline {5.6.2.9}isWindowClosed()}{28}{subsubsection.5.6.2.9}%
+\contentsline {subsubsection}{\numberline {5.6.2.10}setScale()\hspace {0.1cm}{\footnotesize \ttfamily [1/2]}}{29}{subsubsection.5.6.2.10}%
+\contentsline {subsubsection}{\numberline {5.6.2.11}setScale()\hspace {0.1cm}{\footnotesize \ttfamily [2/2]}}{29}{subsubsection.5.6.2.11}%
+\contentsline {subsubsection}{\numberline {5.6.2.12}setSize()}{29}{subsubsection.5.6.2.12}%
+\contentsline {section}{\numberline {5.7}Arcade\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}::IObject Class Reference}{30}{section.5.7}%
+\contentsline {subsection}{\numberline {5.7.1}Detailed Description}{30}{subsection.5.7.1}%
+\contentsline {subsection}{\numberline {5.7.2}Constructor \& Destructor Documentation}{31}{subsection.5.7.2}%
+\contentsline {subsubsection}{\numberline {5.7.2.1}IObject()}{31}{subsubsection.5.7.2.1}%
+\contentsline {subsection}{\numberline {5.7.3}Member Function Documentation}{31}{subsection.5.7.3}%
+\contentsline {subsubsection}{\numberline {5.7.3.1}getColor()}{31}{subsubsection.5.7.3.1}%
+\contentsline {subsubsection}{\numberline {5.7.3.2}getFilePath()}{31}{subsubsection.5.7.3.2}%
+\contentsline {subsubsection}{\numberline {5.7.3.3}getPosition()}{32}{subsubsection.5.7.3.3}%
+\contentsline {subsubsection}{\numberline {5.7.3.4}getShape()}{32}{subsubsection.5.7.3.4}%
+\contentsline {subsubsection}{\numberline {5.7.3.5}getSize()}{32}{subsubsection.5.7.3.5}%
+\contentsline {subsubsection}{\numberline {5.7.3.6}setColor()}{32}{subsubsection.5.7.3.6}%
+\contentsline {subsubsection}{\numberline {5.7.3.7}setFilePath()}{33}{subsubsection.5.7.3.7}%
+\contentsline {subsubsection}{\numberline {5.7.3.8}setPosition()}{33}{subsubsection.5.7.3.8}%
+\contentsline {subsubsection}{\numberline {5.7.3.9}setShape()}{33}{subsubsection.5.7.3.9}%
+\contentsline {subsubsection}{\numberline {5.7.3.10}setSize()}{34}{subsubsection.5.7.3.10}%
+\contentsline {section}{\numberline {5.8}Arcade\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}::Lib\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Loader$<$ Lib\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Interface $>$ Class Template Reference}{34}{section.5.8}%
+\contentsline {subsection}{\numberline {5.8.1}Constructor \& Destructor Documentation}{34}{subsection.5.8.1}%
+\contentsline {subsubsection}{\numberline {5.8.1.1}LibLoader()}{34}{subsubsection.5.8.1.1}%
+\contentsline {subsubsection}{\numberline {5.8.1.2}$\sim $LibLoader()}{34}{subsubsection.5.8.1.2}%
+\contentsline {subsection}{\numberline {5.8.2}Member Function Documentation}{35}{subsection.5.8.2}%
+\contentsline {subsubsection}{\numberline {5.8.2.1}closeLib()}{35}{subsubsection.5.8.2.1}%
+\contentsline {subsubsection}{\numberline {5.8.2.2}isLibOpen()}{35}{subsubsection.5.8.2.2}%
+\contentsline {subsubsection}{\numberline {5.8.2.3}loadGameLib()}{35}{subsubsection.5.8.2.3}%
+\contentsline {subsubsection}{\numberline {5.8.2.4}loadGraphicalLib()}{35}{subsubsection.5.8.2.4}%
+\contentsline {section}{\numberline {5.9}Arcade\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}::Loader\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Exception Class Reference}{36}{section.5.9}%
+\contentsline {subsection}{\numberline {5.9.1}Detailed Description}{36}{subsection.5.9.1}%
+\contentsline {subsection}{\numberline {5.9.2}Constructor \& Destructor Documentation}{36}{subsection.5.9.2}%
+\contentsline {subsubsection}{\numberline {5.9.2.1}LoaderException()}{37}{subsubsection.5.9.2.1}%
+\contentsline {subsubsection}{\numberline {5.9.2.2}$\sim $LoaderException()}{37}{subsubsection.5.9.2.2}%
+\contentsline {subsection}{\numberline {5.9.3}Member Function Documentation}{37}{subsection.5.9.3}%
+\contentsline {subsubsection}{\numberline {5.9.3.1}what()}{37}{subsubsection.5.9.3.1}%
+\contentsline {section}{\numberline {5.10}Arcade\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}::Text Class Reference}{37}{section.5.10}%
+\contentsline {subsection}{\numberline {5.10.1}Detailed Description}{38}{subsection.5.10.1}%
+\contentsline {subsection}{\numberline {5.10.2}Constructor \& Destructor Documentation}{38}{subsection.5.10.2}%
+\contentsline {subsubsection}{\numberline {5.10.2.1}Text()\hspace {0.1cm}{\footnotesize \ttfamily [1/2]}}{38}{subsubsection.5.10.2.1}%
+\contentsline {subsubsection}{\numberline {5.10.2.2}Text()\hspace {0.1cm}{\footnotesize \ttfamily [2/2]}}{38}{subsubsection.5.10.2.2}%
+\contentsline {subsection}{\numberline {5.10.3}Member Function Documentation}{38}{subsection.5.10.3}%
+\contentsline {subsubsection}{\numberline {5.10.3.1}getColor()}{38}{subsubsection.5.10.3.1}%
+\contentsline {subsubsection}{\numberline {5.10.3.2}getPosition()}{39}{subsubsection.5.10.3.2}%
+\contentsline {subsubsection}{\numberline {5.10.3.3}getText()}{39}{subsubsection.5.10.3.3}%
+\contentsline {subsubsection}{\numberline {5.10.3.4}setColor()}{39}{subsubsection.5.10.3.4}%
+\contentsline {subsubsection}{\numberline {5.10.3.5}setPosition()}{40}{subsubsection.5.10.3.5}%
+\contentsline {subsubsection}{\numberline {5.10.3.6}setText()}{40}{subsubsection.5.10.3.6}%
+\contentsline {chapter}{\numberline {6}File Documentation}{41}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Core.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}hpp}{41}{section.6.1}%
+\contentsline {section}{\numberline {6.2}Error\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Management.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}hpp}{42}{section.6.2}%
+\contentsline {section}{\numberline {6.3}Lib\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Loader.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}hpp}{42}{section.6.3}%
+\contentsline {section}{\numberline {6.4}AGame.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}hpp}{43}{section.6.4}%
+\contentsline {section}{\numberline {6.5}IGame.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}hpp}{43}{section.6.5}%
+\contentsline {section}{\numberline {6.6}ALib.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}hpp}{44}{section.6.6}%
+\contentsline {section}{\numberline {6.7}ILib.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}hpp}{44}{section.6.7}%
+\contentsline {section}{\numberline {6.8}Types.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}hpp}{45}{section.6.8}%
+\contentsline {section}{\numberline {6.9}AObjects.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}hpp}{46}{section.6.9}%
+\contentsline {section}{\numberline {6.10}IObject.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}hpp}{47}{section.6.10}%
+\contentsline {section}{\numberline {6.11}Text.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}hpp}{47}{section.6.11}%

@@ -1,0 +1,65 @@
+\hypertarget{LibLoader_8hpp_source}{}\doxysection{Lib\+Loader.\+hpp}
+\label{LibLoader_8hpp_source}\index{core/LibLoader.hpp@{core/LibLoader.hpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{/*}}
+\DoxyCodeLine{2 \textcolor{comment}{** EPITECH PROJECT, 2023}}
+\DoxyCodeLine{3 \textcolor{comment}{** B-\/OOP-\/400-\/NAN-\/4-\/1-\/arcade-\/architecture}}
+\DoxyCodeLine{4 \textcolor{comment}{** File description:}}
+\DoxyCodeLine{5 \textcolor{comment}{** LibLoader}}
+\DoxyCodeLine{6 \textcolor{comment}{*/}}
+\DoxyCodeLine{7 }
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#include <string>}}
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#include <memory.h>}}
+\DoxyCodeLine{11 \textcolor{preprocessor}{\#include <dlfcn.h>}}
+\DoxyCodeLine{12 \textcolor{preprocessor}{\#include "{}ErrorManagement.hpp"{}}}
+\DoxyCodeLine{13 }
+\DoxyCodeLine{14 \textcolor{keyword}{namespace }Arcade \{}
+\DoxyCodeLine{15     \textcolor{keyword}{template} <\textcolor{keyword}{typename} LibInterface>}
+\DoxyCodeLine{16         \textcolor{keyword}{class }\mbox{\hyperlink{classArcade_1_1LibLoader}{LibLoader}} \{}
+\DoxyCodeLine{23             \textcolor{keyword}{public}:}
+\DoxyCodeLine{24                 \mbox{\hyperlink{classArcade_1_1LibLoader}{LibLoader}}(\textcolor{keywordtype}{void}) \{\};}
+\DoxyCodeLine{25                 \mbox{\hyperlink{classArcade_1_1LibLoader}{\string~LibLoader}}() \{\};}
+\DoxyCodeLine{26 }
+\DoxyCodeLine{33                 std::shared\_ptr<LibInterface> \mbox{\hyperlink{classArcade_1_1LibLoader_aea0cac002cc9afad1c073b05a1eab435}{loadGraphicalLib}}(\textcolor{keyword}{const} std::string \&libPath)}
+\DoxyCodeLine{34                 \{}
+\DoxyCodeLine{35                     \_handle = dlopen(libPath.c\_str(), RTLD\_LAZY);}
+\DoxyCodeLine{36                     LibInterface *(*builder)() = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{37                     \textcolor{keywordflow}{if} (!\_handle)}
+\DoxyCodeLine{38                         \textcolor{keywordflow}{throw} \mbox{\hyperlink{classArcade_1_1LoaderException}{LoaderException}}(dlerror());}
+\DoxyCodeLine{39                     builder = \textcolor{keyword}{reinterpret\_cast<}LibInterface *(*)()\textcolor{keyword}{>}(dlsym(\_handle, \textcolor{stringliteral}{"{}DisplayEntryPoint"{}}));}
+\DoxyCodeLine{40                     \textcolor{keywordflow}{if} (!builder)}
+\DoxyCodeLine{41                         \textcolor{keywordflow}{throw} \mbox{\hyperlink{classArcade_1_1LoaderException}{LoaderException}}(dlerror());}
+\DoxyCodeLine{42                     \textcolor{keywordflow}{return} std::shared\_ptr<LibInterface>(builder());}
+\DoxyCodeLine{43                 \}}
+\DoxyCodeLine{44 }
+\DoxyCodeLine{45                 std::shared\_ptr<LibInterface> loadGameLib(\textcolor{keyword}{const} std::string \&libPath)}
+\DoxyCodeLine{46                 \{}
+\DoxyCodeLine{47                     \_handle = dlopen(libPath.c\_str(), RTLD\_LAZY);}
+\DoxyCodeLine{48                     LibInterface *(*builder)() = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{49                     \textcolor{keywordflow}{if} (!\_handle)}
+\DoxyCodeLine{50                         \textcolor{keywordflow}{throw} \mbox{\hyperlink{classArcade_1_1LoaderException}{LoaderException}}(dlerror());}
+\DoxyCodeLine{51                     builder = \textcolor{keyword}{reinterpret\_cast<}LibInterface *(*)()\textcolor{keyword}{>}(dlsym(\_handle, \textcolor{stringliteral}{"{}GameEntryPoint"{}}));}
+\DoxyCodeLine{52                     \textcolor{keywordflow}{if} (!builder)}
+\DoxyCodeLine{53                         \textcolor{keywordflow}{throw} \mbox{\hyperlink{classArcade_1_1LoaderException}{LoaderException}}(dlerror());}
+\DoxyCodeLine{54                     \textcolor{keywordflow}{return} std::shared\_ptr<LibInterface>(builder());}
+\DoxyCodeLine{55                 \}}
+\DoxyCodeLine{56 }
+\DoxyCodeLine{57                 \textcolor{keywordtype}{void} closeLib()}
+\DoxyCodeLine{58                 \{}
+\DoxyCodeLine{59                     \textcolor{keywordflow}{if} (dlclose(\_handle) != 0)}
+\DoxyCodeLine{60                         \textcolor{keywordflow}{throw} LoaderException(dlerror());}
+\DoxyCodeLine{61                 \}}
+\DoxyCodeLine{62 }
+\DoxyCodeLine{63                 \textcolor{keywordtype}{bool} isLibOpen()\textcolor{keyword}{ const}}
+\DoxyCodeLine{64 \textcolor{keyword}{                }\{}
+\DoxyCodeLine{65                     \textcolor{keywordflow}{return} \_handle != \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{66                 \}}
+\DoxyCodeLine{67 }
+\DoxyCodeLine{68                 \textcolor{keyword}{private}:}
+\DoxyCodeLine{69                     \textcolor{keywordtype}{void} *\_handle;}
+\DoxyCodeLine{70         \};}
+\DoxyCodeLine{71 \};}
+
+\end{DoxyCode}
