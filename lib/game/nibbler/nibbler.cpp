@@ -208,9 +208,10 @@ void Arcade::NibblerGame::move()
 
 void Arcade::NibblerGame::check_collisions(int x, int y)
 {
-    if (_int_map[y][x] == WALL || _int_map[y][x] > EMPTY) {
+    if (_int_map[y][x] > EMPTY) {
         _isAlive = false;
     }
+    
 }
 
 bool Arcade::NibblerGame::isEatingFood(int x, int y)
