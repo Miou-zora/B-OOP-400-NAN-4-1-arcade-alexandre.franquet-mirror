@@ -83,8 +83,8 @@ void Arcade::SfmlLib::drawObjets(std::shared_ptr<Arcade::IObject> object) {
     if (!isTextured) {
         _sprites[fp].setColor(arcadeColorToSfColor(object->getColor()));
     }
-    _sprites[fp].setPosition(object->getPosition().first, object->getPosition().second);
-    _sprites[fp].setScale(object->getSize().first, object->getSize().second);
+    _sprites[fp].setPosition(object->getPosition().first * 30, object->getPosition().second * 30);
+    _sprites[fp].setScale(object->getSize().first * 30, object->getSize().second * 30);
     _window.draw(_sprites[fp]);
 }
 
@@ -106,7 +106,7 @@ void Arcade::SfmlLib::drawText(std::shared_ptr<Arcade::Text> text) {
     _texts[text->getText()].setString(text->getText());
     _texts[text->getText()].setCharacterSize(20);
     _texts[text->getText()].setFillColor(arcadeColorToSfColor(text->getColor()));
-    _texts[text->getText()].setPosition(text->getPosition().first, text->getPosition().second);
+    _texts[text->getText()].setPosition(text->getPosition().first * 30, text->getPosition().second * 30);
     _window.draw(_texts[text->getText()]);
 }
 

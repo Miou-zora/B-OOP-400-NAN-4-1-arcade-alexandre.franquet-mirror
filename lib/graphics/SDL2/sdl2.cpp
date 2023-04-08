@@ -45,7 +45,7 @@ void Arcade::SdlDisplayModule::createWindow(void)
     if (_renderer == nullptr)
         std::cerr << "Arcade::SdlDisplayModule::createWindow: " << SDL_GetError() << ".\n" << std::endl;
     SDL_RenderPresent(_renderer);
-    _font = TTF_OpenFont("lib/graphics/arial.ttf", 24);
+    _font = TTF_OpenFont("lib/graphics/arial.ttf", 100);
 }
 
 void Arcade::SdlDisplayModule::closeWindow(void)
