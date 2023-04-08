@@ -68,6 +68,7 @@ namespace Arcade {
             bool moveFreeDir(int x, int y);
             bool checkOldDirIsPossible();
 
+
         private:
             std::vector<std::shared_ptr<Arcade::AObject>> _mapObjects;
             std::vector<std::shared_ptr<Arcade::AObject>> _snakeObjects;
@@ -77,6 +78,7 @@ namespace Arcade {
             std::vector<std::shared_ptr<Arcade::AObject>> _foodObjects;
             std::shared_ptr<Arcade::Text> _scoreText;
             std::pair<int, int> _headPos;
+
             char _food;
             bool _isAlive;
             int _score;
