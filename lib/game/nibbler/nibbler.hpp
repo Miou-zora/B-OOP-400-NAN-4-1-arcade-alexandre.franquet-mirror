@@ -82,7 +82,6 @@ namespace Arcade {
             char _food;
             bool _isAlive;
             int _score;
-            int _highScore;
             int _size_snake;
             bool _isCollWall;
             int _direction;
