@@ -333,7 +333,7 @@ int Arcade::NibblerGame::checkWinGame()
 {
     for (size_t y = 0; y < _int_map.size(); y++) {
         for (size_t x = 0; x < _int_map[y].size(); x++) {
-            if (_int_map[y][x] == EMPTY || _int_map[y][x] == FOOD) {
+            if (_int_map[y][x] == FOOD) {
                 return(0);
             }
         }
