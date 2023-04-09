@@ -193,30 +193,14 @@ void Arcade::SdlDisplayModule::drawText(std::string str, Arcade::Colors color, s
     size_t font_size = sizeof(lib_graphics_arial_ttf);
     SDL_RWops* font_rw = SDL_RWFromConstMem(font_buffer, font_size);
     TTF_Font* font = TTF_OpenFontRW(font_rw, 1, size);
-
-    if (font == nullptr) {
-        std::cerr << "Arcade::SdlDisplayModule::drawText:" << std::endl;
-        return;
-    }
     SDL_Color sdlColor = arcadeColorToSfColor(color);
-    SDL_Surface *surface = TTF_RenderText_Solid(font, str.c_str(), sdlColor);
-    if (surface == nullptr) {
-        std::cerr << "Arcade::SdlDisplayModule::drawText: " << SDL_GetError() << ".\n" << std::endl;
-        return;
-    }
-    SDL_Texture *texture = SDL_CreateTextureFromSurface(_renderer, surface);
-    if (texture == nullptr) {
-        std::cerr << "Arcade::SdlDisplayModule::drawText: " << SDL_GetError() << ".\n" << std::endl;
-        return;
-    }
-    SDL_Rect rect;
-    rect.x = pos.first;
-    rect.y = pos.second;
-    rect.w = size;
-    rect.h = size;
-    SDL_RenderCopy(_renderer, texture, NULL, &rect);
+    SDL_Surface* surface = TTF_RenderText_Blended(font, str.c_str(), sdlColor);
+    SDL_Texture* texture = SDL_CreateTextureFromSurface(_renderer, surface);
+    SDL_Rect dst_rect = {static_cast<int>(pos.first), static_cast<int>(pos.second), surface->w, surface->h };
+    SDL_RenderCopy(_renderer, texture, nullptr, &dst_rect);
     SDL_FreeSurface(surface);
     SDL_DestroyTexture(texture);
+    TTF_CloseFont(font);
 }
 
 bool Arcade::SdlDisplayModule::isKeyPressed(Arcade::Inputs input)
