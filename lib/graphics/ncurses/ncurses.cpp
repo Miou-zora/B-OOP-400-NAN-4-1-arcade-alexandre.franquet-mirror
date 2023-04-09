@@ -91,7 +91,7 @@ void Arcade::NcursesDisplayModule::drawObjets(std::shared_ptr<Arcade::IObject> o
 {
     if (object->getShape() == Arcade::Shapes::SQUARE) {
         attron(COLOR_PAIR(object->getColor()));
-        mvprintw(object->getPosition().second / 30, object->getPosition().first / 30, "[]");
+        mvprintw(object->getPosition().second / 30, object->getPosition().first / 30, "#");
         attroff(COLOR_PAIR(object->getColor()));
     } else if (object->getShape() == Arcade::Shapes::CIRCLE) {
         attron(COLOR_PAIR(object->getColor()));
@@ -127,7 +127,7 @@ void Arcade::NcursesDisplayModule::drawText(std::shared_ptr<Arcade::Text> text)
 void Arcade::NcursesDisplayModule::drawText(std::string str, Arcade::Colors color, ssize_t size, std::pair<ssize_t, ssize_t> pos)
 {
     attron(COLOR_PAIR(color));
-    mvprintw(pos.second / 15, pos.first / 15, str.c_str());
+    mvprintw(pos.second / 30, pos.first / 30, str.c_str());
     attroff(COLOR_PAIR(color));
     (void)size;
 }

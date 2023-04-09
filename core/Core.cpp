@@ -95,7 +95,7 @@ void Arcade::Core::runScene(Arcade::Scenes scene)
             renderMainMenu(*_lib.second.get());
             break;
         case Arcade::Scenes::IN_GAME:
-            _game.second.get()->update(*_lib.second.get(), _deltaTime);
+            _game.second.get()->update(*_lib.second.get(), 0.01);
             _game.second.get()->render(*_lib.second.get());
             break;
         case Arcade::Scenes::LEAVE:
@@ -118,24 +118,24 @@ void Arcade::Core::updateMainMenu(Arcade::ILib &lib)
 
 void Arcade::Core::renderMainMenu(Arcade::ILib &lib)
 {
-    lib.drawText("Arcade press:", Arcade::Colors::BLUE, 2, {1, 1});
-    lib.drawText("\"S\" : quit", Arcade::Colors::BLUE, 2, {1, 3});
-    lib.drawText("\"D\" : game", Arcade::Colors::BLUE, 2, {1, 5});
-    lib.drawText("\"B\" : lib", Arcade::Colors::BLUE, 2, {1, 7});
-    lib.drawText("\"I\" : play", Arcade::Colors::BLUE, 2, {1, 11});
-    lib.drawText("Games", Arcade::Colors::MAGENTA, 2, {20, 1});
+    lib.drawText("Arcade press:", Arcade::Colors::BLUE, 40, {(1 * 1920) / 100, (1 * 1080) / 100});
+    lib.drawText("\"S\" : quit", Arcade::Colors::BLUE, 20, {(1 * 1920) / 100, (15 * 1080) / 100});
+    lib.drawText("\"D\" : game", Arcade::Colors::BLUE, 20, {(1 * 1920) / 100, (25 * 1080) / 100});
+    lib.drawText("\"B\" : lib", Arcade::Colors::BLUE, 20, {(1 * 1920) / 100, (35 * 1080) / 100});
+    lib.drawText("\"I\" : play", Arcade::Colors::BLUE, 20, {(1 * 1920) / 100, (45 * 1080) / 100});
+    lib.drawText("Games", Arcade::Colors::MAGENTA, 40, {(20 * 1920) / 100, (1 * 1080) / 100});
     for (size_t i = 0; i < _gamesPath.size(); i++) {
         if (_gamesPath[i] == _gamesPath[_currentGame])
-            lib.drawText(_gamesPath[i], Arcade::Colors::RED, 2, {20, 3 + i*2});
+            lib.drawText(_gamesPath[i], Arcade::Colors::RED, 20, {(20 *1920) / 100, (10 * 1080 / 100) + (i*10 * 1080 / 100)});
         else
-            lib.drawText(_gamesPath[i], Arcade::Colors::WHITE, 2, {20, 3 + i*2});
+            lib.drawText(_gamesPath[i], Arcade::Colors::WHITE, 20, {(20 * 1920) / 100, 10 * 1080 / 100 + (i*10 * 1080 / 100)});
     }
-    lib.drawText("Libs", Arcade::Colors::MAGENTA, 2, {20, 6 + _gamesPath.size()});
+    lib.drawText("Libs", Arcade::Colors::MAGENTA, 40, {(20 * 1920) / 100, (6 * 1080 / 100) + (_gamesPath.size() * 1080 / 10)});
     for (size_t i = 0; i < _libsPath.size(); i++) {
         if (_libsPath[i] == _libsPath[_currentLib])
-            lib.drawText(_libsPath[i], Arcade::Colors::RED, 2, {20, 10 + _gamesPath.size() + i*2});
+            lib.drawText(_libsPath[i], Arcade::Colors::RED, 20, {(20 * 1920) / 100, (35 * 1080) / 100  + (_gamesPath.size() * 1080 / 100) + (i*7 * 1080 / 100)});
         else
-            lib.drawText(_libsPath[i], Arcade::Colors::WHITE, 2, {20,10 + _gamesPath.size() + i*2});
+            lib.drawText(_libsPath[i], Arcade::Colors::WHITE, 20, {(20 * 1920) / 100, (35 * 1080) / 100 + (_gamesPath.size() * 1080 / 100) + (i*7 * 1080 / 100)});
     }
 }
 
@@ -209,7 +209,6 @@ bool Arcade::Core::loadGame(const std::string &GameName)
         if (_game.first.isLibOpen())
             _game.first.closeLib();
         _game.second = _game.first.loadGameLib(GameName);
-        _game.second.get()->load();
         _currentScene = Arcade::Scenes::IN_GAME;
     } catch (const LoaderException &e) {
         std::cerr << e.what() << std::endl;
