@@ -66,7 +66,7 @@ namespace Arcade {
             std::pair<int, int> updateHeadPos();
             bool checkIfAutomaticMovePossible(int x, int y);
             bool moveFreeDir(int x, int y);
-            bool checkOldDirIsPossible();
+            void destroyFood(int x, int y);
 
 
         private:
