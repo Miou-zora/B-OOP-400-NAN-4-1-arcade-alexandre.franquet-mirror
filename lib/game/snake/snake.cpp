@@ -452,10 +452,6 @@ void Arcade::SnakeGame::displayPause(Arcade::ILib &lib)
 
 void Arcade::SnakeGame::render(Arcade::ILib &lib)
 {
-    if (!_isAlive) {
-        lib.drawText(std::string("Game Over"), BLACK, 3, {3, 5});
-        lib.drawText(std::string("Press R to restart"), BLACK, 2, {1, 10});
-    }
     if (_state == END) {
         lib.drawText(std::string("You Win "), WHITE, 3, {3, 5});
         lib.drawText(std::string("Press Enter to start"), WHITE, 2, {1, 10});
@@ -479,5 +475,9 @@ void Arcade::SnakeGame::render(Arcade::ILib &lib)
 
     if (_state == PAUSE) {
         displayPause(lib);
+    }
+    if (!_isAlive) {
+        lib.drawText(std::string("Game Over"), BLACK, 3, {3, 5});
+        lib.drawText(std::string("Press R to restart"), BLACK, 2, {1, 10});
     }
 }
