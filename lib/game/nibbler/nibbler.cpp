@@ -30,6 +30,9 @@ void Arcade::NibblerGame::fill_tab_int()
             else if (_map[y][x] == '#') {
                 _int_map[y][x] = WALL;
             }
+            if (_map[y][x] == 'f') {
+                _int_map[y][x] = FOOD;
+            }
         }
     }
 }
@@ -62,21 +65,18 @@ Arcade::NibblerGame::NibblerGame(void)
 
 void Arcade::NibblerGame::generateFood()
 {
-    int x = rand() % 19;
-    int y = rand() % 19;
-
-    if (_int_map[y][x] == EMPTY) {
-        _int_map[y][x] = FOOD;
-        std::shared_ptr<Arcade::AObject> food = std::make_shared<Arcade::AObject>();
-        food->setShape(Arcade::Shapes::SQUARE);
-        food->setPosition({x, y});
-        food->setSize({1, 1});
-        food->setColor(Arcade::Colors::WHITE);
-        food->setFilePath("");
-        _foodObjects.push_back(food);
-    }
-    else {
-        generateFood();
+    for (size_t y = 0; y < _map.size(); y++) {
+        for (size_t x = 0; x < _map[y].size(); x++) {
+            if (_map[y][x] == 'f') {
+                std::shared_ptr<Arcade::AObject> food = std::make_shared<Arcade::AObject>();
+                food->setShape(Arcade::Shapes::SQUARE);
+                food->setPosition({x, y});
+                food->setSize({1, 1});
+                food->setColor(Arcade::Colors::WHITE);
+                food->setFilePath("");
+                _foodObjects.push_back(food);
+            }
+        }
     }
 }
 
@@ -164,6 +164,16 @@ bool Arcade::NibblerGame::checkIfAutomaticMovePossible(int x, int y)
     else
         return (moveFreeDir(x, y));
 }
+
+void Arcade::NibblerGame::destroyFood(int x, int y)
+{
+    for (size_t i = 0; i < _foodObjects.size(); i++) {
+        if (_foodObjects[i]->getPosition().first == x && _foodObjects[i]->getPosition().second == y) {
+            _foodObjects.erase(_foodObjects.begin() + i);
+        }
+    }
+}
+
 int Arcade::NibblerGame::moveFunction(int x, int y, int dir)
 {
     for (size_t i = 0; i < _map.size(); i++) {
@@ -175,8 +185,7 @@ int Arcade::NibblerGame::moveFunction(int x, int y, int dir)
                 if (_isCollWall)
                     return (0);
                 if (isEatingFood(j+x, i+y)) {
-                    _foodObjects.clear();
-                    generateFood();
+                    destroyFood(j+x, i+y);
                     _score += 1;
                     if (_score > _highScore)
                         _highScore = _score;
@@ -470,24 +479,24 @@ void Arcade::NibblerGame::load(void)
 {
     _map = {
         "####################",
-        "#                  #",
-        "#  ###         ### #",
-        "#        ###       #",
+        "#f                f#",
+        "#  ###    f    ### #",
+        "#   f    ###    f  #",
         "#        # #       #",
         "#        ###       #",
         "#  ###         ### #",
-        "#  #             # #",
+        "#  #f           f# #",
         "#  #             # #",
         "#  #    #####    # #",
-        "#  #    #   #    # #",
-        "#       #   #      #",
-        "#   #           #  #",
+        "#  #    #f f#    # #",
+        "#  f    #   #    f #",
+        "#   #f         f#  #",
         "#                  #",
         "#    ###     ###   #",
-        "#      #     #     #",
+        "#     f#  f  #f    #",
         "#      #     #     #",
         "#                  #",
-        "#  -ssS            #",
+        "#f -ssS           f#",
         "####################"
     };
     _snake = {"-ssS"};
@@ -526,7 +535,8 @@ void Arcade::NibblerGame::displayPause(Arcade::ILib &lib)
     for (auto &object : _mapObjects) {
             lib.drawObjets(object);
         }
-    lib.drawObjets(*_foodObjects.begin());
+    for (auto &food : _foodObjects)
+        lib.drawObjets(food);
     for (auto &object : _snakeObjects)
         lib.drawObjets(object);
     lib.drawText(std::string("Score : " + std::to_string(_score)), WHITE, 1, {20,0});
@@ -550,7 +560,8 @@ void Arcade::NibblerGame::render(Arcade::ILib &lib)
         for (auto &object : _mapObjects) {
             lib.drawObjets(object);
         }
-        lib.drawObjets(*_foodObjects.begin());
+        for (auto &food : _foodObjects)
+            lib.drawObjets(food);
         for (auto &object : _snakeObjects)
             lib.drawObjets(object);
         lib.drawText(std::string("Score : " + std::to_string(_score)), WHITE, 1, {20,0});
