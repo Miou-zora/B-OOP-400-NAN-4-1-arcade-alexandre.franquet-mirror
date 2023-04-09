@@ -60,6 +60,7 @@ Arcade::NibblerGame::NibblerGame(void)
     _eating = false;
     _isCollWall = false;
     _state = MENU;
+    load();
 
 }
 
@@ -70,8 +71,8 @@ void Arcade::NibblerGame::generateFood()
             if (_map[y][x] == 'f') {
                 std::shared_ptr<Arcade::AObject> food = std::make_shared<Arcade::AObject>();
                 food->setShape(Arcade::Shapes::SQUARE);
-                food->setPosition({x, y});
-                food->setSize({1, 1});
+                food->setPosition({30*x, 30*y});
+                food->setSize({1*20, 1*20});
                 food->setColor(Arcade::Colors::WHITE);
                 food->setFilePath("");
                 _foodObjects.push_back(food);
@@ -168,7 +169,7 @@ bool Arcade::NibblerGame::checkIfAutomaticMovePossible(int x, int y)
 void Arcade::NibblerGame::destroyFood(int x, int y)
 {
     for (size_t i = 0; i < _foodObjects.size(); i++) {
-        if (_foodObjects[i]->getPosition().first == x && _foodObjects[i]->getPosition().second == y) {
+        if (_foodObjects[i]->getPosition().first/30 == x && _foodObjects[i]->getPosition().second/30 == y) {
             _foodObjects.erase(_foodObjects.begin() + i);
         }
     }
@@ -344,7 +345,7 @@ int Arcade::NibblerGame::checkWinGame()
 
 void Arcade::NibblerGame::update(Arcade::ILib &lib, float milliseconds)
 {
-    _second += milliseconds/1000;
+    _second += milliseconds;
 
     changeKeyDirection(lib);
     checkWinGame();
@@ -411,16 +412,16 @@ void Arcade::NibblerGame::generateMap(void)
             if (_map[y][x] == '#') {
                 std::shared_ptr<Arcade::AObject> wall = std::make_shared<Arcade::AObject>();
                 wall->setShape(Arcade::Shapes::SQUARE);
-                wall->setPosition({x, y});
-                wall->setSize({1, 1});
+                wall->setPosition({30*x, 30*y});
+                wall->setSize({1*20, 1*20});
                 wall->setColor(Arcade::Colors::RED);
                 wall->setFilePath("");
                 _mapObjects.push_back(wall);
             } else {
                 std::shared_ptr<Arcade::AObject> empty = std::make_shared<Arcade::AObject>();
                 empty->setShape(Arcade::Shapes::SQUARE);
-                empty->setPosition({x, y});
-                empty->setSize({1, 1});
+                empty->setPosition({30*x, 30*y});
+                empty->setSize({1*20, 1*20});
                 empty->setColor(Arcade::Colors::GREEN);
                 empty->setFilePath("");
                 _mapObjects.push_back(empty);
@@ -436,8 +437,8 @@ void Arcade::NibblerGame::generateSnake(void)
             if (_map[y][x] == 's' || _map[y][x] == '-') {
                 std::shared_ptr<Arcade::AObject> snake = std::make_shared<Arcade::AObject>();
                 snake->setShape(Arcade::Shapes::SQUARE);
-                snake->setPosition({x, y});
-                snake->setSize({1, 1});
+                snake->setPosition({30*x, 30*y});
+                snake->setSize({1*20, 1*20});
                 snake->setColor(Arcade::Colors::BLUE);
                 snake->setFilePath("");
                 _snakeObjects.push_back(snake);
@@ -445,8 +446,8 @@ void Arcade::NibblerGame::generateSnake(void)
             if (_map[y][x] == 'S') {
                 std::shared_ptr<Arcade::AObject> snake = std::make_shared<Arcade::AObject>();
                 snake->setShape(Arcade::Shapes::SQUARE);
-                snake->setPosition({x, y});
-                snake->setSize({1, 1});
+                snake->setPosition({30*x, 30*y});
+                snake->setSize({1*20, 1*20});
                 snake->setColor(Arcade::Colors::MAGENTA);
                 snake->setFilePath("");
                 _snakeObjects.push_back(snake);
@@ -539,20 +540,20 @@ void Arcade::NibblerGame::displayPause(Arcade::ILib &lib)
         lib.drawObjets(food);
     for (auto &object : _snakeObjects)
         lib.drawObjets(object);
-    lib.drawText(std::string("Score : " + std::to_string(_score)), WHITE, 1, {20,0});
-    lib.drawText(std::string("Pause"), WHITE, 3, {5, 5});
-    lib.drawText(std::string("Press Enter to continue"), WHITE, 2, {1, 10});
+    lib.drawText(std::string("Score : " + std::to_string(_score)), WHITE, 1*20, {20*30,0*30});
+    lib.drawText(std::string("Pause"), WHITE, 3*20, {5*30, 5*30});
+    lib.drawText(std::string("Press Enter to continue"), WHITE, 2*20, {1*30, 10*30});
 }
 
 void Arcade::NibblerGame::render(Arcade::ILib &lib)
 {
     if (!_isAlive) {
-        lib.drawText(std::string("Game Over"), WHITE, 3, {3, 5});
-        lib.drawText(std::string("Press R to restart"), WHITE, 2, {1, 10});
+        lib.drawText(std::string("Game Over"), WHITE, 3*20, {3*30, 5*30});
+        lib.drawText(std::string("Press R to restart"), WHITE, 2*20, {1*30, 10*30});
     }
     if (_state == END) {
-        lib.drawText(std::string("You Win "), WHITE, 3, {3, 5});
-        lib.drawText(std::string("Press Enter to start"), WHITE, 2, {1, 10});
+        lib.drawText(std::string("You Win "), WHITE, 3*20, {3*30, 5*30});
+        lib.drawText(std::string("Press Enter to start"), WHITE, 2*20, {1*30, 10*30});
     }
 
     if (_state == GAME && _isAlive) {
@@ -564,13 +565,13 @@ void Arcade::NibblerGame::render(Arcade::ILib &lib)
             lib.drawObjets(food);
         for (auto &object : _snakeObjects)
             lib.drawObjets(object);
-        lib.drawText(std::string("Score : " + std::to_string(_score)), WHITE, 1, {20,0});
-        lib.drawText(std::string("Highscore : " + std::to_string(_highScore)), WHITE, 1, {20,1});
+        lib.drawText(std::string("Score : " + std::to_string(_score)), WHITE, 1*20, {20*30,0*30});
+        lib.drawText(std::string("Highscore : " + std::to_string(_highScore)), WHITE, 1*20, {20*30,1*30});
     }
 
     if (_state == MENU && _isAlive) {
-        lib.drawText(std::string("Nibbler"), WHITE, 3, {5, 5});
-        lib.drawText(std::string("Press Enter to start"), WHITE, 2, {1, 10});
+        lib.drawText(std::string("Nibbler"), WHITE, 3*20, {5*30, 5*30});
+        lib.drawText(std::string("Press Enter to start"), WHITE, 2*20, {1*30, 10*30});
     }
 
     if (_state == PAUSE && _isAlive) {

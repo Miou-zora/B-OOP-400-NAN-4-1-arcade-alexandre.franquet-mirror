@@ -45,7 +45,7 @@ void Arcade::SdlDisplayModule::createWindow(void)
     if (_renderer == nullptr)
         std::cerr << "Arcade::SdlDisplayModule::createWindow: " << SDL_GetError() << ".\n" << std::endl;
     SDL_RenderPresent(_renderer);
-    _font = TTF_OpenFont("lib/graphics/arial.ttf", 100);
+    _font = TTF_OpenFont("lib/graphics/arial.ttf", 50);
 }
 
 void Arcade::SdlDisplayModule::closeWindow(void)
@@ -102,10 +102,10 @@ void Arcade::SdlDisplayModule::drawObjets(std::shared_ptr<Arcade::IObject> objec
 {
     (void)(object);
     SDL_Rect rect;
-    rect.x = object->getPosition().first * 30;
-    rect.y = object->getPosition().second * 30;
-    rect.w = object->getSize().first * 30;
-    rect.h = object->getSize().second * 30;
+    rect.x = object->getPosition().first;
+    rect.y = object->getPosition().second;
+    rect.w = object->getSize().first;
+    rect.h = object->getSize().second;
     SDL_Color color = arcadeColorToSfColor(object->getColor());
     SDL_SetRenderDrawColor(_renderer, color.r, color.g, color.b, color.a);
     SDL_RenderFillRect(_renderer, &rect);
@@ -141,10 +141,10 @@ void Arcade::SdlDisplayModule::drawShapes(Arcade::Shapes shape, Arcade::Colors c
 {
     (void)(shape);
     SDL_Rect rect;
-    rect.x = pos.first * 30;
-    rect.y = pos.second * 30;
-    rect.w = size.first * 30;
-    rect.h = size.second * 30;
+    rect.x = pos.first;
+    rect.y = pos.second;
+    rect.w = size.first;
+    rect.h = size.second;
     SDL_Color color = arcadeColorToSfColor(colors);
     SDL_SetRenderDrawColor(_renderer, color.r, color.g, color.b, color.a);
     SDL_RenderFillRect(_renderer, &rect);
@@ -168,8 +168,8 @@ void Arcade::SdlDisplayModule::drawText(std::shared_ptr<Arcade::Text> text)
         return;
     }
     SDL_Rect rect;
-    rect.x = text->getPosition().first * 30;
-    rect.y = text->getPosition().second * 30;
+    rect.x = text->getPosition().first;
+    rect.y = text->getPosition().second;
     rect.w = 60;
     rect.h = 20;
     SDL_RenderCopy(_renderer, texture, NULL, &rect);
@@ -195,10 +195,10 @@ void Arcade::SdlDisplayModule::drawText(std::string str, Arcade::Colors color, s
         return;
     }
     SDL_Rect rect;
-    rect.x = pos.first * 30;
-    rect.y = pos.second * 30;
-    rect.w = size * 60;
-    rect.h = size * 20;
+    rect.x = pos.first;
+    rect.y = pos.second;
+    rect.w = size;
+    rect.h = size;
     SDL_RenderCopy(_renderer, texture, NULL, &rect);
     SDL_FreeSurface(surface);
     SDL_DestroyTexture(texture);
