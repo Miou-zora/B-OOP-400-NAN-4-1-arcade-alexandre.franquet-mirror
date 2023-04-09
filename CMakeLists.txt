@@ -10,6 +10,7 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/build)
 set(INCLUDE_SRC core/src/Display
                 core/src/Game/
                 core/src/Game/snake
+                core/src/Game/nibbler
                 core/src/Input
                 core/src/Object
                 core/src/Sounds
