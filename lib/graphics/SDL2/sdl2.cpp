@@ -7,6 +7,7 @@
 
 #include "sdl2.hpp"
 #include <iostream>
+#include "font_data.h"
 
 extern "C"
 {
@@ -45,14 +46,18 @@ void Arcade::SdlDisplayModule::createWindow(void)
     if (_renderer == nullptr)
         std::cerr << "Arcade::SdlDisplayModule::createWindow: " << SDL_GetError() << ".\n" << std::endl;
     SDL_RenderPresent(_renderer);
-    _font = TTF_OpenFont("lib/graphics/arial.ttf", 50);
 }
 
 void Arcade::SdlDisplayModule::closeWindow(void)
 {
-    if (_font != nullptr)
-        TTF_CloseFont(_font);
-    _font = nullptr;
+    const unsigned char* font_buffer = lib_graphics_arial_ttf;
+    size_t font_size = sizeof(lib_graphics_arial_ttf);
+    SDL_RWops* font_rw = SDL_RWFromConstMem(font_buffer, font_size);
+    TTF_Font* font = TTF_OpenFontRW(font_rw, 1, font_size);
+
+    if (font != nullptr)
+        TTF_CloseFont(font);
+    font = nullptr;
     if (_renderer != nullptr)
         SDL_DestroyRenderer(_renderer);
     _renderer = nullptr;
@@ -152,12 +157,17 @@ void Arcade::SdlDisplayModule::drawShapes(Arcade::Shapes shape, Arcade::Colors c
 
 void Arcade::SdlDisplayModule::drawText(std::shared_ptr<Arcade::Text> text)
 {
-    if (_font == nullptr) {
+    const unsigned char* font_buffer = lib_graphics_arial_ttf;
+    size_t font_size = sizeof(lib_graphics_arial_ttf);
+    SDL_RWops* font_rw = SDL_RWFromConstMem(font_buffer, font_size);
+    TTF_Font* font = TTF_OpenFontRW(font_rw, 1, font_size);
+
+    if (font == nullptr) {
         std::cerr << "Arcade::SdlDisplayModule::drawText:" << std::endl;
         return;
     }
     SDL_Color sdlColor = arcadeColorToSfColor(text->getColor());
-    SDL_Surface *surface = TTF_RenderText_Solid(_font, text->getText().c_str(), sdlColor);
+    SDL_Surface *surface = TTF_RenderText_Solid(font, text->getText().c_str(), sdlColor);
     if (surface == nullptr) {
         std::cerr << "Arcade::SdlDisplayModule::drawText: " << SDL_GetError() << ".\n" << std::endl;
         return;
@@ -179,12 +189,17 @@ void Arcade::SdlDisplayModule::drawText(std::shared_ptr<Arcade::Text> text)
 
 void Arcade::SdlDisplayModule::drawText(std::string str, Arcade::Colors color, ssize_t size, std::pair<ssize_t, ssize_t> pos)
 {
-    if (_font == nullptr) {
+    const unsigned char* font_buffer = lib_graphics_arial_ttf;
+    size_t font_size = sizeof(lib_graphics_arial_ttf);
+    SDL_RWops* font_rw = SDL_RWFromConstMem(font_buffer, font_size);
+    TTF_Font* font = TTF_OpenFontRW(font_rw, 1, size);
+
+    if (font == nullptr) {
         std::cerr << "Arcade::SdlDisplayModule::drawText:" << std::endl;
         return;
     }
     SDL_Color sdlColor = arcadeColorToSfColor(color);
-    SDL_Surface *surface = TTF_RenderText_Solid(_font, str.c_str(), sdlColor);
+    SDL_Surface *surface = TTF_RenderText_Solid(font, str.c_str(), sdlColor);
     if (surface == nullptr) {
         std::cerr << "Arcade::SdlDisplayModule::drawText: " << SDL_GetError() << ".\n" << std::endl;
         return;

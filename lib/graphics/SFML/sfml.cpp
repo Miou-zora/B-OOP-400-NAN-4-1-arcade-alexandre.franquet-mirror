@@ -7,6 +7,7 @@
 
 #include "sfml.hpp"
 #include <iostream>
+#include "font_data.h"
 
 extern "C"
 {
@@ -107,9 +108,12 @@ void Arcade::SfmlLib::drawText(std::shared_ptr<Arcade::Text> text) {
 }
 
 void Arcade::SfmlLib::drawText(std::string str, Arcade::Colors color, ssize_t size, std::pair<ssize_t, ssize_t> pos) {
-    if (_fonts.find("arial.ttf") == _fonts.end())
-        _fonts["arial.ttf"].loadFromFile("./lib/graphics/arial.ttf");
-    _texts[str].setFont(_fonts["arial.ttf"]);
+    const unsigned char* font_buffer = lib_graphics_arial_ttf;
+    size_t font_size = sizeof(lib_graphics_arial_ttf);
+    sf::Font font;
+    if (!font.loadFromMemory(font_buffer, font_size))
+        std::cout << "Error loading font" << std::endl;
+    _texts[str].setFont(font);
     _texts[str].setString(str);
     _texts[str].setCharacterSize(size);
     _texts[str].setFillColor(arcadeColorToSfColor(color));
