@@ -55,6 +55,7 @@ Arcade::SnakeGame::SnakeGame(void)
     _timeToUpdate = 0.1;
     _eating = false;
     _state = MENU;
+    load();
 
 }
 
@@ -67,8 +68,8 @@ void Arcade::SnakeGame::generateFood()
         _int_map[y][x] = FOOD;
         std::shared_ptr<Arcade::AObject> food = std::make_shared<Arcade::AObject>();
         food->setShape(Arcade::Shapes::SQUARE);
-        food->setPosition({x, y});
-        food->setSize({1, 1});
+        food->setPosition({30*x, 30*y});
+        food->setSize({1*20, 1*20});
         food->setColor(Arcade::Colors::WHITE);
         food->setFilePath("");
         _foodObjects.push_back(food);
@@ -252,7 +253,7 @@ int Arcade::SnakeGame::checkWinGame()
 
 void Arcade::SnakeGame::update(Arcade::ILib &lib, float milliseconds)
 {
-    _second += milliseconds/1000;
+    _second += milliseconds;
     changeKeyDirection(lib);
     checkWinGame();
 
@@ -318,16 +319,16 @@ void Arcade::SnakeGame::generateMap(void)
             if (_map[y][x] == '#') {
                 std::shared_ptr<Arcade::AObject> wall = std::make_shared<Arcade::AObject>();
                 wall->setShape(Arcade::Shapes::SQUARE);
-                wall->setPosition({x, y});
-                wall->setSize({1, 1});
+                wall->setPosition({30*x, 30*y});
+                wall->setSize({1*20, 1*20});
                 wall->setColor(Arcade::Colors::RED);
                 wall->setFilePath("");
                 _mapObjects.push_back(wall);
             } else {
                 std::shared_ptr<Arcade::AObject> empty = std::make_shared<Arcade::AObject>();
                 empty->setShape(Arcade::Shapes::SQUARE);
-                empty->setPosition({x, y});
-                empty->setSize({1, 1});
+                empty->setPosition({30*x, 30*y});
+                empty->setSize({1*20, 1*20});
                 empty->setColor(Arcade::Colors::GREEN);
                 empty->setFilePath("");
                 _mapObjects.push_back(empty);
@@ -343,8 +344,8 @@ void Arcade::SnakeGame::generateSnake(void)
             if (_map[y][x] == 's' || _map[y][x] == '-') {
                 std::shared_ptr<Arcade::AObject> snake = std::make_shared<Arcade::AObject>();
                 snake->setShape(Arcade::Shapes::SQUARE);
-                snake->setPosition({x, y});
-                snake->setSize({1, 1});
+                snake->setPosition({30*x, 30*y});
+                snake->setSize({1*20, 1*20});
                 snake->setColor(Arcade::Colors::BLUE);
                 snake->setFilePath("");
                 _snakeObjects.push_back(snake);
@@ -352,8 +353,8 @@ void Arcade::SnakeGame::generateSnake(void)
             if (_map[y][x] == 'S') {
                 std::shared_ptr<Arcade::AObject> snake = std::make_shared<Arcade::AObject>();
                 snake->setShape(Arcade::Shapes::SQUARE);
-                snake->setPosition({x, y});
-                snake->setSize({1, 1});
+                snake->setPosition({30*x, 30*y});
+                snake->setSize({1*20, 1*20});
                 snake->setColor(Arcade::Colors::MAGENTA);
                 snake->setFilePath("");
                 _snakeObjects.push_back(snake);
@@ -446,15 +447,15 @@ void Arcade::SnakeGame::displayPause(Arcade::ILib &lib)
     for (auto &object : _snakeObjects)
         lib.drawObjets(object);
     lib.drawText(std::string("Score : " + std::to_string(_score)), WHITE, 1, {20,0});
-    lib.drawText(std::string("Pause"), WHITE, 3, {5, 5});
-    lib.drawText(std::string("Press Enter to continue"), WHITE, 2, {1, 10});
+    lib.drawText(std::string("Pause"), WHITE, 3*20, {5*30, 5*30});
+    lib.drawText(std::string("Press Enter to continue"), WHITE, 2*20, {1*30, 10*30});
 }
 
 void Arcade::SnakeGame::render(Arcade::ILib &lib)
 {
     if (_state == END) {
-        lib.drawText(std::string("You Win "), WHITE, 3, {3, 5});
-        lib.drawText(std::string("Press Enter to start"), WHITE, 2, {1, 10});
+        lib.drawText(std::string("You Win "), WHITE, 3*20, {3*30, 5*30});
+        lib.drawText(std::string("Press Enter to start"), WHITE, 2*20, {1*30, 10*30});
     }
 
     if (_state == GAME) {
@@ -464,20 +465,20 @@ void Arcade::SnakeGame::render(Arcade::ILib &lib)
         lib.drawObjets(*_foodObjects.begin());
         for (auto &object : _snakeObjects)
             lib.drawObjets(object);
-        lib.drawText(std::string("Score : " + std::to_string(_score)), WHITE, 1, {20,0});
-        lib.drawText(std::string("Highscore : " + std::to_string(_highScore)), WHITE, 1, {20,1});
+        lib.drawText(std::string("Score : " + std::to_string(_score)), WHITE, 1*20, {20*30,0*30});
+        lib.drawText(std::string("Highscore : " + std::to_string(_highScore)), WHITE, 1*20, {20*30,1*30});
     }
 
     if (_state == MENU) {
-        lib.drawText(std::string("Snake"), WHITE, 3, {5, 5});
-        lib.drawText(std::string("Press Enter to start"), WHITE, 2, {1, 10});
+        lib.drawText(std::string("Snake"), YELLOW, 3*20, {5*30, 5*30});
+        lib.drawText(std::string("Press Enter to start"), YELLOW, 2*20, {1*30, 10*30});
     }
 
     if (_state == PAUSE) {
         displayPause(lib);
     }
     if (!_isAlive) {
-        lib.drawText(std::string("Game Over"), BLACK, 3, {3, 5});
-        lib.drawText(std::string("Press R to restart"), BLACK, 2, {1, 10});
+        lib.drawText(std::string("Game Over"), YELLOW, 3*20, {3*30, 5*30});
+        lib.drawText(std::string("Press R to restart"), YELLOW, 3*20, {1*30, 10*30});
     }
 }

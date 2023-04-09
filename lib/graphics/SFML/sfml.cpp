@@ -7,6 +7,7 @@
 
 #include "sfml.hpp"
 #include <iostream>
+#include "font_data.h"
 
 extern "C"
 {
@@ -83,16 +84,12 @@ void Arcade::SfmlLib::drawObjets(std::shared_ptr<Arcade::IObject> object) {
     if (!isTextured) {
         _sprites[fp].setColor(arcadeColorToSfColor(object->getColor()));
     }
-    _sprites[fp].setPosition(object->getPosition().first * 30, object->getPosition().second * 30);
-    _sprites[fp].setScale(object->getSize().first * 30, object->getSize().second * 30);
+    _sprites[fp].setPosition(object->getPosition().first, object->getPosition().second);
+    _sprites[fp].setScale(object->getSize().first, object->getSize().second);
     _window.draw(_sprites[fp]);
 }
 
 void Arcade::SfmlLib::drawShapes(Arcade::Shapes shape, Arcade::Colors color, std::pair<ssize_t, ssize_t> pos, std::pair<ssize_t, ssize_t> size) {
-    size.first *= 30;
-    size.second *= 30;
-    pos.first *=30;
-    pos.second *=30;
     std::unique_ptr<sf::Shape> sfShape = arcadeShapeToSfShape(shape, (size));
     sfShape->setFillColor(arcadeColorToSfColor(color));
     sfShape->setPosition(pos.first, pos.second);
@@ -104,20 +101,23 @@ void Arcade::SfmlLib::drawText(std::shared_ptr<Arcade::Text> text) {
         _fonts["arial.ttf"].loadFromFile("./lib/graphics/arial.ttf");
     _texts[text->getText()].setFont(_fonts["arial.ttf"]);
     _texts[text->getText()].setString(text->getText());
-    _texts[text->getText()].setCharacterSize(20);
+    _texts[text->getText()].setCharacterSize(30);
     _texts[text->getText()].setFillColor(arcadeColorToSfColor(text->getColor()));
-    _texts[text->getText()].setPosition(text->getPosition().first * 30, text->getPosition().second * 30);
+    _texts[text->getText()].setPosition(text->getPosition().first, text->getPosition().second);
     _window.draw(_texts[text->getText()]);
 }
 
 void Arcade::SfmlLib::drawText(std::string str, Arcade::Colors color, ssize_t size, std::pair<ssize_t, ssize_t> pos) {
-    if (_fonts.find("arial.ttf") == _fonts.end())
-        _fonts["arial.ttf"].loadFromFile("./lib/graphics/arial.ttf");
-    _texts[str].setFont(_fonts["arial.ttf"]);
+    const unsigned char* font_buffer = lib_graphics_arial_ttf;
+    size_t font_size = sizeof(lib_graphics_arial_ttf);
+    sf::Font font;
+    if (!font.loadFromMemory(font_buffer, font_size))
+        std::cout << "Error loading font" << std::endl;
+    _texts[str].setFont(font);
     _texts[str].setString(str);
-    _texts[str].setCharacterSize(30 * size);
+    _texts[str].setCharacterSize(size);
     _texts[str].setFillColor(arcadeColorToSfColor(color));
-    _texts[str].setPosition(30*pos.first, 30*pos.second);
+    _texts[str].setPosition(pos.first, pos.second);
     _window.draw(_texts[str]);
 }
 
