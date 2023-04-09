@@ -17,6 +17,7 @@ set(INCLUDE_SRC core/src/Display
                 core/src/Text
                 core/src
                 core/
+                lib/
 )
 include_directories(${INCLUDE_SRC})
 add_subdirectory(tests/debug_lib)
